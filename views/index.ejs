@@ -7,10 +7,13 @@
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
-    <% if (user) { %>
-      <a href="/logout">Log Out</a>
-    <% } else { %>
+    <% if (!user) { %>
       <a href="/auth/google">Login with Google</a>
-    <% } %>
+      <% } else { %>
+      <a href="/logout">Log Out</a>
+      <p>Hello <%= user.name %>!</p>
+      <p>Your email address is: <%= user.email %></p>
+  <% } %>
+    <a href="/users">Go to Users Page</a>
   </body>
 </html>
