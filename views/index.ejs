@@ -5,9 +5,10 @@
       <a href="/auth/google">Login with Google</a>
       <% } else { %>
       <a href="/logout">Log Out</a>
+      <p>Login Successful!</p>
       <p>Hello <%= user.name %>!</p>
       <p>Your email address is: <%= user.email %></p>
   <% } %>
-    <a href="/users">Go to Users Page</a>
+    <a href="/profile">Go to Users Page</a>
   </body>
   <%- include('./partials/footerhtml') %>
