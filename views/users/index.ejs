@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
+</head>
+<body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
     <% if (user) { %>
-      <a href="/logout">Log Out</a>
+        <a href="/logout">Log Out</a>
     <% } else { %>
-      <a href="/auth/google">Login with Google</a>
+        <a href="/auth/google">Login with Google</a>
     <% } %>
-  </body>
+</body>
 </html>
