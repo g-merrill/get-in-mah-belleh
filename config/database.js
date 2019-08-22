@@ -12,6 +12,9 @@ db.on('connected', () => {
 });
 
 
+
+// Do this when you learn MongoDB Atlas
+
 // var mongoose = require('mongoose');
 
 // mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true });
