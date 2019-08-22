@@ -6,7 +6,7 @@ const passport = require('passport');
 router.get('/', function(req, res, next) {
   res.render('index', {
     user: req.user,
-    title: 'Express'
+    viewName: 'homepage#index'
   });
 });
 

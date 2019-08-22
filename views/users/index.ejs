@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-</head>
+<%- include('../partials/headerhtml') %>
 <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <h1><%= viewName %></h1>
     <% if (!user) { %>
         <a href="/auth/google">Login with Google</a>
     <% } else { %>
@@ -16,4 +10,4 @@
     <% } %>
     <a href="/">Return to Home</a>
 </body>
-</html>
+<%- include('../partials/footerhtml') %>
