@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
     name: String,
     email: String,
-    googleId: Number, // is it a string or a number??
+    googleId: Number,
     trucks: [{
         type: Schema.Types.ObjectId,
         ref: 'Truck'

@@ -4,8 +4,10 @@ const Truck = require('../models/truck');
 module.exports = {
     index,
     new: newTruck,
-    create,
     show,
+    editPage,
+    create,
+    edit,
     delete: deleteTruck
 };
 
@@ -28,6 +30,35 @@ function newTruck(req, res) {
     res.render('trucks/new', {
         user: req.user,
         viewName: 'trucks#new'
+    });
+}
+
+
+function show(req, res) {
+    Truck.findById(req.params.id)
+    .then(truck => {
+        res.render('trucks/show', {
+            user: req.user,
+            viewName: 'trucks#show',
+            truck
+        });
+    })
+    .catch(err => {
+        if (err) console.log(err);
+        res.redirect('/trucks');
+    });
+}
+
+function editPage(req, res) {
+    Truck.findById(req.params.id)
+    .then(truck => res.render('trucks/edit', {
+        user: req.user,
+        viewName: 'trucks#edit',
+        truck
+    }))
+    .catch(err => {
+        if (err) console.log(err);
+        res.redirect(`/trucks/${req.params.id}`);
     });
 }
 
@@ -54,18 +85,12 @@ function create(req, res) {
     });
 }
 
-function show(req, res) {
-    Truck.findById(req.params.id)
-    .then(truck => {
-        res.render('trucks/show', {
-            user: req.user,
-            viewName: 'trucks#show',
-            truck
-        });
-    })
+function edit(req, res) {
+    Truck.findByIdAndUpdate(req.params.id, req.body)
+    .then(truck => res.redirect(`/trucks/${truck.id}`))
     .catch(err => {
         if (err) console.log(err);
-        res.redirect('/trucks');
+        res.redirect(`/trucks/${req.params.id}`);
     });
 }
 
@@ -78,14 +103,14 @@ function deleteTruck(req, res) {
             user.trucks.splice(idx, 1);
             return user.save();
         })
-        .then(() => res.redirect('/trucks'))
+        .then(() => res.redirect('/users/profile'))
         .catch(err => {
             if (err) console.log(err);
-            res.redirect('/trucks');
+            res.redirect('/users/profile');
         });
     })
     .catch(err => {
         if (err) console.log(err);
-        res.redirect('/trucks');
+        res.redirect('/users/profile');
     });
 }

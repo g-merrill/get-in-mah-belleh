@@ -10,7 +10,21 @@
         <p>Hello <%= user.name %>!</p>
         <p>Your email address is: <%= user.email %></p>
     <% } %>
-    <a href="/users/clearuserstrucksfromarray">DEV: Clear all user's trucks from database</a>
+    <a href="/users/clearuserstrucksfromarray">DEV: Clear all trucks from this user's truck array</a>
     <a href="/trucks">Return to Food Truck Index</a>
+    <% if (user.trucks.length) { %>
+        <ul>
+            <% user.trucks.forEach(truck => { %>
+            <li>
+            <form action="/trucks/<%= truck.id %>?_method=DELETE" method="POST">
+                <input type="submit" value="X">
+            </form>
+            <p><%= truck.applicant %></p>
+            <p><%= truck.fooditems %></p>
+            <a href="/trucks/<%= truck.id %>">See More...</a>
+            </li>
+            <% }); %>
+        </ul>
+    <% } %>
 </body>
 <%- include('../partials/footerhtml') %>

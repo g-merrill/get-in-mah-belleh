@@ -13,9 +13,6 @@
     <ul>
       <% trucks.forEach(truck => { %>
       <li>
-        <form action="/trucks/<%= truck.id %>?_method=DELETE" method="POST">
-          <input type="submit" value="X">
-        </form>
         <p><%= truck.applicant %></p>
         <p><%= truck.fooditems %></p>
         <a href="/trucks/<%= truck.id %>">See More...</a>
