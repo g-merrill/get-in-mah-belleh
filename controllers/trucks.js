@@ -4,7 +4,8 @@ module.exports = {
     index,
     new: newTruck,
     create,
-    show
+    show,
+    delete: deleteTruck
 };
 
 function index(req, res) {
@@ -48,6 +49,17 @@ function show(req, res) {
             viewName: 'trucks#show',
             truck
         });
+    })
+    .catch(err => {
+        if (err) console.log(err);
+        return res.redirect('/');
+    });
+}
+
+function deleteTruck(req, res) {
+    Truck.findByIdAndDelete(req.params.id)
+    .then(() => {
+        res.redirect('/');
     })
     .catch(err => {
         if (err) console.log(err);
