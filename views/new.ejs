@@ -8,6 +8,16 @@
     <p>Hello <%= user.name %>!</p>
 <% } %>
   <a href="/profile">Go to Profile Page</a>
-  <a href="/new">Add a Food Truck!</a>
+<form action="/" method="POST">
+    <input type="text" name="applicant" placeholder="Food Truck Name">
+    <input type="text" name="fooditems" placeholder="Foods Offered">
+    <input type="submit" value="Add Food Truck">
+</form>
+
+
+
+
+
+  <a href="/">Return to Food Truck Index</a>
 </body>
 <%- include('./partials/footerhtml') %>
