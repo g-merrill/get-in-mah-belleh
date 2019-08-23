@@ -1,13 +1,10 @@
 const mongoose = require('mongoose');
 
 mongoose.connect(process.env.DATABASE_URL, {
-    useNewUrlParser: true,
-    useCreateIndex: true
+    useNewUrlParser: true
 });
 
-const db = mongoose.connection;
-
-db.on('connected', () => {
+mongoose.connection.on('connected', () => {
     console.log(`Connected to MongoDB at ${process.env.DATABASE_URL}`);
 });
 

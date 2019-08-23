@@ -20,7 +20,7 @@ function index(req, res) {
     })
     .catch(err => {
         if (err) console.log(err);
-        res.send('Error setting up page');
+        res.send('Error setting up trucks index page');
     });
 }
 
@@ -32,20 +32,22 @@ function newTruck(req, res) {
 }
 
 function create(req, res) {
-    console.log(req.body);
-    let truckId;
     Truck.create(req.body)
     .then(truck => truck.save())
     .then(truck => {
-        truckId = truck._id;
-        return User.findById(truck.creator);
+        console.log('Saved truck: ', truck);
+        User.findById(truck.creator)
+        .then(user => {
+            user.trucks.push(truck._id);
+            console.log("Updated user's trucks array: ", user);
+            return user.save();
+        })
+        .then(() => res.redirect('/'))
+        .catch(err => {
+            if (err) console.log(err);
+            res.redirect('/new');
+        });
     })
-    .then(user => {
-        user.trucks.push(truckId);
-        console.log(user);
-        return user.save();
-    })
-    .then(() => res.redirect('/'))
     .catch(err => {
         if (err) console.log(err);
         res.redirect('/new');
@@ -70,8 +72,6 @@ function show(req, res) {
 function deleteTruck(req, res) {
     Truck.findByIdAndDelete(req.params.id)
     .then(truck => {
-        // delete from user's truck array
-        // ****************
         User.findById(req.user.id)
         .then(user => {
             let idx = user.trucks.findIndex(idx => idx === truck.id);
@@ -88,5 +88,4 @@ function deleteTruck(req, res) {
         if (err) console.log(err);
         res.redirect('/');
     });
-        // ****************
 }

@@ -7,7 +7,6 @@ module.exports = {
 }
 
 function show(req, res) {
-    console.log(req.user);
     if (req.user) {
         User.findById(req.user.id)
         .populate('trucks')
