@@ -86,7 +86,7 @@ function create(req, res) {
 }
 
 function edit(req, res) {
-    Truck.findByIdAndUpdate(req.params.id, req.body)
+    Truck.findByIdAndUpdate(req.params.id, req.body,)
     .then(truck => res.redirect(`/trucks/${truck.id}`))
     .catch(err => {
         if (err) console.log(err);
