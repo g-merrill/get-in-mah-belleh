@@ -6,15 +6,10 @@ const truckSchema = new Schema({
         type: String,
         required: true
     },
-    facilitytype: String,
-    locationdescription: String,
-    address: String,
     fooditems: {
         type: String,
         required: true
     },
-    latitude: Number,
-    longitude: Number,
     creator: {
         type: Schema.Types.ObjectId,
         ref: 'User'
@@ -22,7 +17,12 @@ const truckSchema = new Schema({
     reviews: [{
         type: Schema.Types.ObjectId,
         ref: 'Review'
-    }]
+    }],
+    facilitytype: String,
+    locationdescription: String,
+    address: String,
+    latitude: Number,
+    longitude: Number
 }, {
     timestamps: true
 });

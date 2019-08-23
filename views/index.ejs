@@ -6,9 +6,9 @@
     <% } else { %>
     <a href="/logout">Log Out</a>
     <p>Hello <%= user.name %>!</p>
+    <a href="/new">Add a Food Truck!</a>
 <% } %>
   <a href="/users/profile">Go to Profile Page</a>
-  <a href="/new">Add a Food Truck!</a>
   <% if (trucks.length) { %>
     <ul>
       <% trucks.forEach(truck => { %>

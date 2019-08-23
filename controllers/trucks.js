@@ -1,3 +1,4 @@
+const User = require('../models/user');
 const Truck = require('../models/truck');
 
 module.exports = {
@@ -32,8 +33,17 @@ function newTruck(req, res) {
 
 function create(req, res) {
     console.log(req.body);
+    let truckId;
     Truck.create(req.body)
     .then(truck => truck.save())
+    .then(truck => {
+        truckId = truck._id;
+        return User.findById(truck.creator);
+    })
+    .then(user => {
+        user.trucks.push(truckId);
+        return user.save();
+    })
     .then(() => res.redirect('/'))
     .catch(err => {
         if (err) console.log(err);
