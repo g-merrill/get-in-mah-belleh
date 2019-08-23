@@ -1,5 +1,5 @@
-<%- include('./partials/headerhtml') %>
-<body>
+<%- include('../partials/headerhtml') %>
+<body class="trucks-show">
     <h1><%= viewName %></h1>
 <% if (!user) { %>
     <a href="/auth/google">Login with Google</a>
@@ -7,12 +7,12 @@
     <a href="/logout">Log Out</a>
     <p>Hello <%= user.name %>!</p>
 <% } %>
-    <a href="/profile">Go to Profile Page</a>
+    <a href="/users/profile">Go to Profile Page</a>
 
     <h1><%= truck.applicant %></h1>
     <p>Food offered: <%= truck.fooditems %></p>
-    <a href="/<%= truck.id %>/edi">Edit Details</a>
-    <a href="#">Add a Review</a>
+    <a href="/trucks/<%= truck.id %>/edit">Edit Details</a>
+    <a href="/trucks/<%= truck.id %>/reviews/new">Add a Review</a>
     <h3>Reviews: </h3>
 <% if (truck.reviews) { %>
     <% truck.reviews.forEach(review => { %>
@@ -20,6 +20,6 @@
     <% }); %>
 <% } %>
 
-    <a href="/">Return to Food Truck Index</a>
+    <a href="/trucks">Return to Food Truck Index</a>
 </body>
-<%- include('./partials/footerhtml') %>
+<%- include('../partials/footerhtml') %>

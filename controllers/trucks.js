@@ -12,7 +12,7 @@ module.exports = {
 function index(req, res) {
     Truck.find({})
     .then(trucks => {
-        res.render('index', {
+        res.render('trucks/index', {
             user: req.user,
             viewName: 'trucks#index',
             trucks
@@ -25,7 +25,7 @@ function index(req, res) {
 }
 
 function newTruck(req, res) {
-    res.render('new', {
+    res.render('trucks/new', {
         user: req.user,
         viewName: 'trucks#new'
     });
@@ -42,22 +42,22 @@ function create(req, res) {
             console.log("Updated user's trucks array: ", user);
             return user.save();
         })
-        .then(() => res.redirect('/'))
+        .then(() => res.redirect('/trucks'))
         .catch(err => {
             if (err) console.log(err);
-            res.redirect('/new');
+            res.redirect('/trucks/new');
         });
     })
     .catch(err => {
         if (err) console.log(err);
-        res.redirect('/new');
+        res.redirect('/trucks/new');
     });
 }
 
 function show(req, res) {
     Truck.findById(req.params.id)
     .then(truck => {
-        res.render('show', {
+        res.render('trucks/show', {
             user: req.user,
             viewName: 'trucks#show',
             truck
@@ -65,7 +65,7 @@ function show(req, res) {
     })
     .catch(err => {
         if (err) console.log(err);
-        res.redirect('/');
+        res.redirect('/trucks');
     });
 }
 
@@ -78,14 +78,14 @@ function deleteTruck(req, res) {
             user.trucks.splice(idx, 1);
             return user.save();
         })
-        .then(() => res.redirect('/'))
+        .then(() => res.redirect('/trucks'))
         .catch(err => {
             if (err) console.log(err);
-            res.redirect('/');
+            res.redirect('/trucks');
         });
     })
     .catch(err => {
         if (err) console.log(err);
-        res.redirect('/');
+        res.redirect('/trucks');
     });
 }

@@ -1,5 +1,5 @@
 <%- include('../partials/headerhtml') %>
-<body>
+<body class="users-show">
     <h1><%= viewName %></h1>
     <% if (!user) { %>
         <a href="/auth/google">Login with Google</a>
@@ -11,6 +11,6 @@
         <p>Your email address is: <%= user.email %></p>
     <% } %>
     <a href="/users/clearuserstrucksfromarray">DEV: Clear all user's trucks from database</a>
-    <a href="/">Return to Food Truck Index</a>
+    <a href="/trucks">Return to Food Truck Index</a>
 </body>
 <%- include('../partials/footerhtml') %>

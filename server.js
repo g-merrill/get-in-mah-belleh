@@ -7,13 +7,16 @@ const methodOverride = require('method-override');
 const session = require('express-session');
 const passport = require('passport');
 
+// Configures dotenv
 require('dotenv').config();
 
 const app = express();
 
+// Require the database config file (connect to DB)
 require('./config/database');
 require('./config/passport');
 
+const indexRouter = require('./routes/index');
 const trucksRouter = require('./routes/trucks');
 const usersRouter = require('./routes/users');
 const apiRouter = require('./routes/api');
@@ -36,7 +39,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/', trucksRouter);
+app.use('/', indexRouter);
+app.use('/trucks', trucksRouter);
 app.use('/users', usersRouter);
 app.use('/api', apiRouter);
 
