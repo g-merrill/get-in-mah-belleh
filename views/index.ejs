@@ -9,5 +9,13 @@
 <% } %>
   <a href="/profile">Go to Profile Page</a>
   <a href="/new">Add a Food Truck!</a>
+  <ul>
+    <% if (trucks.length) { %>
+      <% trucks.forEach(truck => { %>
+      <li><%= truck.applicant %></li>
+      <li><%= truck.fooditems %></li>
+      <% }); %>
+    <% } %>
+  </ul>
 </body>
 <%- include('./partials/footerhtml') %>

@@ -3,14 +3,6 @@ const router = express.Router();
 const passport = require('passport');
 const trucksCtrl = require('../controllers/trucks');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', {
-    user: req.user,
-    viewName: 'trucks#index'
-  });
-});
-
 // Google OAuth login route
 router.get('/auth/google', passport.authenticate(
   'google',
@@ -30,6 +22,9 @@ router.get('/logout', (req, res) => {
   req.logout();
   res.redirect('/');
 });
+
+/* GET trucks homepage. */
+router.get('/', trucksCtrl.index);
 
 router.get('/new', trucksCtrl.new);
 router.post('/', trucksCtrl.create);

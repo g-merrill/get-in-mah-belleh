@@ -3,6 +3,7 @@
     <h1><%= viewName %></h1>
     <% if (!user) { %>
         <a href="/auth/google">Login with Google</a>
+        <p>Not Logged In</p>
     <% } else { %>
         <a href="/logout">Log Out</a>
         <p>Login Successful!</p>
