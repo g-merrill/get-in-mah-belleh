@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const truckSchema = new Schema({
-    objectid: Number,
     applicant: {
         type: String,
         required: true
@@ -15,7 +14,17 @@ const truckSchema = new Schema({
         required: true
     },
     latitude: Number,
-    longitude: Number
+    longitude: Number,
+    creator: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    reviews: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Review'
+    }]
+}, {
+    timestamps: true
 });
 
 
