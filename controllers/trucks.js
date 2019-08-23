@@ -3,7 +3,8 @@ const Truck = require('../models/truck');
 module.exports = {
     index,
     new: newTruck,
-    create
+    create,
+    show
 };
 
 function index(req, res) {
@@ -36,5 +37,20 @@ function create(req, res) {
     .catch(err => {
         if (err) console.log(err);
         return res.redirect('/new');
+    });
+}
+
+function show(req, res) {
+    Truck.findById(req.params.id)
+    .then(truck => {
+        res.render('show', {
+            user: req.user,
+            viewName: 'trucks#show',
+            truck
+        });
+    })
+    .catch(err => {
+        if (err) console.log(err);
+        return res.redirect('/');
     });
 }

@@ -7,15 +7,18 @@
     <a href="/logout">Log Out</a>
     <p>Hello <%= user.name %>!</p>
 <% } %>
-  <a href="/profile">Go to Profile Page</a>
+  <a href="/users/profile">Go to Profile Page</a>
   <a href="/new">Add a Food Truck!</a>
-  <ul>
-    <% if (trucks.length) { %>
+  <% if (trucks.length) { %>
+    <ul>
       <% trucks.forEach(truck => { %>
-      <li><%= truck.applicant %></li>
-      <li><%= truck.fooditems %></li>
+      <li>
+        <p><%= truck.applicant %></p>
+        <p><%= truck.fooditems %></p>
+        <a href="/<%= truck.id %>">See More...</a>
+      </li>
       <% }); %>
-    <% } %>
-  </ul>
+    </ul>
+  <% } %>
 </body>
 <%- include('./partials/footerhtml') %>

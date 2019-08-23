@@ -1,0 +1,25 @@
+<%- include('./partials/headerhtml') %>
+<body>
+    <h1><%= viewName %></h1>
+<% if (!user) { %>
+    <a href="/auth/google">Login with Google</a>
+<% } else { %>
+    <a href="/logout">Log Out</a>
+    <p>Hello <%= user.name %>!</p>
+<% } %>
+    <a href="/profile">Go to Profile Page</a>
+
+    <h1><%= truck.applicant %></h1>
+    <p>Food offered: <%= truck.fooditems %></p>
+    <a href="/<%= truck.id %>/edi">Edit Details</a>
+    <a href="#">Add a Review</a>
+    <h3>Reviews: </h3>
+<% if (truck.reviews) { %>
+    <% truck.reviews.forEach(review => { %>
+    <p><%= review.content %></p>
+    <% }); %>
+<% } %>
+
+    <a href="/">Return to Food Truck Index</a>
+</body>
+<%- include('./partials/footerhtml') %>

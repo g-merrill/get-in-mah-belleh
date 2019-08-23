@@ -12,7 +12,7 @@ router.get('/auth/google', passport.authenticate(
 router.get('/oauth2callback', passport.authenticate(
   'google',
   {
-    successRedirect : '/profile',
+    successRedirect : '/users/profile',
     failureRedirect : '/'
   }
 ));
@@ -25,8 +25,8 @@ router.get('/logout', (req, res) => {
 
 /* GET trucks homepage. */
 router.get('/', trucksCtrl.index);
-
 router.get('/new', trucksCtrl.new);
 router.post('/', trucksCtrl.create);
+router.get('/:id', trucksCtrl.show);
 
 module.exports = router;
