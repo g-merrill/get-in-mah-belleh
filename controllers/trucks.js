@@ -20,7 +20,7 @@ function index(req, res) {
     })
     .catch(err => {
         if (err) console.log(err);
-        return res.send('Error setting up page');
+        res.send('Error setting up page');
     });
 }
 
@@ -42,12 +42,13 @@ function create(req, res) {
     })
     .then(user => {
         user.trucks.push(truckId);
+        console.log(user);
         return user.save();
     })
     .then(() => res.redirect('/'))
     .catch(err => {
         if (err) console.log(err);
-        return res.redirect('/new');
+        res.redirect('/new');
     });
 }
 
@@ -62,17 +63,30 @@ function show(req, res) {
     })
     .catch(err => {
         if (err) console.log(err);
-        return res.redirect('/');
+        res.redirect('/');
     });
 }
 
 function deleteTruck(req, res) {
     Truck.findByIdAndDelete(req.params.id)
-    .then(() => {
-        res.redirect('/');
+    .then(truck => {
+        // delete from user's truck array
+        // ****************
+        User.findById(req.user.id)
+        .then(user => {
+            let idx = user.trucks.findIndex(idx => idx === truck.id);
+            user.trucks.splice(idx, 1);
+            return user.save();
+        })
+        .then(() => res.redirect('/'))
+        .catch(err => {
+            if (err) console.log(err);
+            res.redirect('/');
+        });
     })
     .catch(err => {
         if (err) console.log(err);
-        return res.redirect('/');
+        res.redirect('/');
     });
+        // ****************
 }
