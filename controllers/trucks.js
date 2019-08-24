@@ -35,11 +35,15 @@ function newTruck(req, res) {
 
 function show(req, res) {
     Truck.findById(req.params.id)
+    .populate('reviews')
     .then(truck => {
+        let user = req.user;
+        console.log('user: ', user, 'truck: ', truck);
         res.render('trucks/show', {
-            user: req.user,
+            user,
             viewName: 'trucks#show',
-            truck
+            truck,
+            hasReviewed: truck.reviews.some(review => user.reviews.includes(review.id))
         });
     })
     .catch(err => {

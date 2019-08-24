@@ -14,9 +14,10 @@
 <% if (user && user.id === truck.creator.toString()) { %>
     <a href="/users/profile/trucks/<%= truck.id %>/edit">Edit Details</a>
 <% } %>
-<% if (user && !user.reviews.some(reviewsTruckId => reviewsTruckId === truck.id)) { %>
+<% if (user && !hasReviewed) { %>
     <a href="/users/profile/trucks/<%= truck.id %>/reviews/new">Add a Review</a>
 <% } %>
+<!-- else.. edit review / show review / delete review options instead -->
     <h3>Reviews: </h3>
 <% if (truck.reviews) { %>
     <% truck.reviews.forEach(review => { %>
