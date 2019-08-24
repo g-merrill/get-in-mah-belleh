@@ -43,7 +43,7 @@ function show(req, res) {
             user,
             viewName: 'trucks#show',
             truck,
-            hasReviewed: truck.reviews.some(review => user.reviews.includes(review.id))
+            hasReviewed: user ? truck.reviews.some(review => user.reviews.includes(review.id)) : false
         });
     })
     .catch(err => {
