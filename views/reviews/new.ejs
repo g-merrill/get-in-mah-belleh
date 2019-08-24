@@ -3,7 +3,7 @@
     <h1><%= viewName %></h1>
 <% if (!user) { %>
     <p>You must log in before adding a review.</p>
-    <a href="/auth/google">Login with Google</a>
+    <a href="/auth/google">Log In with Google</a>
 <% } else { %>    
     <a href="/logout">Log Out</a>
     <p>Hello <%= user.name %>!</p>
@@ -12,11 +12,17 @@
     <form id="reviewform" action="/trucks/<%= truck.id %>/reviews" method="POST">
         <input type="hidden" name="reviewer" value="<%= user._id %>">
         <input type="hidden" name="truck" value="<%= truck._id %>">
-        <label for="rating">Enter Rating: [1-5]</label>
-        <input id="rating" type="number" name="rating" min="1" max="5" required placeholder="3">
+        <p>Rating: </p>
+        <select name="rating" id="ratings" required>
+            <option value="5">5 stars</option>
+            <option value="4">4 stars</option>
+            <option value="3">3 stars</option>
+            <option value="2">2 stars</option>
+            <option value="1">1 star</option>
+        </select>
     </form>
     <textarea form="reviewform" cols="30" rows="10" name="content" maxlength="280" placeholder="Enter your food truck review here. (Max character count: 280)"></textarea>
-    <input form="reviewform" type="submit" value="Add Review for Food Truck">
+    <input form="reviewform" type="submit" value="Add Review">
 <% } %>
     <a href="/trucks/<%= truck.id %>">Return to Food Truck Details</a>
 </body>

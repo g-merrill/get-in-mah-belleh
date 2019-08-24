@@ -2,7 +2,7 @@
 <body class="trucks-show">
     <h1><%= viewName %></h1>
 <% if (!user) { %>
-    <a href="/auth/google">Login with Google</a>
+    <a href="/auth/google">Log In with Google</a>
 <% } else { %>
     <a href="/logout">Log Out</a>
     <p>Hello <%= user.name %>!</p>

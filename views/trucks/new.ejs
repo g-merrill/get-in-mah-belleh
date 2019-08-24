@@ -3,7 +3,7 @@
     <h1><%= viewName %></h1>
 <% if (!user) { %>
     <p>You must log in before adding a food truck.</p>
-    <a href="/auth/google">Login with Google</a>
+    <a href="/auth/google">Log In with Google</a>
 <% } else { %>    
     <a href="/logout">Log Out</a>
     <p>Hello <%= user.name %>!</p>
