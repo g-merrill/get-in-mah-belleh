@@ -9,10 +9,10 @@
     <p>Hello <%= user.name %>!</p>
     <a href="/users/profile">Go to Profile Page</a>
     <form action="/trucks/<%= truck.id %>?_method=PUT" method="POST">
-        <input type="text" name="applicant" placeholder="Food Truck Name">
-        <p>Previously: <%= truck.applicant %></p>
-        <input type="text" name="fooditems" placeholder="Foods Offered">
-        <p>Previously: <%= truck.fooditems %></p>
+        <label for="truckname">Food Truck Name: </label>
+        <input id="truckname" type="text" name="applicant" value="<%= truck.applicant %>" placeholder="Enter food truck name">
+        <label for="foods">Foods Offered: </label>
+        <input id="foods" type="text" name="fooditems" value="<%= truck.fooditems %>" placeholder="List food options here">
         <input type="hidden" name="creator" value="<%= user.id %>">
         <input type="submit" value="Save Changes">
     </form>
