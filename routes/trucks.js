@@ -6,7 +6,6 @@ const trucksCtrl = require('../controllers/trucks');
 router.get('/', trucksCtrl.index);
 router.get('/new', trucksCtrl.new);
 router.get('/:id', trucksCtrl.show);
-router.get('/:id/edit', trucksCtrl.editPage);
 router.post('/', trucksCtrl.create);
 router.put('/:id', trucksCtrl.edit)
 router.delete('/:id', trucksCtrl.delete);

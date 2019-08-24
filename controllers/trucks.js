@@ -5,7 +5,6 @@ module.exports = {
     index,
     new: newTruck,
     show,
-    editPage,
     create,
     edit,
     delete: deleteTruck
@@ -49,18 +48,7 @@ function show(req, res) {
     });
 }
 
-function editPage(req, res) {
-    Truck.findById(req.params.id)
-    .then(truck => res.render('trucks/edit', {
-        user: req.user,
-        viewName: 'trucks#edit',
-        truck
-    }))
-    .catch(err => {
-        if (err) console.log(err);
-        res.redirect(`/trucks/${req.params.id}`);
-    });
-}
+
 
 function create(req, res) {
     Truck.create(req.body)

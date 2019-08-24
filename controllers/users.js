@@ -1,8 +1,9 @@
 const User = require('../models/user');
-
+const Truck = require('../models/truck');
 
 module.exports = {
     show,
+    editTrucksPage,
     clearThemAll
 }
 
@@ -27,6 +28,19 @@ function show(req, res) {
             viewName: 'users#show'
         });
     }
+}
+
+function editTrucksPage(req, res) {
+    Truck.findById(req.params.id)
+    .then(truck => res.render('trucks/edit', {
+        user: req.user,
+        viewName: 'trucks#edit',
+        truck
+    }))
+    .catch(err => {
+        if (err) console.log(err);
+        res.redirect(`/trucks/${req.params.id}`);
+    });
 }
 
 function clearThemAll(req, res) {

@@ -11,8 +11,12 @@
 
     <h1><%= truck.applicant %></h1>
     <p>Food offered: <%= truck.fooditems %></p>
-    <a href="/trucks/<%= truck.id %>/edit">Edit Details</a>
-    <a href="/trucks/<%= truck.id %>/reviews/new">Add a Review</a>
+<% if (user && user.id === truck.creator.toString()) { %>
+    <a href="/users/profile/trucks/<%= truck.id %>/edit">Edit Details</a>
+<% } %>
+<% if (user && !user.reviews.some(reviewsTruckId => reviewsTruckId === truck.id)) { %>
+    <a href="/users/profile/trucks/<%= truck.id %>/reviews/new">Add a Review</a>
+<% } %>
     <h3>Reviews: </h3>
 <% if (truck.reviews) { %>
     <% truck.reviews.forEach(review => { %>
