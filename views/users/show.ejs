@@ -9,22 +9,41 @@
     <p>Login Successful!</p>
     <p>Hello <%= user.name %>!</p>
     <p>Your email address is: <%= user.email %></p>
-<a href="/users/clearuserstrucksfromarray">DEV: Clear all trucks from this user's truck array</a>
+    <a href="/users/clearuserstrucksfromarray">DEV: Clear all trucks from this user's truck array</a>
 <% } %>
     <a href="/trucks">Return to Food Truck Index</a>
-<% if (user && user.trucks.length) { %>
+<% if (user) { %>
+    <% if (user.trucks.length) { %>
     <ul>
-    <% user.trucks.forEach(truck => { %>
+        <h3>Trucks Submitted: </h3>
+        <% user.trucks.forEach(truck => { %>
         <li>
-        <form action="/trucks/<%= truck.id %>?_method=DELETE" method="POST">
-            <input type="submit" value="X">
-        </form>
-        <p><%= truck.applicant %></p>
-        <p><%= truck.fooditems %></p>
-        <a href="/trucks/<%= truck.id %>">See More...</a>
+            <form action="/trucks/<%= truck.id %>?_method=DELETE" method="POST">
+                <input type="submit" value="X">
+            </form>
+            <h5><%= truck.applicant %></h5>
+            <p><%= truck.fooditems %></p>
+            <a href="/trucks/<%= truck.id %>">See More...</a>
         </li>
-    <% }); %>
+        <% }); %>
     </ul>
+    <% } %>
+    <% if (user.reviews.length) { %>
+    <ul>
+        <h3>Reviews Submitted: </h3>
+        <% user.reviews.forEach(review => { %>
+        <li>
+            <!-- delete review button -->
+            <!-- once you populate reviews, insert link to truck, labeled with truck name (can do this name lookup in various ways) -->
+            <!-- star rating -->
+            <p>Rating: <%= review.rating %></p>
+            <!-- review text -->
+            <p>Review: <%= review.content %></p>
+            <!-- edit review button -->
+        </li>
+        <% }); %>
+    </ul>
+    <% } %>
 <% } %>
 </body>
 <%- include('../partials/footerhtml') %>

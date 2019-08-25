@@ -17,7 +17,8 @@
 <% if (user && !hasReviewed) { %>
     <a href="/users/profile/trucks/<%= truck.id %>/reviews/new">Add a Review</a>
 <% } %>
-<!-- else.. edit review / show review / delete review options instead -->
+<!-- else.. have your review at the top of the list of reviews -->
+<!-- and have the option to edit / delete review -->
     <h3>Reviews: </h3>
 <% if (truck.reviews) { %>
     <% truck.reviews.forEach(review => { %>

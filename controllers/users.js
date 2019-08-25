@@ -11,6 +11,7 @@ function show(req, res) {
     if (req.user) {
         User.findById(req.user.id)
         .populate('trucks')
+        .populate('reviews')
         .then(user => {
             console.log(user);
             res.render('users/show', {
