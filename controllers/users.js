@@ -5,7 +5,9 @@ const Review = require('../models/review');
 module.exports = {
     show,
     editTrucksPage,
-    clearThemAll
+    consoleLogAllData,
+    clearThemAll,
+    seedData
 }
 
 function show(req, res) {
@@ -45,6 +47,29 @@ function editTrucksPage(req, res) {
     });
 }
 
+function consoleLogAllData(req, res) {
+    User.find({})
+    .then(users => {
+        console.log('///////////////////// USERS ///////////////////////////');
+        console.log(users);
+        return Truck.find({});
+    })
+    .then(trucks => {
+        console.log('///////////////////// TRUCKS ///////////////////////////');
+        console.log(trucks);
+        return Review.find({});
+    })
+    .then(reviews => {
+        console.log('///////////////////// REVIEWS ///////////////////////////');
+        console.log(reviews);
+        res.redirect('/users/profile');
+    })
+    .catch(err => {
+        if (err) console.log(err);
+        res.redirect('/users/profile');
+    })
+}
+
 function clearThemAll(req, res) {
     User.findById(req.user.id)
     .then(user => {
@@ -59,4 +84,17 @@ function clearThemAll(req, res) {
         if (err) console.log(err);
         return res.send('Error with clearing data from user array');
     });
+}
+
+function seedData(req, res) {
+    User.findById(req.user.id)
+    .then(user => {
+        user.trucks = [];
+        user.reviews = [];
+        return user.save();
+    })
+    .then(() => Truck.deleteMany({}))
+    .then(() => Review.deleteMany({}, err => {if(err) console.log(err)}));
+    const seedFile = require('../config/seed');
+    seedFile.runSeedFunction(req, res);
 }

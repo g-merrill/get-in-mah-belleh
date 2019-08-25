@@ -13,8 +13,10 @@
 <% } %>
 
     <a href="/trucks">Go to Food Truck Index</a>
+    <a href="/users/consolelogalldata">DEV: console.log All Data</a>
 <% if (user) { %>
     <a href="/users/clearuserdata">DEV: Clear all trucks and reviews for this user</a>
+    <a href="/users/seeddata">DEV: Clear and seed fresh data</a>
     <% if (user.trucks.length) { %>
     <ul>
         <h3>Trucks Submitted: </h3>

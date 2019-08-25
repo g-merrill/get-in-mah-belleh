@@ -8,7 +8,9 @@ router.get('/profile', usersCtrl.show);
 router.get('/profile/trucks/:id/edit', usersCtrl.editTrucksPage);
 
 // ***************
-router.get('/clearuserdata', usersCtrl.clearThemAll)
+router.get('/consolelogalldata', usersCtrl.consoleLogAllData);
+router.get('/clearuserdata', usersCtrl.clearThemAll);
+router.get('/seeddata', usersCtrl.seedData);
 // ***************
 
 
