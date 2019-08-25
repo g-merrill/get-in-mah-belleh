@@ -8,6 +8,6 @@ router.get('/users/profile/trucks/:id/reviews/new', reviewsCtrl.new);
 // router.get('/:id', reviewsCtrl.show);
 router.post('/trucks/:id/reviews', reviewsCtrl.create);
 // router.put('/:id', reviewsCtrl.edit)
-// router.delete('/:id', reviewsCtrl.delete);
+router.delete('/trucks/:truckid/reviews/:reviewid', reviewsCtrl.delete);
 
 module.exports = router;

@@ -38,12 +38,18 @@ function show(req, res) {
     .populate('reviews')
     .then(truck => {
         let user = req.user;
-        console.log('user: ', user, 'truck: ', truck);
+        let hasReviewed = user ? truck.reviews.some(review => user.reviews.includes(review.id)) : false;
+        let reviewIdx;
+        if (hasReviewed) {
+            reviewIdx = truck.reviews.find(review => user.reviews.includes(review.id)).id;
+        }
+        console.log('user: ', user, 'truck: ', truck, 'hasReviewed: ', hasReviewed, 'reviewIdx: ', reviewIdx);
         res.render('trucks/show', {
             user,
             viewName: 'trucks#show',
             truck,
-            hasReviewed: user ? truck.reviews.some(review => user.reviews.includes(review.id)) : false
+            hasReviewed,
+            reviewIdx
         });
     })
     .catch(err => {

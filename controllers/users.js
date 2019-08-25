@@ -21,11 +21,11 @@ function show(req, res) {
         })
         .catch(err => {
             if (err) console.log(err);
-            return res.send('Error with showing profile page');
+            res.redirect('/trucks');
         });
     } else {
         res.render('users/show', {
-            user: req.user,
+            user: undefined,
             viewName: 'users#show'
         });
     }

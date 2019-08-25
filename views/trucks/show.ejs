@@ -8,14 +8,21 @@
     <p>Hello <%= user.name %>!</p>
 <% } %>
     <a href="/users/profile">Go to Profile Page</a>
-
     <h1><%= truck.applicant %></h1>
     <p>Food offered: <%= truck.fooditems %></p>
-<% if (user && user.id === truck.creator.toString()) { %>
+<% if (user) { %>
+    <% if (user.id === truck.creator.toString()) { %>
     <a href="/users/profile/trucks/<%= truck.id %>/edit">Edit Details</a>
-<% } %>
-<% if (user && !hasReviewed) { %>
+    <% } %>
+    <% if (!hasReviewed) { %>
     <a href="/users/profile/trucks/<%= truck.id %>/reviews/new">Add a Review</a>
+    <% } else { %>
+    <a href="#">Edit Your Review</a>
+    <form action="/trucks/<%= truck.id %>/reviews/<%= reviewIdx %>?_method=DELETE" method="POST">
+        <!-- above action needs to be the right route -->
+        <input type="submit" value="Delete Your Review">
+    </form>
+    <% } %>
 <% } %>
 <!-- else.. have your review at the top of the list of reviews -->
 <!-- and have the option to edit / delete review -->
