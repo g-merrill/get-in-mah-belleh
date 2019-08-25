@@ -8,7 +8,7 @@ router.get('/profile', usersCtrl.show);
 router.get('/profile/trucks/:id/edit', usersCtrl.editTrucksPage);
 
 // ***************
-router.get('/clearuserstrucksfromarray', usersCtrl.clearThemAll)
+router.get('/clearuserdata', usersCtrl.clearThemAll)
 // ***************
 
 

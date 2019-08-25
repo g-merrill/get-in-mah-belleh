@@ -1,6 +1,7 @@
 <%- include('../partials/headerhtml') %>
 <body class="trucks-show">
     <h1><%= viewName %></h1>
+
 <% if (!user) { %>
     <a href="/auth/google">Log In with Google</a>
 <% } else { %>
@@ -8,31 +9,30 @@
     <p>Hello <%= user.name %>!</p>
 <% } %>
     <a href="/users/profile">Go to Profile Page</a>
+
+    <a href="/trucks">Go to Food Truck Index</a>
     <h1><%= truck.applicant %></h1>
     <p>Food offered: <%= truck.fooditems %></p>
 <% if (user) { %>
     <% if (user.id === truck.creator.toString()) { %>
-    <a href="/users/profile/trucks/<%= truck.id %>/edit">Edit Details</a>
+    <a href="/users/profile/trucks/<%= truck.id %>/edit">Edit Food Truck Details</a>
     <% } %>
     <% if (!hasReviewed) { %>
     <a href="/users/profile/trucks/<%= truck.id %>/reviews/new">Add a Review</a>
     <% } else { %>
     <a href="#">Edit Your Review</a>
+    <!-- need to create route for edit review functionality -->
     <form action="/trucks/<%= truck.id %>/reviews/<%= reviewIdx %>?_method=DELETE" method="POST">
-        <!-- above action needs to be the right route -->
         <input type="submit" value="Delete Your Review">
     </form>
     <% } %>
+    <!-- TO DO.. have your review at the top of the list of reviews -->
 <% } %>
-<!-- else.. have your review at the top of the list of reviews -->
-<!-- and have the option to edit / delete review -->
     <h3>Reviews: </h3>
 <% if (truck.reviews) { %>
     <% truck.reviews.forEach(review => { %>
     <p><%= review.content %></p>
     <% }); %>
 <% } %>
-
-    <a href="/trucks">Return to Food Truck Index</a>
 </body>
 <%- include('../partials/footerhtml') %>

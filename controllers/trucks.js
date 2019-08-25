@@ -13,6 +13,7 @@ module.exports = {
 function index(req, res) {
     Truck.find({})
     .then(trucks => {
+        console.log(req.user, trucks);
         res.render('trucks/index', {
             user: req.user,
             viewName: 'trucks#index',
@@ -61,54 +62,73 @@ function show(req, res) {
 
 
 function create(req, res) {
-    Truck.create(req.body)
-    .then(truck => truck.save())
-    .then(truck => {
-        console.log('Saved truck: ', truck);
-        User.findById(truck.creator)
-        .then(user => {
-            user.trucks.push(truck._id);
-            console.log("Updated user's trucks array: ", user);
-            return user.save();
+    if (req.user) {
+        Truck.create(req.body)
+        .then(truck => truck.save())
+        .then(truck => {
+            console.log('Saved truck: ', truck);
+            User.findById(truck.creator)
+            .then(user => {
+                user.trucks.push(truck._id);
+                console.log("Updated user's trucks array: ", user);
+                return user.save();
+            })
+            .then(() => res.redirect('/trucks'))
+            .catch(err => {
+                if (err) console.log(err);
+                res.redirect('/trucks/new');
+            });
         })
-        .then(() => res.redirect('/trucks'))
         .catch(err => {
             if (err) console.log(err);
             res.redirect('/trucks/new');
         });
-    })
-    .catch(err => {
-        if (err) console.log(err);
+    } else {
         res.redirect('/trucks/new');
-    });
+    }
 }
 
 function edit(req, res) {
-    Truck.findByIdAndUpdate(req.params.id, req.body,)
-    .then(truck => res.redirect(`/trucks/${truck.id}`))
-    .catch(err => {
-        if (err) console.log(err);
-        res.redirect(`/trucks/${req.params.id}`);
-    });
+    if (req.user) {
+        Truck.findByIdAndUpdate(req.params.id, req.body,)
+        .then(truck => res.redirect(`/trucks/${truck.id}`))
+        .catch(err => {
+            if (err) console.log(err);
+            res.redirect(`/trucks/${req.params.id}`);
+        });
+    } else {
+        res.redirect(`/users/profile/trucks/${req.params.id}/edit`);
+    }
 }
 
 function deleteTruck(req, res) {
-    Truck.findByIdAndDelete(req.params.id)
-    .then(truck => {
-        User.findById(req.user.id)
-        .then(user => {
-            let idx = user.trucks.findIndex(idx => idx === truck.id);
-            user.trucks.splice(idx, 1);
-            return user.save();
+    if (req.user) {
+        Truck.findByIdAndDelete(req.params.id)
+        .then(truck => {
+            User.findById(truck.creator)
+            .then(user => {
+                let trucksSpliceIdx = user.trucks.findIndex(userTruck => userTruck._id.toString() === truck.id);
+                user.trucks.splice(trucksSpliceIdx, 1);
+                let truckReviews = truck.reviews.map(review => review.toString());
+                let userReviews = user.reviews.map(review => review.toString());
+                let hasReview = userReviews.some(userReview => truckReviews.includes(userReview));
+                if (hasReview) {
+                    let reviewsSpliceIdx = userReviews.findIndex(userReview => truckReviews.includes(userReview));
+                    user.reviews.splice(reviewsSpliceIdx, 1);
+                }
+                return user.save();
+            })
+            .then(() => res.redirect('/users/profile'))
+            .catch(err => {
+                if (err) console.log(err);
+                res.redirect('/users/profile');
+            });
         })
-        .then(() => res.redirect('/users/profile'))
         .catch(err => {
             if (err) console.log(err);
             res.redirect('/users/profile');
         });
-    })
-    .catch(err => {
-        if (err) console.log(err);
+    } else {
         res.redirect('/users/profile');
-    });
+    }
 }

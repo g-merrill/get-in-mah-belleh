@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const Truck = require('../models/truck');
+const Review = require('../models/review');
 
 module.exports = {
     show,
@@ -48,11 +49,14 @@ function clearThemAll(req, res) {
     User.findById(req.user.id)
     .then(user => {
         user.trucks = [];
+        user.reviews = [];
         return user.save();
     })
+    .then(() => Truck.deleteMany({}))
+    .then(() => Review.deleteMany({}))
     .then(() => res.redirect('/users/profile'))
     .catch(err => {
         if (err) console.log(err);
-        return res.send('Error with clearing trucks from array');
+        return res.send('Error with clearing data from user array');
     });
 }

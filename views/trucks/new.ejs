@@ -1,13 +1,19 @@
 <%- include('../partials/headerhtml') %>
 <body class="trucks-new">
     <h1><%= viewName %></h1>
+
 <% if (!user) { %>
-    <p>You must log in before adding a food truck.</p>
     <a href="/auth/google">Log In with Google</a>
 <% } else { %>    
     <a href="/logout">Log Out</a>
     <p>Hello <%= user.name %>!</p>
+<% } %>
     <a href="/users/profile">Go to Profile Page</a>
+
+    <a href="/trucks">Return to Food Truck Index</a>
+<% if (!user) { %>
+    <p>You must log in before adding a food truck.</p>
+<% } else { %>  
     <form action="/trucks" method="POST">
         <input type="text" name="applicant" placeholder="Food Truck Name">
         <input type="text" name="fooditems" placeholder="Foods Offered">
@@ -15,6 +21,5 @@
         <input type="submit" value="Add Food Truck">
     </form>
 <% } %>
-    <a href="/trucks">Return to Food Truck Index</a>
 </body>
 <%- include('../partials/footerhtml') %>
