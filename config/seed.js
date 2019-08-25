@@ -2,58 +2,67 @@ module.exports = {
     runSeedFunction
 }
 
-function runSeedFunction(req, res){
-    const userCtrl = require('../controllers/users');
+const runSeedFunction = (req, res) => {
+    const User = require('../models/user');
     const Truck = require('../models/truck');
     const Review = require('../models/review');
 
-    userCtrl.clearThemAll(req, res);
 
     const truck1 = {
         creator: req.user.id,
         applicant: "Senor Sisig",
         fooditems: "Filipino fusion food"
     };
-
-    let truck1id = [];
     Truck.create(truck1)
-    .then(truck => truck.save())
-    .then(truck => truck1id.push(truck.id));
-    truck1id = truck1id[0];
-    console.log('truck1id: ', truck1id);
-
-    const truck2 = {
-        creator: req.user.id,
-        applicant: "Curry Up Now",
-        fooditems: "Chicken Tiki Masala Burritos: Paneer Tiki Masala Burritos: Samosas: Mango Lassi"
-    };
-
-    let truck2id = [];
-    Truck.create(truck2)
-    .then(truck => truck.save())
-    .then(truck => truck2id.push(truck.id));
-    truck2id = truck2id[0];
-    console.log('truck2id: ', truck2id);
-
-    const truck1review = {
-        reviewer: req.user.id,
-        truck: truck1id,
-        rating: 5,
-        content: "Highly recommended!"
-    };
-
-    Review.create(truck1review)
-    .then(truck => truck.save(err => {if(err) console.log(err)}))
-    .catch(err => console.log('Error creating truck review 1: ', err));
-
-    const truck2review = {
-        reviewer: req.user.id,
-        truck: truck2id,
-        rating: 4,
-        content: "Good selection. A little pricey."
-    };
-
-    Review.create(truck2review)
-    .then(truck => truck.save(err => {if(err) console.log(err)}))
-    .catch(err => console.log('Error creating truck review 2: ', err));
+    .then(truck1 => truck1.save())
+    .then(truck1 => {
+        console.log('Saved truck1: ', truck1);
+        const truck1review = {
+            reviewer: req.user.id,
+            truck: truck1.id,
+            rating: 5,
+            content: "Highly recommended!"
+        };
+        return Review.create(truck1review);
+    })
+    .then(review1 => review1.save())
+    .then(review1 => {
+        User.findById(req.user.id)
+        .then(user => {
+            user.trucks.push(review1.truck);
+            user.reviews.push(review1.id);
+            return user.save();
+        })
+        .then(() => {
+            const truck2 = {
+                creator: req.user.id,
+                applicant: "Curry Up Now",
+                fooditems: "Chicken Tiki Masala Burritos: Paneer Tiki Masala Burritos: Samosas: Mango Lassi"
+            };
+            return Truck.create(truck2);
+        })
+        .then(truck2 => truck2.save())
+        .then(truck2 => {
+            const truck2review = {
+                reviewer: req.user.id,
+                truck: truck2.id,
+                rating: 4,
+                content: "Good selection. Can be a little pricey."
+            };
+            return Review.create(truck2review);
+        })
+        .then(review2 => review2.save())
+        .then(review2 => {
+            User.findById(req.user.id)
+            .then(user => {
+                user.trucks.push(review2.truck);
+                user.reviews.push(review2.id);
+                return user.save();
+            })
+            .then(() => res.redirect('/users/profile'))
+            .catch(err => console.log('Error with saving user after all finished...: ', err));
+        })
+        .catch(err => console.log('Error with creating truck 2 and review...: ', err));
+    })
+    .catch(err => console.log('Error with creating truck 1 and review...: ', err));
 }
