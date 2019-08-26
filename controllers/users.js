@@ -11,14 +11,11 @@ module.exports = {
 }
 
 function show(req, res) {
-    // console.log('******************* USER PROFILE SHOW START ******************');
     if (req.user) {
         User.findById(req.user.id)
         .populate('trucks')
         .populate('reviews')
         .then(user => {
-            // console.log(user);
-            // console.log('******************* USER PROFILE SHOW END ******************');
             res.render('users/show', {
                 user,
                 viewName: 'users#show'
@@ -94,23 +91,26 @@ function clearThemAll(req, res) {
 
 function seedData(req, res) {
     if(req.user) {
-        console.log('******************* SEED DATA FUNCTION START ******************');
-        User.findById(req.user.id)
-        .then(user => {
-            user.trucks = [];
-            user.reviews = [];
-            return user.save();
-        })
-        .then(() => Truck.deleteMany({}))
-        .then(() => Review.deleteMany({}))
-        .then(() => {
-            const seedFile = require('../config/seed');
-            seedFile.runSeedFunction(req, res);
-        })
-        .catch(err => {
-            if (err) console.log(err);
-            res.redirect('/users/profile');
-        });
+        const seedDataArray = [
+            [{
+                applicant: "Senor Sisig",
+                fooditems: "Filipino fusion food"
+            },
+            {
+                rating: 5,
+                content: "Highly recommended!"
+            }],
+            [{
+                applicant: "Curry Up Now",
+                fooditems: "Chicken Tiki Masala Burritos: Paneer Tiki Masala Burritos: Samosas: Mango Lassi"
+            },
+            {
+                rating: 4,
+                content: "Good selection. Can be a little pricey."
+            }]
+        ];
+        const seedFile = require('../config/seed');
+        seedFile.runSeedFunction(req, res, seedDataArray);
     } else {
         res.redirect('/users/profile');
     }
