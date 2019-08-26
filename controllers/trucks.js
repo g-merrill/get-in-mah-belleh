@@ -13,7 +13,6 @@ module.exports = {
 function index(req, res) {
     Truck.find({})
     .then(trucks => {
-        console.log(req.user, trucks);
         res.render('trucks/index', {
             user: req.user,
             viewName: 'trucks#index',

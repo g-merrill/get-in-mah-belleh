@@ -1,89 +1,90 @@
 module.exports = {
     runSeedFunction
-}
+};
 
 function runSeedFunction(req, res) {
     const User = require('../models/user');
     const Truck = require('../models/truck');
     const Review = require('../models/review');
 
+    let truckOne, reviewOne, truckTwo, reviewTwo;
     const truck1 = {
         creator: req.user.id,
         applicant: "Senor Sisig",
         fooditems: "Filipino fusion food"
     };
-    let reviewOneObj, reviewTwoObj;
     Truck.create(truck1)
-    .then(truck1 => truck1.save())
-    .then(truck1 => {
-        console.log('Saved truck1: ', truck1);
+    .then(createdTruck1 => createdTruck1.save())
+    .then(savedTruck1 => {
+        truckOne = savedTruck1;
+        return User.findById(savedTruck1.creator);
+    })
+    .then(user => {
+        user.trucks.push(truckOne.id);
+        return user.save();
+    })
+    .then(() => {
+        // console.log('truckOne.id: ', truckOne.id, typeof truckOne.id);
         const truck1review = {
             reviewer: req.user.id,
-            truck: truck1.id,
+            truck: truckOne.id,
             rating: 5,
             content: "Highly recommended!"
         };
         return Review.create(truck1review);
     })
-    .then(review1 =>  {
-        reviewOneObj = review1;
-        return review1.save();
+    .then(createdReview1 => createdReview1.save())
+    .then(savedReview1 => {
+        reviewOne = savedReview1;
+        return Truck.findById(reviewOne.truck);
     })
-    .then(review1 => {
-        console.log('Saved review1: ', review1);
-        return User.findById(req.user.id);
+    .then(truck => {
+        truck.reviews.push(reviewOne.id);
+        return truck.save();
+    })
+    .then(truck => {
+        truckOne = truck;
+        return User.findById(reviewOne.reviewer);
     })
     .then(user => {
-        console.log('reviewOneObj: ', reviewOneObj);
-        user.trucks.push(reviewOneObj.truck);
-        user.reviews.push(reviewOneObj.id);
+        user.reviews.push(reviewOne._id);
         return user.save();
     })
     .then(updatedUser => {
-        console.log('updatedUser: ', updatedUser);
-        const truck2 = {
-            creator: req.user.id,
-            applicant: "Curry Up Now",
-            fooditems: "Chicken Tiki Masala Burritos: Paneer Tiki Masala Burritos: Samosas: Mango Lassi"
-        };
+        console.log('Updated User: ', updatedUser);
+        console.log('******************* SEED DATA FUNCTION END ******************');
         res.redirect('/users/profile'); // put this at the end of the last function!
-        // return Truck.create(truck2);
     })
-
-
-
-
+    .catch(err => {
+        if (err) console.log('Error: ', err);
+        res.redirect('/users/profile');
+    });
 }
+
+
+// has something to do with the user not clearing the truck id properly
+// which causes it to not work if you don't clear it out with the other button first
+
+
+
+
+// ADDITIONAL DATA FOR SEEDING BELOW
+
     
-        
-        // .then(truck2 => truck2.save())
-        // .then(truck2 => {
-        //     const truck2review = {
-        //         reviewer: req.user.id,
-        //         truck: truck2.id,
-        //         rating: 4,
-        //         content: "Good selection. Can be a little pricey."
-//             };
-//             return Review.create(truck2review);
-//         })
-//         .then(review2 => review2.save())
-//         .then(review2 => {
-//             User.findById(req.user.id)
-//             .then(user => {
-//                 user.trucks.push(review2.truck);
-//                 user.reviews.push(review2.id);
-//                 return user.save();
-//             })
-//             .then(() => {
-//                 console.log('******************* SEED DATA FUNCTION END ******************');
-//                 res.redirect('/users/profile');
-//             })
-//             .catch(err => console.log('Error with saving user after all finished...: ', err));
-//         })
-//         .catch(err => console.log('Error with creating truck 2 and review...: ', err));
-//     })
-//     .catch(err => console.log('Error with first part', err));
-// }
+    
+    // const truck2 = {
+    //     creator: req.user.id,
+    //     applicant: "Curry Up Now",
+    //     fooditems: "Chicken Tiki Masala Burritos: Paneer Tiki Masala Burritos: Samosas: Mango Lassi"
+    // };
+    
+    // const truck2review = {
+    //     reviewer: req.user.id,
+    //     truck: truck2.id,
+    //     rating: 4,
+    //     content: "Good selection. Can be a little pricey."
+    // };
+
 
 
     // console.log('******************* GOT TO HERE1 ******************');

@@ -73,6 +73,7 @@ function consoleLogAllData(req, res) {
 }
 
 function clearThemAll(req, res) {
+    if (req.user) {
     User.findById(req.user.id)
     .then(user => {
         user.trucks = [];
@@ -86,18 +87,31 @@ function clearThemAll(req, res) {
         if (err) console.log(err);
         return res.send('Error with clearing data from user array');
     });
+    } else {
+        res.redirect('/users/profile');
+    }
 }
 
 function seedData(req, res) {
-    console.log('******************* SEED DATA FUNCTION START ******************');
-    User.findById(req.user.id)
-    .then(user => {
-        user.trucks = [];
-        user.reviews = [];
-        return user.save();
-    })
-    .then(() => Truck.deleteMany({}))
-    .then(() => Review.deleteMany({}, err => {if(err) console.log(err)}));
-    const seedFile = require('../config/seed');
-    seedFile.runSeedFunction(req, res);
+    if(req.user) {
+        console.log('******************* SEED DATA FUNCTION START ******************');
+        User.findById(req.user.id)
+        .then(user => {
+            user.trucks = [];
+            user.reviews = [];
+            return user.save();
+        })
+        .then(() => Truck.deleteMany({}))
+        .then(() => Review.deleteMany({}))
+        .then(() => {
+            const seedFile = require('../config/seed');
+            seedFile.runSeedFunction(req, res);
+        })
+        .catch(err => {
+            if (err) console.log(err);
+            res.redirect('/users/profile');
+        });
+    } else {
+        res.redirect('/users/profile');
+    }
 }
