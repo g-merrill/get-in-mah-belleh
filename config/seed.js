@@ -2,11 +2,10 @@ module.exports = {
     runSeedFunction
 }
 
-const runSeedFunction = (req, res) => {
+function runSeedFunction(req, res) {
     const User = require('../models/user');
     const Truck = require('../models/truck');
     const Review = require('../models/review');
-
 
     const truck1 = {
         creator: req.user.id,
@@ -27,6 +26,7 @@ const runSeedFunction = (req, res) => {
     })
     .then(review1 => review1.save())
     .then(review1 => {
+        console.log('Saved review1: ', review1);
         User.findById(req.user.id)
         .then(user => {
             user.trucks.push(review1.truck);
@@ -59,10 +59,18 @@ const runSeedFunction = (req, res) => {
                 user.reviews.push(review2.id);
                 return user.save();
             })
-            .then(() => res.redirect('/users/profile'))
+            .then(() => {
+                console.log('******************* SEED DATA FUNCTION END ******************');
+                res.redirect('/users/profile');
+            })
             .catch(err => console.log('Error with saving user after all finished...: ', err));
         })
         .catch(err => console.log('Error with creating truck 2 and review...: ', err));
     })
-    .catch(err => console.log('Error with creating truck 1 and review...: ', err));
+    .catch(err => console.log('Error with first part', err));
 }
+
+
+    // console.log('******************* GOT TO HERE1 ******************');
+
+    // console.log('******************* GOT TO HERE2 ******************');

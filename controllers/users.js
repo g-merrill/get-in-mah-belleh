@@ -11,12 +11,14 @@ module.exports = {
 }
 
 function show(req, res) {
+    // console.log('******************* USER PROFILE SHOW START ******************');
     if (req.user) {
         User.findById(req.user.id)
         .populate('trucks')
         .populate('reviews')
         .then(user => {
-            console.log(user);
+            // console.log(user);
+            // console.log('******************* USER PROFILE SHOW END ******************');
             res.render('users/show', {
                 user,
                 viewName: 'users#show'
@@ -87,6 +89,7 @@ function clearThemAll(req, res) {
 }
 
 function seedData(req, res) {
+    console.log('******************* SEED DATA FUNCTION START ******************');
     User.findById(req.user.id)
     .then(user => {
         user.trucks = [];
