@@ -1,6 +1,4 @@
 <%- include('../partials/headerhtml') %>
-<body class="trucks-show">
-    <h1><%= viewName %></h1>
 
 <% if (!user) { %>
     <a href="/auth/google">Log In with Google</a>
@@ -38,5 +36,5 @@
     <p><%= review.content %></p>
     <% }); %>
 <% } %>
-</body>
+
 <%- include('../partials/footerhtml') %>

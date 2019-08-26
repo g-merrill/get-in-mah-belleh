@@ -1,6 +1,4 @@
 <%- include('../partials/headerhtml') %>
-<body class="users-show">
-    <h1><%= viewName %></h1>
 
 <% if (!user) { %>
     <a href="/auth/google">Log In with Google</a>
@@ -49,5 +47,5 @@
     </ul>
     <% } %>
 <% } %>
-</body>
+
 <%- include('../partials/footerhtml') %>

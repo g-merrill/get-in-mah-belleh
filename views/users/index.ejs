@@ -1,0 +1,14 @@
+<%- include('../partials/headerhtml') %>
+
+<% if (!user) { %>
+<a href="/auth/google">Log In with Google</a>
+<p>Not Logged In</p>
+<% } else { %>
+<a href="/logout">Log Out</a>
+<p>Login Successful!</p>
+<p>Hello <%= user.name %>!</p>
+<p>Your email address is: <%= user.email %></p>
+<% } %>
+<a href="/trucks">Go to Food Truck Index</a>
+
+<%- include('../partials/footerhtml') %>

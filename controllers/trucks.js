@@ -15,7 +15,7 @@ function index(req, res) {
     .then(trucks => {
         res.render('trucks/index', {
             user: req.user,
-            viewName: 'trucks#index',
+            viewName: 'trucks-index',
             trucks
         });
     })
@@ -28,13 +28,13 @@ function index(req, res) {
 function newTruck(req, res) {
     res.render('trucks/new', {
         user: req.user,
-        viewName: 'trucks#new'
+        viewName: 'trucks-new'
     });
 }
 
 
 function show(req, res) {
-    Truck.findById(req.params.id)
+    Truck.findById(req.params.truckid)
     .populate('reviews')
     .then(truck => {
         let user = req.user;
@@ -46,7 +46,7 @@ function show(req, res) {
         console.log('user: ', user, 'truck: ', truck, 'hasReviewed: ', hasReviewed, 'reviewId: ', reviewId);
         res.render('trucks/show', {
             user,
-            viewName: 'trucks#show',
+            viewName: 'trucks-show',
             truck,
             hasReviewed,
             reviewId
@@ -89,23 +89,23 @@ function create(req, res) {
 
 function edit(req, res) {
     if (req.user) {
-        Truck.findByIdAndUpdate(req.params.id, req.body,)
+        Truck.findByIdAndUpdate(req.params.truckid, req.body,)
         .then(truck => {
             console.log('Updated truck: ', truck);
             res.redirect(`/trucks/${truck.id}`);
         })
         .catch(err => {
             if (err) console.log(err);
-            res.redirect(`/trucks/${req.params.id}`);
+            res.redirect(`/trucks/${req.params.truckid}`);
         });
     } else {
-        res.redirect(`/users/profile/trucks/${req.params.id}/edit`);
+        res.redirect(`/users/profile/trucks/${req.params.truckid}/edit`);
     }
 }
 
 function deleteTruck(req, res) {
     if (req.user) {
-        Truck.findByIdAndDelete(req.params.id)
+        Truck.findByIdAndDelete(req.params.truckid)
         .then(truck => {
             User.findById(truck.creator)
             .then(user => {

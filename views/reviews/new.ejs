@@ -1,6 +1,4 @@
 <%- include('../partials/headerhtml') %>
-<body class="reviews-new">
-    <h1><%= viewName %></h1>
 
 <% if (!user) { %>
     <a href="/auth/google">Log In with Google</a>
@@ -30,5 +28,5 @@
     <textarea form="reviewform" cols="30" rows="10" name="content" maxlength="280" placeholder="Enter your food truck review here. (Max character count: 280)"></textarea>
     <input form="reviewform" type="submit" value="Add Review">
 <% } %>
-</body>
+
 <%- include('../partials/footerhtml') %>

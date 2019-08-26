@@ -5,9 +5,9 @@ const trucksCtrl = require('../controllers/trucks');
 /* GET trucks homepage. */
 router.get('/', trucksCtrl.index);
 router.get('/new', trucksCtrl.new);
-router.get('/:id', trucksCtrl.show);
+router.get('/:truckid', trucksCtrl.show);
 router.post('/', trucksCtrl.create);
-router.put('/:id', trucksCtrl.edit)
-router.delete('/:id', trucksCtrl.delete);
+router.put('/:truckid', trucksCtrl.edit)
+router.delete('/:truckid', trucksCtrl.delete);
 
 module.exports = router;

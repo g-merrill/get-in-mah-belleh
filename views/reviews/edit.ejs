@@ -1,6 +1,4 @@
 <%- include('../partials/headerhtml') %>
-<body class="reviews-edit">
-    <h1><%= viewName %></h1>
 
 <% if (!user) { %>
     <a href="/auth/google">Log In with Google</a>
@@ -36,5 +34,4 @@
     <input form="reviewform" type="submit" value="Save Review">
 <% } %>
 <!--  -->
-</body>
 <%- include('../partials/footerhtml') %>

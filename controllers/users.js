@@ -3,12 +3,19 @@ const Truck = require('../models/truck');
 const Review = require('../models/review');
 
 module.exports = {
+    logInPage,
     show,
     editTrucksPage,
     editReviewPage,
     consoleLogAllData,
     clearThemAll,
     seedData
+}
+
+function logInPage(req, res) {
+    res.render('users/index', {
+        viewName: 'users-index'
+    });
 }
 
 function show(req, res) {
@@ -19,7 +26,7 @@ function show(req, res) {
         .then(user => {
             res.render('users/show', {
                 user,
-                viewName: 'users#show'
+                viewName: 'users-show'
             });
         })
         .catch(err => {
@@ -29,9 +36,22 @@ function show(req, res) {
     } else {
         res.render('users/show', {
             user: undefined,
-            viewName: 'users#show'
+            viewName: 'users-show'
         });
     }
+}
+
+function editTrucksPage(req, res) {
+    Truck.findById(req.params.truckid)
+    .then(truck => res.render('trucks/edit', {
+        user: req.user,
+        viewName: 'trucks-edit',
+        truck
+    }))
+    .catch(err => {
+        if (err) console.log(err);
+        res.redirect(`/trucks/${req.params.truckid}`);
+    });
 }
 
 function editReviewPage(req, res) {
@@ -40,7 +60,7 @@ function editReviewPage(req, res) {
         Review.findById(req.params.reviewid)
         .then(review => res.render('reviews/edit', {
             user: req.user,
-            viewName: 'reviews#edit',
+            viewName: 'reviews-edit',
             truck,
             review
         }))
@@ -52,19 +72,6 @@ function editReviewPage(req, res) {
     .catch(err => {
         if (err) console.log(err);
         res.redirect(`/trucks/${req.params.truckid}`);
-    });
-}
-
-function editTrucksPage(req, res) {
-    Truck.findById(req.params.id)
-    .then(truck => res.render('trucks/edit', {
-        user: req.user,
-        viewName: 'trucks#edit',
-        truck
-    }))
-    .catch(err => {
-        if (err) console.log(err);
-        res.redirect(`/trucks/${req.params.id}`);
     });
 }
 

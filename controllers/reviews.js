@@ -14,7 +14,7 @@ function newReview(req, res) {
     .then(truck => {
         res.render('reviews/new', {
             user: req.user,
-            viewName: 'reviews#new',
+            viewName: 'reviews-new',
             truck
         });
     })
