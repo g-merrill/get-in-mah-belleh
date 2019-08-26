@@ -63,8 +63,15 @@ function create(req, res) {
 }
 
 function edit(req, res) {
-    // ** /users/profile/trucks/:truckid/reviews/:reviewid **
-    res.send('');
+    if (req.user) {
+        Review.findByIdAndUpdate(req.params.reviewid, req.body)
+        .then(review => {
+            console.log('Updated review: ', review);
+            res.redirect(`/trucks/${review.truck}`);
+        })
+    } else {
+        res.redirect('/users/profile');
+    }
 }
 
 function deleteReview(req, res) {
