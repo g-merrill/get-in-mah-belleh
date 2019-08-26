@@ -20,15 +20,19 @@
     <% if (!hasReviewed) { %>
     <a href="/users/profile/trucks/<%= truck.id %>/reviews/new">Add a Review</a>
     <% } else { %>
-    <a href="#">Edit Your Review</a>
+    <a href="/users/profile/trucks/<%= truck.id %>/reviews/<%= reviewId %>/edit">Edit Your Review</a>
+    <div>
+        <p><%= user.name %> said: </p>
+        <p><%= truck.reviews.find(review => review.id === reviewId).content %></p>
+    </div>
     <!-- need to create route for edit review functionality -->
-    <form action="/trucks/<%= truck.id %>/reviews/<%= reviewIdx %>?_method=DELETE" method="POST">
+    <form action="/users/profile/trucks/<%= truck.id %>/reviews/<%= reviewId %>?_method=DELETE" method="POST">
         <input type="submit" value="Delete Your Review">
     </form>
     <% } %>
     <!-- TO DO.. have your review at the top of the list of reviews -->
 <% } %>
-    <h3>Reviews: </h3>
+    <h3>All Reviews: </h3>
 <% if (truck.reviews) { %>
     <% truck.reviews.forEach(review => { %>
     <p><%= review.content %></p>

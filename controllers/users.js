@@ -5,6 +5,7 @@ const Review = require('../models/review');
 module.exports = {
     show,
     editTrucksPage,
+    editReviewPage,
     consoleLogAllData,
     clearThemAll,
     seedData
@@ -31,6 +32,27 @@ function show(req, res) {
             viewName: 'users#show'
         });
     }
+}
+
+function editReviewPage(req, res) {
+    Truck.findById(req.params.truckid)
+    .then(truck => {
+        Review.findById(req.params.reviewid)
+        .then(review => res.render('reviews/edit', {
+            user: req.user,
+            viewName: 'reviews#edit',
+            truck,
+            review
+        }))
+        .catch(err => {
+            if (err) console.log(err);
+            res.redirect(`/trucks/${truck.id}`);
+        });
+    })
+    .catch(err => {
+        if (err) console.log(err);
+        res.redirect(`/trucks/${req.params.truckid}`);
+    });
 }
 
 function editTrucksPage(req, res) {

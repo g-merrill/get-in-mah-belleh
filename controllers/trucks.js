@@ -39,17 +39,17 @@ function show(req, res) {
     .then(truck => {
         let user = req.user;
         let hasReviewed = user ? truck.reviews.some(review => user.reviews.includes(review.id)) : false;
-        let reviewIdx;
+        let reviewId;
         if (hasReviewed) {
-            reviewIdx = truck.reviews.find(review => user.reviews.includes(review.id)).id;
+            reviewId = truck.reviews.find(review => user.reviews.includes(review.id)).id;
         }
-        console.log('user: ', user, 'truck: ', truck, 'hasReviewed: ', hasReviewed, 'reviewIdx: ', reviewIdx);
+        console.log('user: ', user, 'truck: ', truck, 'hasReviewed: ', hasReviewed, 'reviewId: ', reviewId);
         res.render('trucks/show', {
             user,
             viewName: 'trucks#show',
             truck,
             hasReviewed,
-            reviewIdx
+            reviewId
         });
     })
     .catch(err => {

@@ -6,6 +6,7 @@ const usersCtrl = require('../controllers/users');
 /* GET user profile listing. */
 router.get('/profile', usersCtrl.show);
 router.get('/profile/trucks/:id/edit', usersCtrl.editTrucksPage);
+router.get('/profile/trucks/:truckid/reviews/:reviewid/edit', usersCtrl.editReviewPage);
 
 // ***************
 router.get('/consolelogalldata', usersCtrl.consoleLogAllData);

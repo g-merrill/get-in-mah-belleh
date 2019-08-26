@@ -1,5 +1,5 @@
 <%- include('../partials/headerhtml') %>
-<body class="reviews-new">
+<body class="reviews-edit">
     <h1><%= viewName %></h1>
 
 <% if (!user) { %>
@@ -9,13 +9,15 @@
     <p>Hello <%= user.name %>!</p>
 <% } %>
     <a href="/users/profile">Go to Profile Page</a>
-
+<!--  -->
     <a href="/trucks/<%= truck.id %>">Return to Food Truck Details</a>
 <% if (!user) { %>
-    <p>You must log in before adding a review.</p>
+    <p>You must log in before editing a review.</p>
 <% } else { %> 
-    <h1>Add Review for: <%= truck.applicant %></h1>
-    <form id="reviewform" action="/users/profile/trucks/<%= truck.id %>/reviews" method="POST">
+    <h1>Edit Review for: <%= truck.applicant %></h1>
+    <!--  -->
+    <form id="reviewform" action="/users/profile/trucks/<%= truck.id %>/reviews/<%= review.id %>?_method=PUT" method="POST">
+    <!-- insert proper PUT route with method override -->
         <input type="hidden" name="reviewer" value="<%= user._id %>">
         <input type="hidden" name="truck" value="<%= truck._id %>">
         <p>Rating: </p>
@@ -26,9 +28,13 @@
             <option value="2">2 stars</option>
             <option value="1">1 star</option>
         </select>
+        <p>Previous rating: <%= review.rating %> star(s)</p>
     </form>
     <textarea form="reviewform" cols="30" rows="10" name="content" maxlength="280" placeholder="Enter your food truck review here. (Max character count: 280)"></textarea>
-    <input form="reviewform" type="submit" value="Add Review">
+    <p>Previous review: </p>
+    <p><%= review.content %></p>
+    <input form="reviewform" type="submit" value="Save Review">
 <% } %>
+<!--  -->
 </body>
 <%- include('../partials/footerhtml') %>

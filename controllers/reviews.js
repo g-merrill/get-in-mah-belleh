@@ -5,12 +5,12 @@ const User = require('../models/user');
 module.exports = {
     new: newReview,
     create,
+    edit,
     delete: deleteReview
-    // delete: deleteAllReviews
 };
 
 function newReview(req, res) {
-    Truck.findById(req.params.id)
+    Truck.findById(req.params.truckid)
     .then(truck => {
         res.render('reviews/new', {
             user: req.user,
@@ -22,17 +22,6 @@ function newReview(req, res) {
         if (err) console.log(err);
         res.redirect('trucks/show');
     });
-    // *****************SHOW ALL REVIEWS************************
-    // Review.find({})
-    // .then(reviews => {
-    //     console.log('All reviews in database: ', reviews);
-    //     res.redirect(`/trucks/${req.params.id}`);
-    // })
-    // .catch(err => {
-    //     if (err) console.log(err);
-    //     res.redirect(`/trucks/${req.params.id}`);
-    // });
-    // *****************SHOW ALL REVIEWS************************
 }
 
 function create(req, res) {
@@ -41,14 +30,14 @@ function create(req, res) {
         Review.create(req.body)
         .then(review => review.save())
         .then(review => {
-            console.log(review);
+            console.log('Saved review: ', review);
             User.findById(req.user.id)
             .then(user => {
                 user.reviews.push(review.id);
                 return user.save();
             })
             .then(user => {
-                console.log(user);
+                console.log('Updated user: ', user);
                 return Truck.findById(review.truck);
             })
             .then(truck => {
@@ -56,7 +45,7 @@ function create(req, res) {
                 return truck.save();
             })
             .then(truck => {
-                console.log(truck);
+                console.log('Updated truck: ', truck);
                 res.redirect(`/trucks/${truck.id}`);
             })
             .catch(err => {
@@ -66,25 +55,19 @@ function create(req, res) {
         })
         .catch(err => {
             if (err) console.log(err);
-            res.redirect(`/trucks/${req.params.id}`);
+            res.redirect(`/trucks/${req.params.truckid}`);
         });
     } else {
-        res.redirect(`/users/profile/trucks/${req.params.id}/reviews/new`);
+        res.redirect('/users/profile');
     }
 }
 
+function edit(req, res) {
+    // ** /users/profile/trucks/:truckid/reviews/:reviewid **
+    res.send('');
+}
+
 function deleteReview(req, res) {
-    // *****************SHOW ALL REVIEWS************************
-    // Review.find({})
-    // .then(reviews => {
-    //     console.log('All reviews in database: ', reviews);
-    //     res.redirect(`/trucks/${req.params.truckid}`);
-    // })
-    // .catch(err => {
-    //     if (err) console.log(err);
-    //     res.redirect(`/trucks/${req.params.truckid}`);
-    // });
-    // *****************SHOW ALL REVIEWS************************
     if (req.user) {
         Review.findByIdAndDelete(req.params.reviewid)
         .then(review => {
@@ -124,29 +107,4 @@ function deleteReview(req, res) {
     } else {
         res.redirect('/users/profile');
     }
-}
-function deleteAllReviews(req, res) {
-    // **********DELETE ALL REVIEWS including all for user and selected truck***************
-    User.findById(req.user.id)
-    .then(user => {
-        user.reviews = [];
-        return user.save();
-    })
-    .then(() => Truck.findById(req.params.truckid))
-    .then(truck => {
-        truck.reviews = [];
-        return truck.save();
-    })
-    .then(() => {
-        return Review.deleteMany({});
-    })
-    .then((reviews) => {
-        console.log(reviews);
-        res.redirect(`/trucks/${req.params.truckid}`);
-    })
-    .catch(err => {
-        if (err) console.log(err);
-        res.redirect(`/trucks/${req.params.truckid}`);
-    });
-    // ******************************
 }
