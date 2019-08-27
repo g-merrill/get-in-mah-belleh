@@ -15,11 +15,24 @@ function index(req, res) {
     Truck.find({})
     .populate('reviews')
     .then(trucks => {
-        console.log(trucks);
+        let avgRatings = [];
+        trucks.forEach(truck => {
+            let truckRatingsSum = 0;
+            if (truck.reviews.length) {
+                truck.reviews.forEach(review => {
+                    truckRatingsSum += review.rating;
+                });
+                truckAvgRating = Math.round(truckRatingsSum / truck.reviews.length);
+                avgRatings.push(truckAvgRating);
+            } else {
+                avgRatings.push(0);
+            }
+        });
         res.render('trucks/index', {
             user: req.user,
             viewName: 'trucks-index',
-            trucks
+            trucks,
+            avgRatings
         });
     })
     .catch(err => {

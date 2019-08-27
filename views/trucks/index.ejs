@@ -37,22 +37,20 @@
 
 <% if (trucks.length) { %>
   <ul>
-    <% trucks.forEach(truck => { %>
+    <% trucks.forEach((truck, idx) => { %>
     <li>
       <p><%= truck.applicant.toUpperCase(); %></p>
-      <% if (truck.reviews.length) { %>
-        <!-- want to change this to average rating, not most recent rating -->
-        
-        <% for (let i = 0; i !== truck.reviews[truck.reviews.length - 1].rating; i++) { %>
+      
+      <% if (truck.reviews.length) { %>        
+        <% for (let i = 0; i !== avgRatings[idx]; i++) { %>
       <i class="fas fa-star"></i>
         <% } %>
-        <!-- want to change this to average rating, not most recent rating -->
-        <!-- how do I make this preview text -->
+        <!-- how do I make this preview text? -->
       <p>
         <%= truck.reviews[truck.reviews.length - 1].content; %>
         <a href="/trucks/<%= truck.id %>">read more...</a>
       </p>
-        <!-- how do I make this preview text -->
+        <!-- how do I make this preview text? -->
       <% } else { %>
       <i class="far fa-star"></i>
       <i class="far fa-star"></i>
