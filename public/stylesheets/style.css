@@ -5,9 +5,7 @@
   font-family: "Gill Sans", Avenir, "Tsukushi A Round Gothic", Seravek, sans-serif;
   font-size: 32px;
   border: 1px solid;
-  /* margin: 5px; */
 }
-
 body {
   width: 100vw;
   display: flex;
@@ -15,7 +13,6 @@ body {
   align-items: center;
   background-color: rgba(251, 230, 229, 1);
 }
-
 a {
   color: rgba(0, 183, 255, 1);
 }
@@ -23,7 +20,7 @@ a {
 .nav-main {
   display: flex;
   width: 100%;
-  height: 220px;
+  height: 190px;
 }
 .nav-main-link {
   display: flex;
@@ -33,15 +30,22 @@ a {
   text-decoration: none;
   width: 20%;
 }
-
 .nav-main-link>* {
   margin: 20px 0 0 0;
 }
-
 .nav-main-linktext {
   text-align: center;
   max-height: 77px;
   overflow: hidden;
+}
+
+.trucks-index .logocontainer {
+  margin: 2vh 0;
+  height: 132px;
+  overflow: auto;
+}
+.trucks-index .logo {
+  margin: 0 2vw;
 }
 
 input {
