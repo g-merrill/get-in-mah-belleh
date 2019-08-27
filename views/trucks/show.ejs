@@ -11,6 +11,13 @@
 
     <a href="/trucks">Go to Food Truck Index</a>
     <h1><%= truck.applicant %></h1>
+    <div>
+    <% if (truckAvgRating) { %>
+        <% for (let i = 0; i !== truckAvgRating; i++) { %>
+        <i class="fas fa-star"></i>
+        <% } %>
+    <% } %>
+    </div>
     <p>Food offered: <%= truck.fooditems %></p>
 <% if (user) { %>
     <% if (user.id === truck.creator.toString()) { %>
@@ -23,7 +30,12 @@
     <a href="/users/profile/trucks/<%= truck.id %>/reviews/new">Add a Review</a>
     <% } else { %>
     <div>
-        <p>Your rating: <%= reviews.find(review => review.id === reviewId).rating %> star(s)</p>
+        <% let userRating = reviews.find(review => review.id === reviewId).rating; %>
+        <p>Your rating: 
+            <% for (let i = 0; i !== userRating; i++) { %>
+            <i class="fas fa-star"></i>
+            <% } %>
+        </p>
         <p>You said: <%= reviews.find(review => review.id === reviewId).content %></p>
     </div>
     <a href="/users/profile/trucks/<%= truck.id %>/reviews/<%= reviewId %>/edit">Edit Your Review</a>
@@ -35,7 +47,11 @@
     <h3>All Reviews: </h3>
 <% if (reviews) { %>
     <% reviews.forEach(review => { %>
-    <p><%= review.rating %> star(s)</p>
+    <div>
+        <% for (let i = 0; i !== review.rating; i++) { %>
+        <i class="fas fa-star"></i>
+        <% } %>
+    </div>
     <p><%= review.reviewer.name %> said: <%= review.content %></p>
     <% }); %>
 <% } %>

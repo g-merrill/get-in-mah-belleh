@@ -59,7 +59,17 @@ function show(req, res) {
         if (hasReviewed) {
             reviewId = truck.reviews.find(review => user.reviews.includes(review.id)).id;
         }
-        console.log('user: ', user, 'truck: ', truck, 'hasReviewed: ', hasReviewed, 'reviewId: ', reviewId);
+        let truckAvgRating;
+        if (truck.reviews.length) {
+            let truckRatingsSum = 0;
+            truck.reviews.forEach(review => {
+                truckRatingsSum += review.rating;
+            });
+            truckAvgRating = Math.round(truckRatingsSum / truck.reviews.length);
+        } else {
+            truckAvgRating = 0;
+        }
+        console.log('user: ', user, 'truck: ', truck, 'hasReviewed: ', hasReviewed, 'reviewId: ', reviewId, 'truckAvgRating: ', truckAvgRating);
         Review.find({ truck: truck.id })
         .populate('reviewer')
         .then(reviews => {
@@ -70,7 +80,8 @@ function show(req, res) {
                 truck,
                 hasReviewed,
                 reviewId,
-                reviews
+                reviews,
+                truckAvgRating
             });
         })
         .catch(err => {
