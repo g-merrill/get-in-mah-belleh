@@ -25,7 +25,6 @@ a {
   width: 100%;
   height: 220px;
 }
-
 .nav-main-link {
   display: flex;
   flex-direction: column;
@@ -36,11 +35,13 @@ a {
 }
 
 .nav-main-link>* {
-  margin: 8% 0 0 0;
+  margin: 20px 0 0 0;
 }
 
 .nav-main-linktext {
   text-align: center;
+  max-height: 77px;
+  overflow: hidden;
 }
 
 input {
