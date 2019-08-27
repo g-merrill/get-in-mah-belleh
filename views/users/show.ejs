@@ -1,7 +1,8 @@
 <%- include('../partials/headerhtml') %>
 
 <% if (!user) { %>
-    <a href="/auth/google">Log In with Google</a>
+    <a href="/users/login">Log In</a>
+    <a href="/users/new">Create Account</a>
     <p>Not Logged In</p>
 <% } else { %>
     <a href="/logout">Log Out</a>
@@ -36,6 +37,9 @@
         <% user.reviews.forEach(review => { %>
         <li>
             <!-- delete review button -->
+            <form action="/users/profile/trucks/<%= review.truck %>/reviews/<%= review.id %>?_method=DELETE" method="POST">
+                <input type="submit" value="X">
+            </form>
             <!-- once you populate reviews, insert link to truck, labeled with truck name (can do this name lookup in various ways) -->
             <!-- star rating -->
             <p>Rating: <%= review.rating %></p>

@@ -1,14 +1,21 @@
 <%- include('../partials/headerhtml') %>
 
-<% if (!user) { %>
-<a href="/auth/google">Log In with Google</a>
-<p>Not Logged In</p>
-<% } else { %>
-<a href="/logout">Log Out</a>
-<p>Login Successful!</p>
-<p>Hello <%= user.name %>!</p>
-<p>Your email address is: <%= user.email %></p>
-<% } %>
 <a href="/trucks">Go to Food Truck Index</a>
+<a href="/users/new">Create a New Account</a>
+
+<div>
+    <h3>Log In with Created Account</h3>
+    <form action="/users/login/submit" method="GET">
+        <label for="email">Email: </label>
+        <input id="email" type="text" name="email">
+        <label for="pw">Password: </label>
+        <input id="pw" type="password" name="password">
+        <!-- <input type="submit" value="Log In"> -->
+        <button disabled="disabled">Log in</button>
+    </form>
+</div>
+<div>
+    <a href="/auth/google">Log In with Google</a>
+</div>
 
 <%- include('../partials/footerhtml') %>

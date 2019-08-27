@@ -13,6 +13,7 @@ function runSeedFunction(req, res, array) {
         user.reviews = [];
         return user.save();
     })
+    .then(user => User.deleteMany({ _id: { $ne: user.id } }))
     .then(() => Truck.deleteMany({}))
     .then(() => Review.deleteMany({}))
     .then(() => {

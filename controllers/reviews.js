@@ -100,16 +100,16 @@ function deleteReview(req, res) {
             .then(truck => {
                 console.log('new truck reviews', truck.reviews);
                 console.log('Deleted Review: ', review);
-                res.redirect(`/trucks/${review.truck}`);
+                res.redirect('/users/profile');
             })
             .catch(err => {
                 if (err) console.log(err);
-                res.redirect(`/trucks/${req.params.truckid}`);
+                res.redirect('/users/profile');
             });
         })
         .catch(err => {
             if (err) console.log(err);
-            res.redirect(`/trucks/${req.params.truckid}`);
+            res.redirect('/users/profile');
         });
     } else {
         res.redirect('/users/profile');

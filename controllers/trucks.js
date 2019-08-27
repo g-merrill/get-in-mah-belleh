@@ -62,17 +62,27 @@ function show(req, res) {
 
 function create(req, res) {
     if (req.user) {
+        let truckObj;
         Truck.create(req.body)
         .then(truck => truck.save())
         .then(truck => {
             console.log('Saved truck: ', truck);
+            truckObj = truck;
             User.findById(truck.creator)
             .then(user => {
                 user.trucks.push(truck._id);
                 console.log("Updated user's trucks array: ", user);
                 return user.save();
             })
-            .then(() => res.redirect('/trucks'))
+            .then(user => {
+                res.render('trucks/show', {
+                    user,
+                    viewName: 'trucks-show',
+                    truck: truckObj,
+                    hasReviewed: false,
+                    reviewId: undefined
+                });
+            })
             .catch(err => {
                 if (err) console.log(err);
                 res.redirect('/trucks/new');

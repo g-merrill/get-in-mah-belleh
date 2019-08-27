@@ -4,9 +4,11 @@ const Review = require('../models/review');
 
 module.exports = {
     logInPage,
+    new: newUser,
     show,
     editTrucksPage,
     editReviewPage,
+    create,
     consoleLogAllData,
     clearThemAll,
     seedData
@@ -15,6 +17,12 @@ module.exports = {
 function logInPage(req, res) {
     res.render('users/index', {
         viewName: 'users-index'
+    });
+}
+
+function newUser(req, res) {
+    res.render('users/new', {
+        viewName: 'users-new'
     });
 }
 
@@ -72,6 +80,29 @@ function editReviewPage(req, res) {
     .catch(err => {
         if (err) console.log(err);
         res.redirect(`/trucks/${req.params.truckid}`);
+    });
+}
+
+function create(req, res) {
+    User.create(req.body)
+    .then(createdUser => createdUser.save())
+    .then(savedUser => {
+        console.log('Saved user: ', savedUser);
+        req.user = savedUser;
+        // ^ doesn't seem to work after redirect or render, not sure if req.user can be saved edited
+        console.log('req.user: ', req.user);
+        return Truck.find({});
+    })
+    .then(trucks => {
+        res.render('/trucks', {
+            user: savedUser,
+            viewName: 'trucks-index',
+            trucks
+        });
+    })
+    .catch(err => {
+        if (err) console.log(err);
+        res.redirect('/users/login');
     });
 }
 

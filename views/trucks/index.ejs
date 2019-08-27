@@ -1,7 +1,8 @@
 <%- include('../partials/headerhtml') %>
 
 <% if (!user) { %>
-  <a href="/auth/google">Log In with Google</a>
+  <a href="/users/login">Log In</a>
+  <a href="/users/new">Create Account</a>
 <% } else { %>
   <a href="/logout">Log Out</a>
   <p>Hello <%= user.name %>!</p>

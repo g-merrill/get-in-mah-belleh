@@ -3,7 +3,12 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
     name: String,
-    email: String,
+    // shortname: function that returns Greg M instead of Greg Merrill
+    email: {
+        type: String,
+        required: true
+    },
+    password: String,
     googleId: Number,
     trucks: [{
         type: Schema.Types.ObjectId,

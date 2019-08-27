@@ -1,0 +1,19 @@
+<%- include('../partials/headerhtml') %>
+<a href="/trucks">Go to Food Truck Index</a>
+<a href="/users/login">Log In with Google / Existing Account</a>
+<h1>Create a truckSFinder account</h1>
+<form action="/users" method="POST">
+    <label for="name">Your Name (first and last): </label>
+    <input id="name" type="text" name="name">
+    <label for="email">Account Email: </label>
+    <input id="email" type="text" name="email" required>
+    <p>(You will log in with your email in the future)</p>
+    <label for="pw">Account Password: </label>
+    <input id="pw" type="password" name="password" required>
+    <label for="pwReEnter">Re-Enter Password: </label>
+    <input id="pwReEnter" type="password">
+    <!-- need pw validation stuff here -->
+    <!-- <input type="submit" value="Create account"> -->
+    <button disabled="disabled">Create Account</button>
+</form>
+<%- include('../partials/footerhtml') %>
