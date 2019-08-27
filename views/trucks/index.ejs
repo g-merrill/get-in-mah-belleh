@@ -1,23 +1,54 @@
 <%- include('../partials/headerhtml') %>
 
+<% if (user) { %>
+  <a href="/trucks/new">Add a new food truck</a>
+<% } %>
+
 <% if (!user) { %>
-  <a href="/users/login">Log In</a>
-  <a href="/users/new">Create Account</a>
+  <a href="/users/login">Log in</a>
+  <a href="/users/new">Create an account</a>
 <% } else { %>
   <a href="/logout">Log Out</a>
-  <p>Hello <%= user.name %>!</p>
+  <a href="/users/profile">Profile</a>
 <% } %>
-  <a href="/users/profile">Go to Profile Page</a>
 
-<% if (user) { %>
-  <a href="/trucks/new">Add a Food Truck!</a>
-<% } %>
+<h3>Find the best food trucks in San Francisco.</h3>
+<!-- non-functional -->
+<form action="/trucks" method="GET">
+  <i class="fas fa-search"></i>
+  <input type="search" name="searchbar" id="searchbar" placeholder="Search for food trucks, neighborhood, or cuisines...">
+  <input type="submit" value="Go!">
+</form>
+<select name="sortvariable" id="sortselect">
+  <option value="sortby">SORT BY</option>
+  <option value="1">Name (A-Z)</option>
+  <option value="2">Name (Z-A)</option>
+  <option value="3">Star rating</option>
+  <option value="4">Number of reviews</option>
+  <option value="5">Recently reviewed</option>
+</select>
+<select name="filtervariable" id="filterselect">
+  <option value="filter">FILTER</option>
+  <option value="a">Food type</option>
+  <option value="b">Star rating</option>
+</select>
+<!-- non-functional -->
+
+
 <% if (trucks.length) { %>
   <ul>
     <% trucks.forEach(truck => { %>
     <li>
       <p><%= truck.applicant %></p>
-      <p><%= truck.fooditems %></p>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+
+      <i class="fas fa-heart"></i>
+      <i class="fas fa-pen"></i>
+      <!-- <p><%= truck.fooditems %></p> -->
       <a href="/trucks/<%= truck.id %>">See More...</a>
     </li>
     <% }); %>

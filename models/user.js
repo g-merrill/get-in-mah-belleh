@@ -2,7 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    name: String,
+    name: {
+        type: String,
+        required: true
+    },
     // shortname: function that returns Greg M instead of Greg Merrill
     email: {
         type: String,
@@ -11,6 +14,10 @@ const userSchema = new Schema({
     password: String,
     googleId: Number,
     trucks: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Truck'
+    }],
+    favTrucks: [{
         type: Schema.Types.ObjectId,
         ref: 'Truck'
     }],
