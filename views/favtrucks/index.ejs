@@ -1,23 +1,25 @@
-<!-- NEED TO EDIT THIS CODE, THIS IS COPY PASTED FROM TRUCKS INDEX -->
 <%- include('../partials/headerhtml') %>
-<h3>My Favorites</h3>
+<h1>My Favorites</h1>
+<% if (!user) { %>
+<p>You must log in before seeing your favorite food trucks.</p>
+<% } else { %>
+<!-- NEED TO EDIT THIS CODE, THIS IS COPY PASTED FROM TRUCKS INDEX -->
 <% if (trucks.length) { %>
 <ul>
     <% trucks.forEach((truck, idx) => { %>
     <li>
     <p><%= truck.applicant.toUpperCase(); %></p>
-    
-    <% if (truck.reviews.length) { %>        
-        <% for (let i = 0; i !== avgRatings[idx]; i++) { %>
+        <% if (truck.reviews.length) { %>        
+            <% for (let i = 0; i !== avgRatings[idx]; i++) { %>
     <i class="fas fa-star"></i>
-        <% } %>
+            <% } %>
         <!-- how do I make this preview text? try overflow prop -->
     <p>
         <%= truck.reviews[truck.reviews.length - 1].content; %>
         <a href="/trucks/<%= truck.id %>">read more...</a>
     </p>
         <!-- how do I make this preview text?  try overflow prop -->
-    <% } else { %>
+        <% } else { %>
     <i class="far fa-star"></i>
     <i class="far fa-star"></i>
     <i class="far fa-star"></i>
@@ -27,15 +29,18 @@
         No review submitted for this truck yet!
         <a href="/trucks/<%= truck.id %>">read more...</a>
     </p>  
-    <% } %>
-    <% if (user) { %>
+        <% } %>
+        <% if (user) { %>
     <p><i class="fas fa-pen"></i> Write a review</p>
     <p><i class="fas fa-heart"></i> Save to favorites</p>
-    <% } %>
+        <% } %>
     <!-- <p><%= truck.fooditems %></p> -->
     </li>
     <% }); %>
 </ul>
+<!-- NEED TO EDIT THIS CODE, THIS IS COPY PASTED FROM TRUCKS INDEX -->
+<% } else { %>
+    <p>You haven't saved any of your favorite food trucks yet!</p>
+<% } %>
 <% } %>
 <%- include('../partials/footerhtml') %>
-<!-- NEED TO EDIT THIS CODE, THIS IS COPY PASTED FROM TRUCKS INDEX -->

@@ -21,7 +21,7 @@
         <p>Previous rating: <%= review.rating %> star(s)</p>
     </form>
     <textarea form="reviewform" cols="30" rows="10" name="content" maxlength="280" placeholder="Enter your food truck review here. (Max character count: 280)"></textarea>
-    <p>Previous review: </p>
+    <p>In your previous review, you said: </p>
     <p><%= review.content %></p>
     <input form="reviewform" type="submit" value="Save Review">
 <% } %>
