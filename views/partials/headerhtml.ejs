@@ -2,20 +2,42 @@
 <html>
 <head>
     <title><%= viewName %></title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script src="https://kit.fontawesome.com/e63fc7cc5e.js"></script>
 </head>
 <body class="<%= viewName %>">
     <!-- <h1><%= viewName %></h1> -->
-    <nav>
-        <a href="/trucks/new">Add a new food truck</a>
+    <nav class="nav-main">
+        <a class="nav-main-link" href="/trucks">
+            <i class="fas fa-home"></i>
+            <p>All food trucks</p>
+        </a>
+        <a class="nav-main-link" href="/trucks/new">
+            <i class="fas fa-plus"></i>
+            <p>Add a new food truck</p>
+        </a>
+        <a class="nav-main-link" href="#">
+            <i class="fas fa-heart"></i>
+            <p>Favorite food trucks</p>
+        </a>
         <% if (!user) { %>
-            <a href="/users/login">Log in</a>
-            <a href="/users/new">Create an account</a>
+        <a class="nav-main-link" href="/users/login">
+            <i class="fas fa-sign-in-alt"></i>
+            <p>Log in</p>
+        </a>
+        <a class="nav-main-link" href="/users/new">
+            <i class="fas fa-user-plus"></i>
+            <p>Create an account</p>
+        </a>
         <% } else { %>
-            <a href="#">Saved food trucks</a>
-            <a href="/logout">Log Out</a>
-            <a href="/users/profile">Profile</a>
+        <a class="nav-main-link" href="/users/profile">
+            <i class="fas fa-user"></i>
+            <p>My account</p>
+        </a>
+        <a class="nav-main-link" href="/logout">
+            <i class="fas fa-sign-out-alt"></i>
+            <p>Log Out</p>
+        </a>
         <% } %>
     </nav>
