@@ -1,44 +1,44 @@
 <%- include('../partials/headerhtml') %>
 <% if (!user) { %>
-    <p>Not Logged In</p>
+<p>Not Logged In</p>
 <% } else { %>
-    <h1>Your truckSFinder account details</h1>
-    <p>Hello <%= user.name %>!</p>
-    <p>Your email address is: <%= user.email %></p>
+<h1>Your truckSFinder account details</h1>
+<p>Hello <%= user.name %>!</p>
+<p>Your email address is: <%= user.email %></p>
 <% } %>
-    <a href="/users/consolelogalldata">DEV: console.log All Data</a>
+<a href="/users/consolelogalldata">DEV: console.log All Data</a>
 <% if (user) { %>
-    <a href="/users/clearuserdata">DEV: Clear all trucks and reviews for this user</a>
-    <a href="/users/seeddata">DEV: Clear and seed fresh data</a>
+<a href="/users/clearuserdata">DEV: Clear all trucks and reviews for this user</a>
+<a href="/users/seeddata">DEV: Clear and seed fresh data</a>
     <% if (user.trucks.length) { %>
-    <ul>
-        <h3>Trucks Submitted: </h3>
+<ul>
+    <h3>Trucks Submitted: </h3>
         <% user.trucks.forEach(truck => { %>
-        <li>
-            <form action="/trucks/<%= truck.id %>?_method=DELETE" method="POST">
-                <input type="submit" value="X">
-            </form>
-            <h5><%= truck.applicant %></h5>
-            <p><%= truck.fooditems %></p>
-            <a href="/trucks/<%= truck.id %>">See More...</a>
-        </li>
+    <li>
+        <form action="/trucks/<%= truck.id %>?_method=DELETE" method="POST">
+            <input type="submit" value="X">
+        </form>
+        <h5><%= truck.applicant %></h5>
+        <p><%= truck.fooditems %></p>
+        <a href="/trucks/<%= truck.id %>">See More...</a>
+    </li>
         <% }); %>
-    </ul>
+</ul>
     <% } %>
     <% if (user.reviews.length) { %>
-    <ul>
-        <h3>Reviews Submitted: </h3>
+<ul>
+    <h3>Reviews Submitted: </h3>
         <% user.reviews.forEach(review => { %>
-        <li>
-            <form action="/users/profile/trucks/<%= review.truck %>/reviews/<%= review.id %>?_method=DELETE" method="POST">
-                <input type="submit" value="X">
-            </form>
-            <!-- once you populate reviews, insert link to truck, labeled with truck name (can do this name lookup in various ways) -->
-            <p>Rating: <%= review.rating %></p>
-            <p>Review: <%= review.content %></p>
-        </li>
+    <li>
+        <form action="/users/profile/trucks/<%= review.truck %>/reviews/<%= review.id %>?_method=DELETE" method="POST">
+            <input type="submit" value="X">
+        </form>
+        <!-- once you populate reviews, insert link to truck, labeled with truck name (can do this name lookup in various ways) -->
+        <p>Rating: <%= review.rating %></p>
+        <p>Review: <%= review.content %></p>
+    </li>
         <% }); %>
-    </ul>
+</ul>
     <% } %>
 <% } %>
 <%- include('../partials/footerhtml') %>

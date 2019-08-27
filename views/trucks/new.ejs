@@ -1,13 +1,13 @@
 <%- include('../partials/headerhtml') %>
 <% if (!user) { %>
-    <p>You must log in before adding a food truck.</p>
+<p>You must log in before adding a food truck.</p>
 <% } else { %>  
-    <h1>Add a new food truck</h1>
-    <form class="form" action="/trucks" method="POST">
-        <input type="text" name="applicant" placeholder="Food Truck Name">
-        <input type="text" name="fooditems" placeholder="Foods Offered">
-        <input type="hidden" name="creator" value="<%= user.id %>">
-        <input type="submit" value="Add Food Truck">
-    </form>
+<h1>Add a new food truck</h1>
+<form class="form" action="/trucks" method="POST">
+    <input type="text" name="applicant" placeholder="Food Truck Name">
+    <input type="text" name="fooditems" placeholder="Foods Offered">
+    <input type="hidden" name="creator" value="<%= user.id %>">
+    <input type="submit" value="Add Food Truck">
+</form>
 <% } %>
 <%- include('../partials/footerhtml') %>

@@ -1,16 +1,15 @@
 <%- include('../partials/headerhtml') %>
-    <a href="/trucks/<%= truck.id %>">Return to Food Truck Details</a>
+<a href="/trucks/<%= truck.id %>">Return to Food Truck Details</a>
 <% if (!user) { %>
-    <p>You must log in before editing a food truck.</p>
+<p>You must log in before editing a food truck.</p>
 <% } else { %>
-    <form action="/trucks/<%= truck.id %>?_method=PUT" method="POST">
-        <label for="truckname">Food Truck Name: </label>
-        <input id="truckname" type="text" name="applicant" value="<%= truck.applicant %>" placeholder="Enter food truck name">
-        <label for="foods">Foods Offered: </label>
-        <input id="foods" type="text" name="fooditems" value="<%= truck.fooditems %>" placeholder="List food options here">
-        <input type="hidden" name="creator" value="<%= user.id %>">
-        <input type="submit" value="Save Changes">
-    </form>
+<form action="/trucks/<%= truck.id %>?_method=PUT" method="POST">
+    <label for="truckname">Food Truck Name: </label>
+    <input id="truckname" type="text" name="applicant" value="<%= truck.applicant %>" placeholder="Enter food truck name">
+    <label for="foods">Foods Offered: </label>
+    <input id="foods" type="text" name="fooditems" value="<%= truck.fooditems %>" placeholder="List food options here">
+    <input type="hidden" name="creator" value="<%= user.id %>">
+    <input type="submit" value="Save Changes">
+</form>
 <% } %>
-
 <%- include('../partials/footerhtml') %>

@@ -1,47 +1,47 @@
 <%- include('../partials/headerhtml') %>
-    <h1><%= truck.applicant %></h1>
-    <div>
-    <% if (truckAvgRating) { %>
-        <% for (let i = 0; i !== truckAvgRating; i++) { %>
-        <i class="fas fa-star"></i>
-        <% } %>
-    <% } %>
-    </div>
-    <p>Food offered: <%= truck.fooditems %></p>
-<% if (user) { %>
-    <% if (user.id === truck.creator.toString()) { %>
-    <a href="/users/profile/trucks/<%= truck.id %>/edit">Edit Food Truck Details</a>
-    <form action="/trucks/<%= truck.id %>?_method=DELETE" method="POST">
-        <input type="submit" value="Delete Food Truck">
-    </form>
-    <% } %>
-    <% if (!hasReviewed) { %>
-    <a href="/users/profile/trucks/<%= truck.id %>/reviews/new">Add a Review</a>
-    <% } else { %>
-    <div>
-        <% let userRating = reviews.find(review => review.id === reviewId).rating; %>
-        <p>Your rating: 
-            <% for (let i = 0; i !== userRating; i++) { %>
-            <i class="fas fa-star"></i>
-            <% } %>
-        </p>
-        <p>You said: <%= reviews.find(review => review.id === reviewId).content %></p>
-    </div>
-    <a href="/users/profile/trucks/<%= truck.id %>/reviews/<%= reviewId %>/edit">Edit Your Review</a>
-    <form action="/users/profile/trucks/<%= truck.id %>/reviews/<%= reviewId %>?_method=DELETE" method="POST">
-        <input type="submit" value="Delete Your Review">
-    </form>
+<h1><%= truck.applicant %></h1>
+<div>
+<% if (truckAvgRating) { %>
+    <% for (let i = 0; i !== truckAvgRating; i++) { %>
+    <i class="fas fa-star"></i>
     <% } %>
 <% } %>
-    <h3>All Reviews: </h3>
-<% if (reviews) { %>
-    <% reviews.forEach(review => { %>
-    <div>
-        <% for (let i = 0; i !== review.rating; i++) { %>
+</div>
+<p>Food offered: <%= truck.fooditems %></p>
+<% if (user) { %>
+    <% if (user.id === truck.creator.toString()) { %>
+<a href="/users/profile/trucks/<%= truck.id %>/edit">Edit Food Truck Details</a>
+<form action="/trucks/<%= truck.id %>?_method=DELETE" method="POST">
+    <input type="submit" value="Delete Food Truck">
+</form>
+    <% } %>
+    <% if (!hasReviewed) { %>
+<a href="/users/profile/trucks/<%= truck.id %>/reviews/new">Add a Review</a>
+    <% } else { %>
+<div>
+        <% let userRating = reviews.find(review => review.id === reviewId).rating; %>
+    <p>Your rating: 
+        <% for (let i = 0; i !== userRating; i++) { %>
         <i class="fas fa-star"></i>
         <% } %>
-    </div>
-    <p><%= review.reviewer.name %> said: <%= review.content %></p>
+    </p>
+    <p>You said: <%= reviews.find(review => review.id === reviewId).content %></p>
+</div>
+<a href="/users/profile/trucks/<%= truck.id %>/reviews/<%= reviewId %>/edit">Edit Your Review</a>
+<form action="/users/profile/trucks/<%= truck.id %>/reviews/<%= reviewId %>?_method=DELETE" method="POST">
+    <input type="submit" value="Delete Your Review">
+</form>
+    <% } %>
+<% } %>
+<h3>All Reviews: </h3>
+<% if (reviews) { %>
+    <% reviews.forEach(review => { %>
+<div>
+        <% for (let i = 0; i !== review.rating; i++) { %>
+    <i class="fas fa-star"></i>
+        <% } %>
+</div>
+<p><%= review.reviewer.name %> said: <%= review.content %></p>
     <% }); %>
 <% } %>
 <%- include('../partials/footerhtml') %>

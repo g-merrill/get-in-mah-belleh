@@ -4,7 +4,6 @@
   <i class="logo fas fa-truck fa-4x">.</i>
   <i class="logo fas fa-smile fa-4x">!</i>
 </div>
-
 <h1>Find the best food trucks in San Francisco.</h1>
 <!-- non-functional -->
 <form action="/trucks" method="GET">
@@ -26,45 +25,39 @@
   <option value="b">Star rating</option>
 </select>
 <!-- non-functional -->
-
-
 <% if (trucks.length) { %>
-  <ul>
-    <% trucks.forEach((truck, idx) => { %>
-    <li>
-      <p><%= truck.applicant.toUpperCase(); %></p>
-      
-      <% if (truck.reviews.length) { %>        
-        <% for (let i = 0; i !== avgRatings[idx]; i++) { %>
-      <i class="fas fa-star"></i>
-        <% } %>
-        <!-- how do I make this preview text? -->
-      <p>
-        <%= truck.reviews[truck.reviews.length - 1].content; %>
-        <a href="/trucks/<%= truck.id %>">read more...</a>
-      </p>
-        <!-- how do I make this preview text? -->
-      <% } else { %>
-      <i class="far fa-star"></i>
-      <i class="far fa-star"></i>
-      <i class="far fa-star"></i>
-      <i class="far fa-star"></i>
-      <i class="far fa-star"></i>
-      <p>
-        No review submitted for this truck yet!
-        <a href="/trucks/<%= truck.id %>">read more...</a>
-      </p>  
+<ul>
+  <% trucks.forEach((truck, idx) => { %>
+  <li>
+    <p><%= truck.applicant.toUpperCase(); %></p>
+    <!-- <p><%= truck.fooditems %></p> -->
+    <% if (truck.reviews.length) { %>        
+      <% for (let i = 0; i !== avgRatings[idx]; i++) { %>
+    <i class="fas fa-star"></i>
       <% } %>
-      <% if (user) { %>
-      <p><i class="fas fa-pen"></i> Write a review</p>
-      <p><i class="fas fa-heart"></i> Save to favorites</p>
-      <% } %>
-      
-      <!-- <p><%= truck.fooditems %></p> -->
-      
-    </li>
-    <% }); %>
-  </ul>
+    <!-- how do I make this preview text? -->
+    <p>
+      <%= truck.reviews[truck.reviews.length - 1].content; %>
+      <a href="/trucks/<%= truck.id %>">read more...</a>
+    </p>
+    <!-- how do I make this preview text? -->
+    <% } else { %>
+    <i class="far fa-star"></i>
+    <i class="far fa-star"></i>
+    <i class="far fa-star"></i>
+    <i class="far fa-star"></i>
+    <i class="far fa-star"></i>
+    <p>
+      No review submitted for this truck yet!
+      <a href="/trucks/<%= truck.id %>">read more...</a>
+    </p>  
+    <% } %>
+    <% if (user) { %>
+    <p><i class="fas fa-pen"></i> Write a review</p>
+    <p><i class="fas fa-heart"></i> Save to favorites</p>
+    <% } %>
+  </li>
+  <% }); %>
+</ul>
 <% } %>
-
 <%- include('../partials/footerhtml') %>
