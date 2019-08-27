@@ -6,6 +6,7 @@ module.exports = {
     logInPage,
     new: newUser,
     show,
+    favTrucks,
     editTrucksPage,
     editReviewPage,
     create,
@@ -49,6 +50,38 @@ function show(req, res) {
             viewName: 'users-show'
         });
     }
+}
+
+function favTrucks(req, res) {
+    // NEED TO EDIT THIS CODE, THIS IS COPY PASTED FROM TRUCKS INDEX
+    Truck.find({})
+    .populate('reviews')
+    .then(trucks => {
+        let avgRatings = [];
+        trucks.forEach(truck => {
+            let truckRatingsSum = 0;
+            if (truck.reviews.length) {
+                truck.reviews.forEach(review => {
+                    truckRatingsSum += review.rating;
+                });
+                truckAvgRating = Math.round(truckRatingsSum / truck.reviews.length);
+                avgRatings.push(truckAvgRating);
+            } else {
+                avgRatings.push(0);
+            }
+        });
+        res.render('favtrucks/index', {
+            user: req.user,
+            viewName: 'favtrucks-index',
+            trucks,
+            avgRatings
+        });
+    })
+    .catch(err => {
+        if (err) console.log(err);
+        res.send('Error setting up trucks index page');
+    });
+    // NEED TO EDIT THIS CODE, THIS IS COPY PASTED FROM TRUCKS INDEX
 }
 
 function editTrucksPage(req, res) {

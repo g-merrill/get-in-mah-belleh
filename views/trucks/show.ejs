@@ -1,15 +1,4 @@
 <%- include('../partials/headerhtml') %>
-
-<% if (!user) { %>
-    <a href="/users/login">Log In</a>
-    <a href="/users/new">Create Account</a>
-<% } else { %>
-    <a href="/logout">Log Out</a>
-    <p>Hello <%= user.name %>!</p>
-<% } %>
-    <a href="/users/profile">Go to Profile Page</a>
-
-    <a href="/trucks">Go to Food Truck Index</a>
     <h1><%= truck.applicant %></h1>
     <div>
     <% if (truckAvgRating) { %>
@@ -55,5 +44,4 @@
     <p><%= review.reviewer.name %> said: <%= review.content %></p>
     <% }); %>
 <% } %>
-
 <%- include('../partials/footerhtml') %>

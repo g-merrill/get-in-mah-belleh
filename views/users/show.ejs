@@ -1,17 +1,11 @@
 <%- include('../partials/headerhtml') %>
-
 <% if (!user) { %>
-    <a href="/users/login">Log In</a>
-    <a href="/users/new">Create Account</a>
     <p>Not Logged In</p>
 <% } else { %>
-    <a href="/logout">Log Out</a>
     <p>Login Successful!</p>
     <p>Hello <%= user.name %>!</p>
     <p>Your email address is: <%= user.email %></p>
 <% } %>
-
-    <a href="/trucks">Go to Food Truck Index</a>
     <a href="/users/consolelogalldata">DEV: console.log All Data</a>
 <% if (user) { %>
     <a href="/users/clearuserdata">DEV: Clear all trucks and reviews for this user</a>
@@ -36,20 +30,15 @@
         <h3>Reviews Submitted: </h3>
         <% user.reviews.forEach(review => { %>
         <li>
-            <!-- delete review button -->
             <form action="/users/profile/trucks/<%= review.truck %>/reviews/<%= review.id %>?_method=DELETE" method="POST">
                 <input type="submit" value="X">
             </form>
             <!-- once you populate reviews, insert link to truck, labeled with truck name (can do this name lookup in various ways) -->
-            <!-- star rating -->
             <p>Rating: <%= review.rating %></p>
-            <!-- review text -->
             <p>Review: <%= review.content %></p>
-            <!-- edit review button -->
         </li>
         <% }); %>
     </ul>
     <% } %>
 <% } %>
-
 <%- include('../partials/footerhtml') %>
