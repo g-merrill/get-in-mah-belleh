@@ -14,8 +14,17 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: rgba(251, 230, 229, 1);
 }
 
 a {
   color: #00B7FF;
+}
+
+input {
+  background-color: inherit;
+}
+
+select {
+  background-color: inherit;
 }

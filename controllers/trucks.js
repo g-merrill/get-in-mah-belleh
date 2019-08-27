@@ -13,7 +13,9 @@ module.exports = {
 
 function index(req, res) {
     Truck.find({})
+    .populate('reviews')
     .then(trucks => {
+        console.log(trucks);
         res.render('trucks/index', {
             user: req.user,
             viewName: 'trucks-index',

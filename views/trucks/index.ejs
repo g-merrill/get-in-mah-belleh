@@ -39,17 +39,38 @@
   <ul>
     <% trucks.forEach(truck => { %>
     <li>
-      <p><%= truck.applicant %></p>
+      <p><%= truck.applicant.toUpperCase(); %></p>
+      <% if (truck.reviews.length) { %>
+        <!-- want to change this to average rating, not most recent rating -->
+        
+        <% for (let i = 0; i !== truck.reviews[truck.reviews.length - 1].rating; i++) { %>
       <i class="fas fa-star"></i>
-      <i class="fas fa-star"></i>
-      <i class="fas fa-star"></i>
-      <i class="fas fa-star"></i>
-      <i class="fas fa-star"></i>
-
-      <i class="fas fa-heart"></i>
-      <i class="fas fa-pen"></i>
+        <% } %>
+        <!-- want to change this to average rating, not most recent rating -->
+        <!-- how do I make this preview text -->
+      <p>
+        <%= truck.reviews[truck.reviews.length - 1].content; %>
+        <a href="/trucks/<%= truck.id %>">read more...</a>
+      </p>
+        <!-- how do I make this preview text -->
+      <% } else { %>
+      <i class="far fa-star"></i>
+      <i class="far fa-star"></i>
+      <i class="far fa-star"></i>
+      <i class="far fa-star"></i>
+      <i class="far fa-star"></i>
+      <p>
+        No review submitted for this truck yet!
+        <a href="/trucks/<%= truck.id %>">read more...</a>
+      </p>  
+      <% } %>
+      <% if (user) { %>
+      <p><i class="fas fa-pen"></i> Write a review</p>
+      <p><i class="fas fa-heart"></i> Save to favorites</p>
+      <% } %>
+      
       <!-- <p><%= truck.fooditems %></p> -->
-      <a href="/trucks/<%= truck.id %>">See More...</a>
+      
     </li>
     <% }); %>
   </ul>
