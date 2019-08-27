@@ -7,4 +7,15 @@
     <script src="https://kit.fontawesome.com/e63fc7cc5e.js"></script>
 </head>
 <body class="<%= viewName %>">
-    <h1><%= viewName %></h1>
+    <!-- <h1><%= viewName %></h1> -->
+    <nav>
+        <a href="/trucks/new">Add a new food truck</a>
+        <% if (!user) { %>
+            <a href="/users/login">Log in</a>
+            <a href="/users/new">Create an account</a>
+        <% } else { %>
+            <a href="#">Saved food trucks</a>
+            <a href="/logout">Log Out</a>
+            <a href="/users/profile">Profile</a>
+        <% } %>
+    </nav>

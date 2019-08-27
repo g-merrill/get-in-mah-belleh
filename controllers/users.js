@@ -16,12 +16,14 @@ module.exports = {
 
 function logInPage(req, res) {
     res.render('users/index', {
+        user: undefined,
         viewName: 'users-index'
     });
 }
 
 function newUser(req, res) {
     res.render('users/new', {
+        user: undefined,
         viewName: 'users-new'
     });
 }
