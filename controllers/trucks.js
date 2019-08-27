@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const Truck = require('../models/truck');
+const Review = require('../models/review');
 
 module.exports = {
     index,
@@ -44,12 +45,22 @@ function show(req, res) {
             reviewId = truck.reviews.find(review => user.reviews.includes(review.id)).id;
         }
         console.log('user: ', user, 'truck: ', truck, 'hasReviewed: ', hasReviewed, 'reviewId: ', reviewId);
-        res.render('trucks/show', {
-            user,
-            viewName: 'trucks-show',
-            truck,
-            hasReviewed,
-            reviewId
+        Review.find({ truck: truck.id })
+        .populate('reviewer')
+        .then(reviews => {
+            console.log('reviews: ', reviews);
+            res.render('trucks/show', {
+                user,
+                viewName: 'trucks-show',
+                truck,
+                hasReviewed,
+                reviewId,
+                reviews
+            });
+        })
+        .catch(err => {
+            if (err) console.log(err);
+            res.redirect('/trucks');
         });
     })
     .catch(err => {
@@ -80,7 +91,8 @@ function create(req, res) {
                     viewName: 'trucks-show',
                     truck: truckObj,
                     hasReviewed: false,
-                    reviewId: undefined
+                    reviewId: undefined,
+                    reviews: []
                 });
             })
             .catch(err => {

@@ -15,21 +15,28 @@
 <% if (user) { %>
     <% if (user.id === truck.creator.toString()) { %>
     <a href="/users/profile/trucks/<%= truck.id %>/edit">Edit Food Truck Details</a>
+    <form action="/trucks/<%= truck.id %>?_method=DELETE" method="POST">
+        <input type="submit" value="Delete Food Truck">
+    </form>
     <% } %>
     <% if (!hasReviewed) { %>
     <a href="/users/profile/trucks/<%= truck.id %>/reviews/new">Add a Review</a>
     <% } else { %>
     <div>
-        <p>You said: </p>
-        <p><%= truck.reviews.find(review => review.id === reviewId).content %></p>
+        <p>Your rating: <%= reviews.find(review => review.id === reviewId).rating %> star(s)</p>
+        <p>You said: <%= reviews.find(review => review.id === reviewId).content %></p>
     </div>
     <a href="/users/profile/trucks/<%= truck.id %>/reviews/<%= reviewId %>/edit">Edit Your Review</a>
+    <form action="/users/profile/trucks/<%= truck.id %>/reviews/<%= reviewId %>?_method=DELETE" method="POST">
+        <input type="submit" value="Delete Your Review">
+    </form>
     <% } %>
 <% } %>
     <h3>All Reviews: </h3>
-<% if (truck.reviews) { %>
-    <% truck.reviews.forEach(review => { %>
-    <p><%= review.content %></p>
+<% if (reviews) { %>
+    <% reviews.forEach(review => { %>
+    <p><%= review.rating %> star(s)</p>
+    <p><%= review.reviewer.name %> said: <%= review.content %></p>
     <% }); %>
 <% } %>
 
