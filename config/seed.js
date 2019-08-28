@@ -17,12 +17,9 @@ function runSeedFunction(req, res, array) {
     .then(() => Truck.deleteMany({}))
     .then(() => Review.deleteMany({}))
     .then(() => {
-        let counter = 0;
-        const arraylength = array.length;
-        array.forEach(arr => {
-            counter += 1;
+        for (let i = 0; i < array.length; i++) {
             let truckCopy, reviewCopy;
-            let truckRaw = arr[0];
+            let truckRaw = array[i][0];
             truckRaw.creator = req.user.id;
             Truck.create(truckRaw)
             .then(createdTruck1 => createdTruck1.save())
@@ -35,7 +32,7 @@ function runSeedFunction(req, res, array) {
                 return user.save();
             })
             .then(() => {
-                let reviewRaw = arr[1];
+                let reviewRaw = array[i][1];
                 reviewRaw.reviewer = req.user.id;
                 reviewRaw.truck = truckCopy.id;
                 return Review.create(reviewRaw);
@@ -58,19 +55,17 @@ function runSeedFunction(req, res, array) {
                 return user.save();
             })
             .then(updatedUser => {
-                console.log('Updated User: ', updatedUser);
-                if (counter === arraylength) {
+                if (i === array.length - 1) {
+                    console.log('Updated User : ', updatedUser);
                     console.log('******************* SEED DATA FUNCTION END ******************');
-                    res.redirect('/users/profile'); // put this at the end of the last function!
-                } else {
-                    return;
+                    res.redirect('/users/profile'); // put this at the end of the last function!            
                 }
             })
             .catch(err => {
                 if (err) console.log('Error: ', err);
                 res.redirect('/users/profile');
             });
-        });
+        }
     })
     .catch(err => {
         if (err) console.log('Error: ', err);

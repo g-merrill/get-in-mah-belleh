@@ -166,11 +166,13 @@ function deleteTruck(req, res) {
                 return Review.find({ truck: truck._id })
             })
             .then(reviews => {
-                    // for each user that submitted a review for this truck
-                    console.log(reviews);
-                    // splice review from users array 
-                    // and then save user
-                    return Review.find({ truck: truck._id });
+                console.log('Array of all reviews for this deleted truck: ', reviews);
+                
+                // ******** LEFT OFF HERE *************
+                // for each user that submitted a review for this truck
+                // splice review from users array 
+                // and then save user
+                return Review.find({ truck: truck._id });
             })
             // NEW CODE **********
             .then(() => res.redirect('/users/profile'))
