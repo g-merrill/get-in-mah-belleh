@@ -33,23 +33,23 @@
     <!-- <p><%= truck.fooditems %></p> -->
     <% if (truck.reviews.length) { %>        
       <% for (let i = 0; i !== avgRatings[idx]; i++) { %>
-    <i class="fas fa-star"></i>
+    <span>&#9733</span>
       <% } %>
     <!-- how do I make this preview text? -->
     <p>
       <%= truck.reviews[truck.reviews.length - 1].content; %>
-      <a href="/trucks/<%= truck.id %>">read more...</a>
+      <a href="/trucks/<%= truck.id %>">read more</a>
     </p>
     <!-- how do I make this preview text? -->
     <% } else { %>
-    <i class="far fa-star"></i>
-    <i class="far fa-star"></i>
-    <i class="far fa-star"></i>
-    <i class="far fa-star"></i>
-    <i class="far fa-star"></i>
-    <p>
+      <span>&#9734</span>
+      <span>&#9734</span>
+      <span>&#9734</span>
+      <span>&#9734</span>
+      <span>&#9734</span>
+      <p>
       No review submitted for this truck yet!
-      <a href="/trucks/<%= truck.id %>">read more...</a>
+      <a href="/trucks/<%= truck.id %>">read more</a>
     </p>  
     <% } %>
     <% if (user) { %>

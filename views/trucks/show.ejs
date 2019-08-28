@@ -3,7 +3,7 @@
 <div>
 <% if (truckAvgRating) { %>
     <% for (let i = 0; i !== truckAvgRating; i++) { %>
-    <i class="fas fa-star"></i>
+    <span>&#9733</span>
     <% } %>
 <% } %>
 </div>
@@ -22,7 +22,7 @@
         <% let userRating = reviews.find(review => review.id === reviewId).rating; %>
     <p>Your rating: 
         <% for (let i = 0; i !== userRating; i++) { %>
-        <i class="fas fa-star"></i>
+        <span>&#9733</span>
         <% } %>
     </p>
     <p>You said: <%= reviews.find(review => review.id === reviewId).content %></p>
@@ -34,14 +34,23 @@
     <% } %>
 <% } %>
 <h3>All Reviews: </h3>
-<% if (reviews) { %>
+<% if (reviews.length) { %>
     <% reviews.forEach(review => { %>
 <div>
         <% for (let i = 0; i !== review.rating; i++) { %>
-    <i class="fas fa-star"></i>
+    <span>&#9733</span>
         <% } %>
 </div>
 <p><%= review.reviewer.name %> said: <%= review.content %></p>
     <% }); %>
+<% } else { %>
+<div>
+    <span>&#9734</span>
+    <span>&#9734</span>
+    <span>&#9734</span>
+    <span>&#9734</span>
+    <span>&#9734</span>
+</div>
+<p>No reviews yet!</p>
 <% } %>
 <%- include('../partials/footerhtml') %>
