@@ -22,7 +22,7 @@ function index(req, res) {
                 truck.reviews.forEach(review => {
                     truckRatingsSum += review.rating;
                 });
-                truckAvgRating = Math.round(truckRatingsSum / truck.reviews.length);
+                let truckAvgRating = Math.round(truckRatingsSum / truck.reviews.length);
                 avgRatings.push(truckAvgRating);
             } else {
                 avgRatings.push(0);
@@ -137,7 +137,7 @@ function create(req, res) {
 
 function edit(req, res) {
     if (req.user) {
-        Truck.findByIdAndUpdate(req.params.truckid, req.body,)
+        Truck.findByIdAndUpdate(req.params.truckid, req.body)
         .then(truck => {
             console.log('Updated truck: ', truck);
             res.redirect(`/trucks/${truck.id}`);

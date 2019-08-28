@@ -35,10 +35,43 @@ function show(req, res) {
         .populate('trucks')
         .populate('reviews')
         .then(user => {
-            res.render('users/show', {
-                user,
-                viewName: 'users-show'
-            });
+            let avgRatings = [];
+            if (user.trucks.length) {
+                user.trucks.forEach(truck => {
+                    let truckRatingsSum = 0;
+                    if (truck.reviews.length) {
+                        Truck.findById(truck.id)
+                        .populate('reviews')
+                        .then(truck => {
+                            truck.reviews.forEach(review => {
+                                truckRatingsSum += review.rating;
+                            });
+                            let truckAvgRating = Math.round(truckRatingsSum / truck.reviews.length);
+                            avgRatings.push(truckAvgRating);
+                        })
+                        .catch(err => {
+                            if (err) console.log(err);
+                            res.redirect('/users/login');
+                        });
+                    } else {
+                        avgRatings.push(0);
+                    }
+                });
+                console.log('User: ', user, 'avgRatings: ', avgRatings);
+                res.render('users/show', {
+                    user,
+                    viewName: 'users-show',
+                    avgRatings
+                });
+            } else {
+                avgRatings.push(0);
+                console.log('User: ', user, 'avgRatings: ', avgRatings);
+                res.render('users/show', {
+                    user,
+                    viewName: 'users-show',
+                    avgRatings
+                });
+            }
         })
         .catch(err => {
             if (err) console.log(err);

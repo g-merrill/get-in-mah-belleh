@@ -13,15 +13,20 @@
     <% if (user.trucks.length) { %>
 <ul>
     <h3>Trucks Submitted: </h3>
-        <% user.trucks.forEach(truck => { %>
+        <% user.trucks.forEach((truck, idx) => { %>
+    <form action="/trucks/<%= truck.id %>?_method=DELETE" method="POST">
+        <input type="submit" value="X">
+    </form>
+
     <li>
-        <form action="/trucks/<%= truck.id %>?_method=DELETE" method="POST">
-            <input type="submit" value="X">
-        </form>
         <h5><%= truck.applicant %></h5>
         <p><%= truck.fooditems %></p>
         <a href="/trucks/<%= truck.id %>">read more</a>
     </li>
+<!-- replace above with code below -->
+
+<!-- code to replace -->
+
         <% }); %>
 </ul>
     <% } %>

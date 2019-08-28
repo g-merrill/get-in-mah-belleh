@@ -28,7 +28,7 @@
 <% if (trucks.length) { %>
 <ul>
   <% trucks.forEach((truck, idx) => { %>
-  <li>
+  <li class="truck-card-container">
     <p><%= truck.applicant.toUpperCase(); %></p>
     <!-- <p><%= truck.fooditems %></p> -->
     <% if (truck.reviews.length) { %>        

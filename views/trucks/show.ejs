@@ -1,13 +1,35 @@
 <%- include('../partials/headerhtml') %>
-<h1><%= truck.applicant %></h1>
-<div>
-<% if (truckAvgRating) { %>
+<div class="truck-card-container">
+    <p><%= truck.applicant.toUpperCase(); %></p>
+    <!-- <p>Food offered: <%= truck.fooditems %></p> -->
+    <% if (truck.reviews.length) { %>        
     <% for (let i = 0; i !== truckAvgRating; i++) { %>
     <span>&#9733</span>
     <% } %>
-<% } %>
+    <!-- how do I make this preview text? -->
+    <p>
+    <%= truck.reviews[truck.reviews.length - 1].content; %>
+    </p>
+    <!-- how do I make this preview text? -->
+    <% } else { %>
+    <span>&#9734</span>
+    <span>&#9734</span>
+    <span>&#9734</span>
+    <span>&#9734</span>
+    <span>&#9734</span>
+    <p>
+    No review submitted for this truck yet!
+    </p>  
+    <% } %>
+    <% if (user) { %>
+        <% if (!hasReviewed) { %>
+    <p><i class="fas fa-pen"></i> Write a review</p>
+        <% } else { %>
+    <a href="/users/profile/trucks/<%= truck.id %>/reviews/<%= reviewId %>/edit">Edit Your Review</a>
+        <% } %>
+    <p><i class="fas fa-heart"></i> Save to favorites</p>
+    <% } %>
 </div>
-<p>Food offered: <%= truck.fooditems %></p>
 <% if (user) { %>
     <% if (user.id === truck.creator.toString()) { %>
 <a href="/users/profile/trucks/<%= truck.id %>/edit">Edit Food Truck Details</a>
@@ -17,24 +39,11 @@
     <% } %>
     <% if (!hasReviewed) { %>
 <a href="/users/profile/trucks/<%= truck.id %>/reviews/new">Add a Review</a>
-    <% } else { %>
-<div>
-        <% let userRating = reviews.find(review => review.id === reviewId).rating; %>
-    <p>Your rating: 
-        <% for (let i = 0; i !== userRating; i++) { %>
-        <span>&#9733</span>
-        <% } %>
-    </p>
-    <p>You said: <%= reviews.find(review => review.id === reviewId).content %></p>
-</div>
-<a href="/users/profile/trucks/<%= truck.id %>/reviews/<%= reviewId %>/edit">Edit Your Review</a>
-<form action="/users/profile/trucks/<%= truck.id %>/reviews/<%= reviewId %>?_method=DELETE" method="POST">
-    <input type="submit" value="Delete Your Review">
-</form>
     <% } %>
 <% } %>
 <h3>All Reviews: </h3>
 <% if (reviews.length) { %>
+    <!-- Stretch: could pop off the most recent review that is displaying up on the top card -->
     <% reviews.forEach(review => { %>
 <div>
         <% for (let i = 0; i !== review.rating; i++) { %>
