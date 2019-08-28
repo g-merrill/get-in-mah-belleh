@@ -69,11 +69,9 @@ function show(req, res) {
         } else {
             truckAvgRating = 0;
         }
-        // console.log('user: ', user, 'truck: ', truck, 'hasReviewed: ', hasReviewed, 'reviewId: ', reviewId, 'truckAvgRating: ', truckAvgRating);
         Review.find({ truck: truck.id })
         .populate('reviewer')
         .then(reviews => {
-            // console.log('reviews: ', reviews);
             res.render('trucks/show', {
                 user,
                 viewName: 'trucks-show',
@@ -103,12 +101,10 @@ function create(req, res) {
         Truck.create(req.body)
         .then(truck => truck.save())
         .then(truck => {
-            // console.log('Saved truck: ', truck);
             truckObj = truck;
             User.findById(truck.creator)
             .then(user => {
                 user.trucks.push(truck._id);
-                // console.log("Updated user's trucks array: ", user);
                 return user.save();
             })
             .then(user => {
@@ -139,7 +135,6 @@ function edit(req, res) {
     if (req.user) {
         Truck.findByIdAndUpdate(req.params.truckid, req.body)
         .then(truck => {
-            // console.log('Updated truck: ', truck);
             res.redirect(`/trucks/${truck.id}`);
         })
         .catch(err => {
@@ -157,25 +152,38 @@ function deleteTruck(req, res) {
         .then(truck => {
             User.findById(truck.creator)
             .then(user => {
-                let trucksSpliceIdx = user.trucks.findIndex(userTruck => userTruck._id.toString() === truck.id);
+                let trucksSpliceIdx = user.trucks.findIndex(userTruck => userTruck.toString() === truck.id);
                 user.trucks.splice(trucksSpliceIdx, 1);
                 return user.save();
             })
-            // NEW CODE **********
             .then(() => {
                 return Review.find({ truck: truck._id })
             })
             .then(reviews => {
-                console.log('Array of all reviews for this deleted truck: ', reviews);
-                
-                // ******** LEFT OFF HERE *************
-                // for each user that submitted a review for this truck
-                // splice review from users array 
-                // and then save user
-                return Review.find({ truck: truck._id });
+                reviews.forEach(review => {
+                    Review.findByIdAndDelete(review.id)
+                    .then(deletedReview => {
+                        User.findById(deletedReview.reviewer)
+                        .then(foundUser => {
+                            let reviewsSpliceIdx = foundUser.reviews.findIndex(userReviews => userReviews.toString() === deletedReview.id);
+                            foundUser.reviews.splice(reviewsSpliceIdx, 1);
+                            return foundUser.save(err => { if (err) console.log('Error: ', err)});
+                        })
+                        .catch(err => {
+                            if (err) console.log(err);
+                            res.redirect('/users/profile');
+                        });
+                    })
+                    .catch(err => {
+                        if (err) console.log(err);
+                        res.redirect('/users/profile');
+                    });
+                });
+                return Truck.find({});
             })
-            // NEW CODE **********
-            .then(() => res.redirect('/users/profile'))
+            .then(() => {
+                res.redirect('/users/profile');
+            })
             .catch(err => {
                 if (err) console.log(err);
                 res.redirect('/users/profile');

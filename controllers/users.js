@@ -57,7 +57,6 @@ function show(req, res) {
                         avgRatings.push(0);
                     }
                 });
-                // console.log('User: ', user, 'avgRatings: ', avgRatings);
                 res.render('users/show', {
                     user,
                     viewName: 'users-show',
@@ -65,7 +64,6 @@ function show(req, res) {
                 });
             } else {
                 avgRatings.push(0);
-                // console.log('User: ', user, 'avgRatings: ', avgRatings);
                 res.render('users/show', {
                     user,
                     viewName: 'users-show',
@@ -155,10 +153,9 @@ function create(req, res) {
     User.create(req.body)
     .then(createdUser => createdUser.save())
     .then(savedUser => {
-        // console.log('Saved user: ', savedUser);
         req.user = savedUser;
         // ^ doesn't seem to work after redirect or render, not sure if req.user can be saved edited
-        // console.log('req.user: ', req.user);
+        // ANSWER: You can't.  Req.user is a passport thing.  Also, major security issues that you don't know how to fix.
         return Truck.find({});
     })
     .then(trucks => {
