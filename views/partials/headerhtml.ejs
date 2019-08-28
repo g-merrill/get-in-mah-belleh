@@ -22,13 +22,13 @@
             <p class="nav-main-linktext">Favorite food trucks</p>
         </a>
 <% if (!user) { %>
-        <a class="nav-main-link" href="/users/login">
-            <i class="fas fa-sign-in-alt fa-2x"></i>
-            <p class="nav-main-linktext">Log in</p>
-        </a>
         <a class="nav-main-link" href="/users/new">
             <i class="fas fa-user-plus fa-2x"></i>
             <p class="nav-main-linktext">Create an account</p>
+        </a>
+        <a class="nav-main-link" href="/users/login">
+            <i class="fas fa-sign-in-alt fa-2x"></i>
+            <p class="nav-main-linktext">Log in</p>
         </a>
 <% } else { %>
         <a class="nav-main-link" href="/users/profile">

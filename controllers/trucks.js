@@ -69,11 +69,11 @@ function show(req, res) {
         } else {
             truckAvgRating = 0;
         }
-        console.log('user: ', user, 'truck: ', truck, 'hasReviewed: ', hasReviewed, 'reviewId: ', reviewId, 'truckAvgRating: ', truckAvgRating);
+        // console.log('user: ', user, 'truck: ', truck, 'hasReviewed: ', hasReviewed, 'reviewId: ', reviewId, 'truckAvgRating: ', truckAvgRating);
         Review.find({ truck: truck.id })
         .populate('reviewer')
         .then(reviews => {
-            console.log('reviews: ', reviews);
+            // console.log('reviews: ', reviews);
             res.render('trucks/show', {
                 user,
                 viewName: 'trucks-show',
@@ -103,12 +103,12 @@ function create(req, res) {
         Truck.create(req.body)
         .then(truck => truck.save())
         .then(truck => {
-            console.log('Saved truck: ', truck);
+            // console.log('Saved truck: ', truck);
             truckObj = truck;
             User.findById(truck.creator)
             .then(user => {
                 user.trucks.push(truck._id);
-                console.log("Updated user's trucks array: ", user);
+                // console.log("Updated user's trucks array: ", user);
                 return user.save();
             })
             .then(user => {
@@ -139,7 +139,7 @@ function edit(req, res) {
     if (req.user) {
         Truck.findByIdAndUpdate(req.params.truckid, req.body)
         .then(truck => {
-            console.log('Updated truck: ', truck);
+            // console.log('Updated truck: ', truck);
             res.redirect(`/trucks/${truck.id}`);
         })
         .catch(err => {
@@ -155,19 +155,10 @@ function deleteTruck(req, res) {
     if (req.user) {
         Truck.findByIdAndDelete(req.params.truckid)
         .then(truck => {
-            // CHANGE THIS FROM FIND AND DELETE FROM CURRENT USER ARRAY TO FIND AND DELETE FROM ANY/ALL USERS
             User.findById(truck.creator)
             .then(user => {
                 let trucksSpliceIdx = user.trucks.findIndex(userTruck => userTruck._id.toString() === truck.id);
                 user.trucks.splice(trucksSpliceIdx, 1);
-                // let truckReviews = truck.reviews.map(review => review.toString());
-                // let userReviews = user.reviews.map(review => review.toString());
-                // let hasReview = userReviews.some(userReview => truckReviews.includes(userReview));
-                // if (hasReview) {
-                //     let reviewsSpliceIdx = userReviews.findIndex(userReview => truckReviews.includes(userReview));
-                //     user.reviews.splice(reviewsSpliceIdx, 1);
-                // }
-            // CHANGE THIS FROM FIND AND DELETE FROM CURRENT USER ARRAY TO FIND AND DELETE FROM ANY/ALL USERS
                 return user.save();
             })
             // NEW CODE **********
@@ -176,8 +167,10 @@ function deleteTruck(req, res) {
             })
             .then(reviews => {
                     // for each user that submitted a review for this truck
+                    console.log(reviews);
                     // splice review from users array 
                     // and then save user
+                    return Review.find({ truck: truck._id });
             })
             // NEW CODE **********
             .then(() => res.redirect('/users/profile'))
