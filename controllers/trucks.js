@@ -155,19 +155,31 @@ function deleteTruck(req, res) {
     if (req.user) {
         Truck.findByIdAndDelete(req.params.truckid)
         .then(truck => {
+            // CHANGE THIS FROM FIND AND DELETE FROM CURRENT USER ARRAY TO FIND AND DELETE FROM ANY/ALL USERS
             User.findById(truck.creator)
             .then(user => {
                 let trucksSpliceIdx = user.trucks.findIndex(userTruck => userTruck._id.toString() === truck.id);
                 user.trucks.splice(trucksSpliceIdx, 1);
-                let truckReviews = truck.reviews.map(review => review.toString());
-                let userReviews = user.reviews.map(review => review.toString());
-                let hasReview = userReviews.some(userReview => truckReviews.includes(userReview));
-                if (hasReview) {
-                    let reviewsSpliceIdx = userReviews.findIndex(userReview => truckReviews.includes(userReview));
-                    user.reviews.splice(reviewsSpliceIdx, 1);
-                }
+                // let truckReviews = truck.reviews.map(review => review.toString());
+                // let userReviews = user.reviews.map(review => review.toString());
+                // let hasReview = userReviews.some(userReview => truckReviews.includes(userReview));
+                // if (hasReview) {
+                //     let reviewsSpliceIdx = userReviews.findIndex(userReview => truckReviews.includes(userReview));
+                //     user.reviews.splice(reviewsSpliceIdx, 1);
+                // }
+            // CHANGE THIS FROM FIND AND DELETE FROM CURRENT USER ARRAY TO FIND AND DELETE FROM ANY/ALL USERS
                 return user.save();
             })
+            // NEW CODE **********
+            .then(() => {
+                return Review.find({ truck: truck._id })
+            })
+            .then(reviews => {
+                    // for each user that submitted a review for this truck
+                    // splice review from users array 
+                    // and then save user
+            })
+            // NEW CODE **********
             .then(() => res.redirect('/users/profile'))
             .catch(err => {
                 if (err) console.log(err);
