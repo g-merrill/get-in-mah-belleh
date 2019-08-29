@@ -22,25 +22,10 @@
     </p>  
     <% } %>
     <% if (user) { %>
-        <% if (!hasReviewed) { %>
-    <p><i class="fas fa-pen"></i> Write a review</p>
-        <% } else { %>
-    <a href="/users/profile/trucks/<%= truck.id %>/reviews/<%= reviewId %>/edit">Edit Your Review</a>
-        <% } %>
+    <a href="/users/profile/trucks/<%= truck.id %>/reviews/new"><i class="fas fa-pen"></i> Write a review</a>
     <p><i class="fas fa-heart"></i> Save to favorites</p>
     <% } %>
 </div>
-<% if (user) { %>
-    <% if (user.id === truck.creator.toString()) { %>
-<a href="/users/profile/trucks/<%= truck.id %>/edit">Edit Food Truck Details</a>
-<form action="/trucks/<%= truck.id %>?_method=DELETE" method="POST">
-    <input type="submit" value="Delete Food Truck">
-</form>
-    <% } %>
-    <% if (!hasReviewed) { %>
-<a href="/users/profile/trucks/<%= truck.id %>/reviews/new">Add a Review</a>
-    <% } %>
-<% } %>
 <h3>All Reviews: </h3>
 <% if (reviews.length) { %>
     <!-- Stretch: could pop off the most recent review that is displaying up on the top card -->

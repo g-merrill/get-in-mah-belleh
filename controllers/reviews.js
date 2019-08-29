@@ -63,10 +63,10 @@ function edit(req, res) {
     if (req.user) {
         Review.findByIdAndUpdate(req.params.reviewid, req.body)
         .then(review => {
-            res.redirect(`/trucks/${review.truck}`);
+            res.redirect('/users/profile/reviews/submitted');
         })
     } else {
-        res.redirect('/users/profile');
+        res.redirect('/users/profile/reviews/submitted');
     }
 }
 
@@ -89,18 +89,18 @@ function deleteReview(req, res) {
                 return truck.save();
             })
             .then(truck => {
-                res.redirect('/users/profile');
+                res.redirect('/users/profile/reviews/submitted');
             })
             .catch(err => {
                 if (err) console.log(err);
-                res.redirect('/users/profile');
+                res.redirect('/users/profile/reviews/submitted');
             });
         })
         .catch(err => {
             if (err) console.log(err);
-            res.redirect('/users/profile');
+            res.redirect('/users/profile/reviews/submitted');
         });
     } else {
-        res.redirect('/users/profile');
+        res.redirect('/users/profile/reviews/submitted');
     }
 }

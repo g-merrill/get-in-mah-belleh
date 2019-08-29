@@ -135,11 +135,11 @@ function edit(req, res) {
     if (req.user) {
         Truck.findByIdAndUpdate(req.params.truckid, req.body)
         .then(truck => {
-            res.redirect(`/trucks/${truck.id}`);
+            res.redirect('/users/profile/trucks/submitted');
         })
         .catch(err => {
             if (err) console.log(err);
-            res.redirect(`/trucks/${req.params.truckid}`);
+            res.redirect('/users/profile/trucks/submitted');
         });
     } else {
         res.redirect(`/users/profile/trucks/${req.params.truckid}/edit`);
@@ -171,29 +171,29 @@ function deleteTruck(req, res) {
                         })
                         .catch(err => {
                             if (err) console.log(err);
-                            res.redirect('/users/profile');
+                            res.redirect('/users/profile/trucks/submitted');
                         });
                     })
                     .catch(err => {
                         if (err) console.log(err);
-                        res.redirect('/users/profile');
+                        res.redirect('/users/profile/trucks/submitted');
                     });
                 });
                 return Truck.find({});
             })
             .then(() => {
-                res.redirect('/users/profile');
+                res.redirect('/users/profile/trucks/submitted');
             })
             .catch(err => {
                 if (err) console.log(err);
-                res.redirect('/users/profile');
+                res.redirect('/users/profile/trucks/submitted');
             });
         })
         .catch(err => {
             if (err) console.log(err);
-            res.redirect('/users/profile');
+            res.redirect('/users/profile/trucks/submitted');
         });
     } else {
-        res.redirect('/users/profile');
+        res.redirect('/users/profile/trucks/submitted');
     }
 }

@@ -16,6 +16,9 @@
     <% } else { %>
 <ul>
         <% trucks.forEach((truck, idx) => { %>
+    <form action="/trucks/<%= truck.id %>?_method=DELETE" method="POST">
+        <input type="submit" value="X">
+    </form>
     <li class="truck-card-container">
         <p><%= truck.applicant.toUpperCase(); %></p>
         <!-- <p><%= truck.fooditems %></p> -->
@@ -41,10 +44,11 @@
         </p>  
             <% } %>
             <% if (user) { %>
-        <p><i class="fas fa-pen"></i> Write a review</p>
+        <a href="/users/profile/trucks/<%= truck.id %>/reviews/new"><i class="fas fa-pen"></i> Write a review</a>
         <p><i class="fas fa-heart"></i> Save to favorites</p>
             <% } %>
     </li>
+    <a href="/users/profile/trucks/<%= truck.id %>/edit">Edit Food Truck Details</a>
         <% }); %>
 </ul>
     <% } %>

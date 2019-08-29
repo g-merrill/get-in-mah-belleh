@@ -52,10 +52,8 @@
       <a href="/trucks/<%= truck.id %>">read more</a>
     </p>  
     <% } %>
-    <% if (user) { %>
-    <p><i class="fas fa-pen"></i> Write a review</p>
+    <a href="/users/profile/trucks/<%= truck.id %>/reviews/new"><i class="fas fa-pen"></i> Write a review</a>
     <p><i class="fas fa-heart"></i> Save to favorites</p>
-    <% } %>
   </li>
   <% }); %>
 </ul>

@@ -18,40 +18,5 @@
 <% if (user) { %>
 <a href="/users/clearuserdata">DEV: Clear all trucks and reviews for this user</a>
 <a href="/users/seeddata">DEV: Clear and seed fresh data</a>
-    <% if (user.trucks.length) { %>
-<ul>
-    <h3>Trucks Submitted: </h3>
-        <% user.trucks.forEach((truck, idx) => { %>
-    <form action="/trucks/<%= truck.id %>?_method=DELETE" method="POST">
-        <input type="submit" value="X">
-    </form>
-
-    <li>
-        <h5><%= truck.applicant %></h5>
-        <p><%= truck.fooditems %></p>
-        <a href="/trucks/<%= truck.id %>">read more</a>
-    </li>
-<!-- replace above with code below -->
-
-<!-- code to replace -->
-
-        <% }); %>
-</ul>
-    <% } %>
-    <% if (user.reviews.length) { %>
-<ul>
-    <h3>Reviews Submitted: </h3>
-        <% user.reviews.forEach(review => { %>
-    <li>
-        <form action="/users/profile/trucks/<%= review.truck %>/reviews/<%= review.id %>?_method=DELETE" method="POST">
-            <input type="submit" value="X">
-        </form>
-        <!-- once you populate reviews, insert link to truck, labeled with truck name (can do this name lookup in various ways) -->
-        <p>Rating: <%= review.rating %></p>
-        <p>Review: <%= review.content %></p>
-    </li>
-        <% }); %>
-</ul>
-    <% } %>
 <% } %>
 <%- include('../partials/footerhtml') %>
