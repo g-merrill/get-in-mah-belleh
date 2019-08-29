@@ -11,6 +11,7 @@ module.exports = {
     editReviewPage,
     create,
     userReviews,
+    userTrucks,
     consoleLogAllData,
     clearThemAll,
     seedData
@@ -176,15 +177,41 @@ function userReviews(req, res) {
     Review.find({ reviewer: req.user.id })
     .populate('truck')
     .then(reviews => {
-        console.log(reviews);
-        // let reviewArray = [];
-        // reviews.forEach(review => {
-            // **************** how do i populate the truck property for each review???
-        // });
         res.render('users/showreviews', {
             user: req.user,
             viewName: 'users-showreviews',
             reviews
+        });
+    })
+    .catch(err => {
+        if (err) console.log(err);
+        res.redirect('/users/profile');
+    });
+}
+
+
+function userTrucks(req, res) {
+    Truck.find({ creator: req.user.id })
+    .populate('reviews')
+    .then(trucks => {
+        let avgRatings = [];
+        trucks.forEach(truck => {
+            let truckRatingsSum = 0;
+            if (truck.reviews.length) {
+                truck.reviews.forEach(review => {
+                    truckRatingsSum += review.rating;
+                });
+                let truckAvgRating = Math.round(truckRatingsSum / truck.reviews.length);
+                avgRatings.push(truckAvgRating);
+            } else {
+                avgRatings.push(0);
+            }
+        });
+        res.render('users/showtrucks', {
+            user: req.user,
+            viewName: 'users-showtrucks',
+            trucks,
+            avgRatings
         });
     })
     .catch(err => {

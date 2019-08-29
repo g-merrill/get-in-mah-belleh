@@ -1,0 +1,52 @@
+<%- include('../partials/headerhtml') %>
+<% if (!user) { %>
+<p>Not Logged In</p>
+<% } else { %>
+<nav>
+    <div>
+        <a href="/users/profile/trucks/submitted">Submitted Trucks</a>
+    </div>
+    <div>
+        <a href="/users/profile/reviews/submitted">Submitted Reviews</a>
+    </div>
+</nav>
+<h1>Your truckSFinder trucks</h1>
+    <% if (!trucks.length) { %>
+<p>You have not submitted any food trucks yet!</p>
+    <% } else { %>
+<ul>
+        <% trucks.forEach((truck, idx) => { %>
+    <li class="truck-card-container">
+        <p><%= truck.applicant.toUpperCase(); %></p>
+        <!-- <p><%= truck.fooditems %></p> -->
+            <% if (truck.reviews.length) { %>        
+                <% for (let i = 0; i !== avgRatings[idx]; i++) { %>
+        <span>&#9733</span>
+                <% } %>
+        <!-- how do I make this preview text? -->
+        <p>
+        <%= truck.reviews[truck.reviews.length - 1].content; %>
+        <a href="/trucks/<%= truck.id %>">read more</a>
+        </p>
+        <!-- how do I make this preview text? -->
+            <% } else { %>
+        <span>&#9734</span>
+        <span>&#9734</span>
+        <span>&#9734</span>
+        <span>&#9734</span>
+        <span>&#9734</span>
+        <p>
+        No review submitted for this truck yet!
+        <a href="/trucks/<%= truck.id %>">read more</a>
+        </p>  
+            <% } %>
+            <% if (user) { %>
+        <p><i class="fas fa-pen"></i> Write a review</p>
+        <p><i class="fas fa-heart"></i> Save to favorites</p>
+            <% } %>
+    </li>
+        <% }); %>
+</ul>
+    <% } %>
+<% } %>
+<%- include('../partials/footerhtml') %>

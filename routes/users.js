@@ -14,6 +14,7 @@ router.get('/profile/trucks/:truckid/reviews/:reviewid/edit', usersCtrl.editRevi
 router.post('/', usersCtrl.create);
 
 router.get('/profile/reviews/submitted', usersCtrl.userReviews);
+router.get('/profile/trucks/submitted', usersCtrl.userTrucks);
 
 // ***************
 router.get('/consolelogalldata', usersCtrl.consoleLogAllData);

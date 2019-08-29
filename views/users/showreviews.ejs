@@ -11,18 +11,18 @@
     </div>
 </nav>
 <h1>Your truckSFinder reviews</h1>
-<% if (!reviews.length) { %>
+    <% if (!reviews.length) { %>
 <p>You have not submitted any food truck reviews yet!</p>
-<% } else { %>
-    <% reviews.forEach(review => { %>
+    <% } else { %>
+        <% reviews.forEach(review => { %>
 <p>For <%= review.truck.applicant %>:</p>
 <div>
-        <% for (let i = 0; i !== review.rating; i++) { %>
+            <% for (let i = 0; i !== review.rating; i++) { %>
     <span>&#9733</span>
-        <% } %>
+            <% } %>
 </div>
 <p><%= review.content %></p>
-    <% }); %>
-<% } %>
+        <% }); %>
+    <% } %>
 <% } %>
 <%- include('../partials/footerhtml') %>
