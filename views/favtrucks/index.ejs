@@ -3,9 +3,43 @@
 <% if (!user) { %>
 <p>You must log in before seeing or saving your favorite food trucks.</p>
 <% } else { %>
-<!-- NEED TO EDIT THIS CODE, THIS IS COPY PASTED FROM TRUCKS INDEX -->
-
-<!-- NEED TO EDIT THIS CODE, THIS IS COPY PASTED FROM TRUCKS INDEX -->
-<p>You haven't saved any of your favorite food trucks yet!</p>
+    <% if (trucks.length) { %>
+<ul>
+        <% trucks.forEach((truck, idx) => { %>
+    <li class="truck-card-container">
+        <p><%= truck.applicant.toUpperCase(); %></p>
+        <!-- <p><%= truck.fooditems %></p> -->
+            <% if (truck.reviews.length) { %>        
+                <% for (let i = 0; i !== avgRatings[idx]; i++) { %>
+        <span>&#9733</span>
+                <% } %>
+        <!-- how do I make this preview text? -->
+        <p>
+            <%= truck.reviews[truck.reviews.length - 1].content; %>
+            <a href="/trucks/<%= truck.id %>">read more</a>
+        </p>
+        <!-- how do I make this preview text? -->
+            <% } else { %>
+        <span>&#9734</span>
+        <span>&#9734</span>
+        <span>&#9734</span>
+        <span>&#9734</span>
+        <span>&#9734</span>
+        <p>
+            No review submitted for this truck yet!
+            <a href="/trucks/<%= truck.id %>">read more</a>
+        </p>  
+            <% } %>
+        <a href="/users/profile/trucks/<%= truck.id %>/reviews/new"><i class="fas fa-pen"></i> Write a review</a>
+        <!-- else enable delete from trucks functionality with class of 'hearted' -->
+        <form action="/trucks/<%= truck.id %>/favorites/favs?_method=DELETE" method="POST">
+            <p><button type="submit"><i class="fas fa-heart"></i></button> Saved to favorites</p>
+        </form>
+    </li>
+        <% }); %>
+</ul>
+    <% } else { %>
+        <p>You haven't saved any of your favorite food trucks yet!</p>
+    <% } %>
 <% } %>
 <%- include('../partials/footerhtml') %>

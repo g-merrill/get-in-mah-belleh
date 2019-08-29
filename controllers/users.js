@@ -18,6 +18,8 @@ module.exports = {
     favTruckDelShow,
     favTruckSubmitted,
     favTruckDelSubmitted,
+    favTruckFavs,
+    favTruckDelFavs,
     consoleLogAllData,
     clearThemAll,
     seedData
@@ -92,35 +94,55 @@ function show(req, res) {
 }
 
 function favTrucks(req, res) {
-    // NEED TO EDIT THIS CODE, THIS IS COPY PASTED FROM TRUCKS INDEX
-    Truck.find({})
-    .populate('reviews')
-    .then(trucks => {
+    User.findById(req.user.id)
+    .populate('favTrucks')
+    .then(user => {
         let avgRatings = [];
-        trucks.forEach(truck => {
-            let truckRatingsSum = 0;
-            if (truck.reviews.length) {
-                truck.reviews.forEach(review => {
-                    truckRatingsSum += review.rating;
+        if (user.favTrucks.length) {
+            // user.favTrucks.forEach(favTruck => {
+            for(let i = 0; i < user.favTrucks.length; i++) {
+                Truck.findById(user.favTrucks[i].id)
+                .populate('reviews')
+                .then(truck => {
+                    console.log('truck: ', truck);
+                    let truckRatingsSum = 0;
+                    if (truck.reviews.length) {
+                        truck.reviews.forEach(review => {
+                            truckRatingsSum += review.rating;
+                        });
+                        let truckAvgRating = Math.round(truckRatingsSum / truck.reviews.length);
+                        avgRatings.push(truckAvgRating);
+                    } else {
+                        avgRatings.push(0);
+                    }
+                    if (i === user.favTrucks.length - 1) {
+                        res.render('favtrucks/index', {
+                            user,
+                            viewName: 'favtrucks-index',
+                            trucks: user.favTrucks,
+                            avgRatings
+                        });
+                    }
+                })
+                .catch(err => {
+                    if (err) console.log(err);
+                    res.redirect('/trucks');
                 });
-                truckAvgRating = Math.round(truckRatingsSum / truck.reviews.length);
-                avgRatings.push(truckAvgRating);
-            } else {
-                avgRatings.push(0);
             }
-        });
-        res.render('favtrucks/index', {
-            user: req.user,
-            viewName: 'favtrucks-index',
-            trucks,
-            avgRatings
-        });
+        } else {
+            avgRatings.push(0);
+            res.render('favtrucks/index', {
+                user,
+                viewName: 'favtrucks-index',
+                trucks: user.favTrucks,
+                avgRatings
+            });
+        }
     })
     .catch(err => {
         if (err) console.log(err);
-        res.send('Error setting up trucks index page');
+        res.redirect('/trucks');
     });
-    // NEED TO EDIT THIS CODE, THIS IS COPY PASTED FROM TRUCKS INDEX
 }
 
 function editTrucksPage(req, res) {
@@ -328,6 +350,41 @@ function favTruckDelSubmitted(req, res) {
         });
     } else {
         res.redirect('/users/profile/trucks/submitted');
+    }
+}
+
+function favTruckFavs(req, res) {
+    if (req.user) {
+        User.findById(req.user.id)
+        .then(user => {
+            user.favTrucks.push(req.params.truckid)
+            return user.save();
+        })
+        .then(() => res.redirect('/users/profile/trucks/favorites'))
+        .catch(err => {
+            if (err) console.log(err);
+            res.redirect('/users/profile/trucks/favorites');
+        });
+    } else {
+        res.redirect('/users/profile/trucks/favorites');
+    }
+}
+
+function favTruckDelFavs(req, res) {
+    if (req.user) {
+        User.findById(req.user.id)
+        .then(user => {
+            let favSpliceIdx = user.favTrucks.findIndex(favTruck => favTruck.toString() === req.params.truckid);
+            user.favTrucks.splice(favSpliceIdx, 1);
+            return user.save();
+        })
+        .then(() => res.redirect('/users/profile/trucks/favorites'))
+        .catch(err => {
+            if (err) console.log(err);
+            res.redirect('/users/profile/trucks/favorites');
+        });
+    } else {
+        res.redirect('/users/profile/trucks/favorites');
     }
 }
 

@@ -17,9 +17,11 @@ router.get('/users/profile/trucks/submitted', usersCtrl.userTrucks);
 router.post('/trucks/:truckid/favorites/index', usersCtrl.favTruckIndex);
 router.post('/trucks/:truckid/favorites/show', usersCtrl.favTruckShow);
 router.post('/trucks/:truckid/favorites/submitted', usersCtrl.favTruckSubmitted);
+router.post('/trucks/:truckid/favorites/favs', usersCtrl.favTruckFavs);
 router.delete('/trucks/:truckid/favorites/index', usersCtrl.favTruckDelIndex);
 router.delete('/trucks/:truckid/favorites/show', usersCtrl.favTruckDelShow);
 router.delete('/trucks/:truckid/favorites/submitted', usersCtrl.favTruckDelSubmitted);
+router.delete('/trucks/:truckid/favorites/favs', usersCtrl.favTruckDelFavs);
 
 // ***************
 router.get('/users/consolelogalldata', usersCtrl.consoleLogAllData);
