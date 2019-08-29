@@ -21,9 +21,17 @@
     No review submitted for this truck yet!
     </p>  
     <% } %>
-    <% if (user) { %>
     <a href="/users/profile/trucks/<%= truck.id %>/reviews/new"><i class="fas fa-pen"></i> Write a review</a>
-    <p><i class="fas fa-heart"></i> Save to favorites</p>
+    <% if (!user.favTrucks || !user.favTrucks.some(favTruck => favTruck.toString() === truck.id)) { %>
+        <!-- if not in user's favTrucks array, enable add to favorites functionality with class of 'unhearted' -->
+    <form action="/trucks/<%= truck.id %>/favorites" method="POST">
+        <p><button type="submit"><i class="far fa-heart"></i></button> Save to favorites</p>
+    </form>
+        <!-- else enable delete from trucks functionality with class of 'hearted' -->
+    <% } else { %>
+    <form action="/trucks/<%= truck.id %>/favorites?_method=DELETE" method="POST">
+        <p><button type="submit"><i class="fas fa-heart"></i></button> Save to favorites</p>
+    </form>
     <% } %>
 </div>
 <h3>All Reviews: </h3>
