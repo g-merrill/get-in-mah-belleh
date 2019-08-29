@@ -1,15 +1,15 @@
 <%- include('../partials/headerhtml') %>
 <div class="truck-card-container">
-    <p><%= truck.applicant.toUpperCase(); %></p>
+    <p class="truck-card-header"><%= truck.applicant.toUpperCase(); %></p>
     <!-- <p>Food offered: <%= truck.fooditems %></p> -->
     <% if (truck.reviews.length) { %>        
     <% for (let i = 0; i !== truckAvgRating; i++) { %>
     <span>&#9733</span>
     <% } %>
     <!-- how do I make this preview text? -->
-    <p>
-    <%= truck.reviews[truck.reviews.length - 1].content; %>
-    </p>
+    <div class="truck-card-revcontainer">
+        <p class="truck-card-revtext"><%= truck.reviews[truck.reviews.length - 1].content; %></p>
+    </div>
     <!-- how do I make this preview text? -->
     <% } else { %>
     <span>&#9734</span>
@@ -17,9 +17,9 @@
     <span>&#9734</span>
     <span>&#9734</span>
     <span>&#9734</span>
-    <p>
-    No review submitted for this truck yet!
-    </p>  
+    <div class="truck-card-revcontainer">
+        <p class="truck-card-revtext">No review submitted for this truck yet!</p>
+    </div>  
     <% } %>
     <a href="/users/profile/trucks/<%= truck.id %>/reviews/new"><i class="fas fa-pen"></i> Write a review</a>
     <% if (!user) { %>

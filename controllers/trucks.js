@@ -135,6 +135,7 @@ function edit(req, res) {
     if (req.user) {
         Truck.findByIdAndUpdate(req.params.truckid, req.body)
         .then(truck => {
+            console.log(req.body);
             res.redirect('/users/profile/trucks/submitted');
         })
         .catch(err => {
