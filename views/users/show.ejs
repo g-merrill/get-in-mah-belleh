@@ -13,10 +13,10 @@
 <h1>Your truckSFinder account details</h1>
 <p>Hello <%= user.name %>!</p>
 <p>Your email address is: <%= user.email %></p>
-<% } %>
+    <% if (user.email === 'gmerrill03@gmail.com') { %>
 <a href="/users/consolelogalldata">DEV: console.log All Data</a>
-<% if (user) { %>
 <a href="/users/clearuserdata">DEV: Clear all trucks and reviews for this user</a>
 <a href="/users/seeddata">DEV: Clear and seed fresh data</a>
+    <% } %>
 <% } %>
 <%- include('../partials/footerhtml') %>
