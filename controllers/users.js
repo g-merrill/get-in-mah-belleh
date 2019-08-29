@@ -12,6 +12,7 @@ module.exports = {
     create,
     userReviews,
     userTrucks,
+    favTruckIndex,
     consoleLogAllData,
     clearThemAll,
     seedData
@@ -218,6 +219,23 @@ function userTrucks(req, res) {
         if (err) console.log(err);
         res.redirect('/users/profile');
     });
+}
+
+function favTruckIndex(req, res) {
+    if (req.user) {
+        User.findById(req.user.id)
+        .then(user => {
+            user.favTrucks.push(req.params.truckid)
+            return user.save();
+        })
+        .then(() => res.redirect('/trucks'))
+        .catch(err => {
+            if (err) console.log(err);
+            res.redirect('/trucks');
+        });
+    } else {
+        res.redirect('/trucks');
+    }
 }
 
 function consoleLogAllData(req, res) {

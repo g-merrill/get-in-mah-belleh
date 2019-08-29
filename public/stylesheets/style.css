@@ -19,9 +19,27 @@ a {
 .fa-heart {
   color: rgba(219, 86, 91, 1);	
 }
-/* .far.fa-heart:hover {
-  background-color: rgba(219, 86, 91, 1);
-} nice try but doesnt work :,( */
+.heartcontainer {
+  position: relative;
+  height: 32px;
+  width: 32px;
+}
+.hoverhearts {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+.hoverhearts.fas {
+  opacity: 0;
+}
+.hoverhearts.fas:hover {
+  opacity: 1;
+  transition: 0.3s ease;
+}
+
+
 
 .nav-main {
   display: flex;

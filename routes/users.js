@@ -14,6 +14,10 @@ router.post('/', usersCtrl.create);
 router.get('/profile/reviews/submitted', usersCtrl.userReviews);
 router.get('/profile/trucks/submitted', usersCtrl.userTrucks);
 
+router.post('/trucks/:truckid/favorites/index', usersCtrl.favTruckIndex);
+// router.post('/trucks/:truckid/favorites/show', usersCtrl.favTruckShow);
+// router.post('/trucks/:truckid/favorites/submitted', usersCtrl.favTruckSubmitted);
+
 // ***************
 router.get('/consolelogalldata', usersCtrl.consoleLogAllData);
 router.get('/clearuserdata', usersCtrl.clearThemAll);
