@@ -52,24 +52,32 @@
       <a class="truck-card-showlink" href="/trucks/<%= truck.id %>">read more</a>
     </div>  
     <% } %>
+    <div class="truck-card-footer">
     <a href="/users/profile/trucks/<%= truck.id %>/reviews/new"><i class="fas fa-pen"></i> Write a review</a>
     <% if (!user) { %>
-    <form action="/users/profile/trucks/favorites" method="GET">
-      <p><button class="heartcontainer" type="submit"><i class="hoverhearts far fa-heart"></i><i class="hoverhearts far fa-heart"></i></button> Save to favorites</p>
-    </form>
+      <form action="/users/profile/trucks/favorites" method="GET">
+        <button type="submit">
+          <span class="heartcontainer"><i class="hoverhearts far fa-heart"></i><i class="hoverhearts far fa-heart"></i></span><span class="truck-card-favtext"> Save to favorites</span>
+        </button>
+      </form>
     <% } else { %>
       <% if (!user.favTrucks.some(favTruck => favTruck.toString() === truck.id)) { %>
     <!-- if not in user's favTrucks array, enable add to favorites functionality with class of 'unhearted' -->
-    <form action="/trucks/<%= truck.id %>/favorites/index" method="POST">
-      <p><button class="heartcontainer" type="submit"><i class="hoverhearts far fa-heart"></i><i class="hoverhearts fas fa-heart"></i></button> Save to favorites</p>
-    </form>
+      <form action="/trucks/<%= truck.id %>/favorites/index" method="POST">
+        <button type="submit">
+          <span class="heartcontainer"><i class="hoverhearts far fa-heart"></i><i class="hoverhearts fas fa-heart"></i></span><span class="truck-card-favtext"> Save to favorites</span>
+        </button>
+      </form>
       <% } else { %>
     <!-- else enable delete from trucks functionality with class of 'hearted' -->
-    <form action="/trucks/<%= truck.id %>/favorites/index?_method=DELETE" method="POST">
-      <p><button type="submit"><i class="fas fa-heart"></i></button> Saved to favorites</p>
-    </form>
+      <form action="/trucks/<%= truck.id %>/favorites/index?_method=DELETE" method="POST">
+        <button type="submit">
+          <span class="heartcontainer"><i class="fas fa-heart"></i></span><span class="truck-card-favtext"> Saved to favorites</span>
+        </button>
+      </form>
       <% } %>
     <% } %>
+    </div>
   </li>
   <% }); %>
 </ul>

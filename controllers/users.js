@@ -94,6 +94,7 @@ function show(req, res) {
 }
 
 function favTrucks(req, res) {
+    if (req.user) {
     User.findById(req.user.id)
     .populate('favTrucks')
     .then(user => {
@@ -143,6 +144,15 @@ function favTrucks(req, res) {
         if (err) console.log(err);
         res.redirect('/trucks');
     });
+    } else {
+        let avgRatings = [0];
+        res.render('favtrucks/index', {
+            user: undefined,
+            viewName: 'favtrucks-index',
+            trucks: undefined,
+            avgRatings
+        });
+    }
 }
 
 function editTrucksPage(req, res) {
