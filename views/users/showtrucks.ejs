@@ -45,18 +45,18 @@
             <% } %>
         <a href="/users/profile/trucks/<%= truck.id %>/reviews/new"><i class="fas fa-pen"></i> Write a review</a>
         <% if (!user) { %>
-        <form action="/trucks/<%= truck.id %>/favorites/index" method="POST">
+        <form action="/users/profile/trucks/favorites" method="GET">
             <p><button class="heartcontainer" type="submit"><i class="hoverhearts far fa-heart"></i><i class="hoverhearts far fa-heart"></i></button> Save to favorites</p>
         </form>
         <% } else { %>
             <% if (!user.favTrucks.some(favTruck => favTruck.toString() === truck.id)) { %>
         <!-- if not in user's favTrucks array, enable add to favorites functionality with class of 'unhearted' -->
-        <form action="/trucks/<%= truck.id %>/favorites/index" method="POST">
+        <form action="/trucks/<%= truck.id %>/favorites/submitted" method="POST">
             <p><button class="heartcontainer" type="submit"><i class="hoverhearts far fa-heart"></i><i class="hoverhearts fas fa-heart"></i></button> Save to favorites</p>
         </form>
             <% } else { %>
         <!-- else enable delete from trucks functionality with class of 'hearted' -->
-        <form action="/trucks/<%= truck.id %>/favorites/index?_method=DELETE" method="POST">
+        <form action="/trucks/<%= truck.id %>/favorites/submitted?_method=DELETE" method="POST">
             <p><button type="submit"><i class="fas fa-heart"></i></button> Save to favorites</p>
         </form>
             <% } %>

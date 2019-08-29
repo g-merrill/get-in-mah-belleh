@@ -41,7 +41,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/', usersRouter);
 app.use('/trucks', trucksRouter);
 app.use('/', reviewsRouter);
 app.use('/api', apiRouter);

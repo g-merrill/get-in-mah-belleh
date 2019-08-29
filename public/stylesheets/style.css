@@ -16,7 +16,7 @@ body {
 a {
   color: rgba(0, 183, 255, 1);
 }
-.fa-heart {
+button .fa-heart {
   color: rgba(219, 86, 91, 1);	
 }
 .heartcontainer {

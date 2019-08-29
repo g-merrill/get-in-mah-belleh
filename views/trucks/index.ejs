@@ -54,7 +54,7 @@
     <% } %>
     <a href="/users/profile/trucks/<%= truck.id %>/reviews/new"><i class="fas fa-pen"></i> Write a review</a>
     <% if (!user) { %>
-    <form action="/trucks/<%= truck.id %>/favorites/index" method="POST">
+    <form action="/users/profile/trucks/favorites" method="GET">
       <p><button class="heartcontainer" type="submit"><i class="hoverhearts far fa-heart"></i><i class="hoverhearts far fa-heart"></i></button> Save to favorites</p>
     </form>
     <% } else { %>

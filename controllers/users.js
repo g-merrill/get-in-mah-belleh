@@ -13,6 +13,11 @@ module.exports = {
     userReviews,
     userTrucks,
     favTruckIndex,
+    favTruckDelIndex,
+    favTruckShow,
+    favTruckDelShow,
+    favTruckSubmitted,
+    favTruckDelSubmitted,
     consoleLogAllData,
     clearThemAll,
     seedData
@@ -238,6 +243,94 @@ function favTruckIndex(req, res) {
     }
 }
 
+function favTruckDelIndex(req, res) {
+    if (req.user) {
+        User.findById(req.user.id)
+        .then(user => {
+            let favSpliceIdx = user.favTrucks.findIndex(favTruck => favTruck.toString() === req.params.truckid);
+            user.favTrucks.splice(favSpliceIdx, 1);
+            return user.save();
+        })
+        .then(() => res.redirect('/trucks'))
+        .catch(err => {
+            if (err) console.log(err);
+            res.redirect('/trucks');
+        });
+    } else {
+        res.redirect('/trucks');
+    }
+}
+
+function favTruckShow(req, res) {
+    if (req.user) {
+        User.findById(req.user.id)
+        .then(user => {
+            user.favTrucks.push(req.params.truckid)
+            return user.save();
+        })
+        .then(() => res.redirect(`/trucks/${req.params.truckid}`))
+        .catch(err => {
+            if (err) console.log(err);
+            res.redirect(`/trucks/${req.params.truckid}`);
+        });
+    } else {
+        res.redirect(`/trucks/${req.params.truckid}`);
+    }
+}
+
+function favTruckDelShow(req, res) {
+    if (req.user) {
+        User.findById(req.user.id)
+        .then(user => {
+            let favSpliceIdx = user.favTrucks.findIndex(favTruck => favTruck.toString() === req.params.truckid);
+            user.favTrucks.splice(favSpliceIdx, 1);
+            return user.save();
+        })
+        .then(() => res.redirect(`/trucks/${req.params.truckid}`))
+        .catch(err => {
+            if (err) console.log(err);
+            res.redirect(`/trucks/${req.params.truckid}`);
+        });
+    } else {
+        res.redirect(`/trucks/${req.params.truckid}`);
+    }
+}
+
+function favTruckSubmitted(req, res) {
+    if (req.user) {
+        User.findById(req.user.id)
+        .then(user => {
+            user.favTrucks.push(req.params.truckid)
+            return user.save();
+        })
+        .then(() => res.redirect('/users/profile/trucks/submitted'))
+        .catch(err => {
+            if (err) console.log(err);
+            res.redirect('/users/profile/trucks/submitted');
+        });
+    } else {
+        res.redirect('/users/profile/trucks/submitted');
+    }
+}
+
+function favTruckDelSubmitted(req, res) {
+    if (req.user) {
+        User.findById(req.user.id)
+        .then(user => {
+            let favSpliceIdx = user.favTrucks.findIndex(favTruck => favTruck.toString() === req.params.truckid);
+            user.favTrucks.splice(favSpliceIdx, 1);
+            return user.save();
+        })
+        .then(() => res.redirect('/users/profile/trucks/submitted'))
+        .catch(err => {
+            if (err) console.log(err);
+            res.redirect('/users/profile/trucks/submitted');
+        });
+    } else {
+        res.redirect('/users/profile/trucks/submitted');
+    }
+}
+
 function consoleLogAllData(req, res) {
     User.find({})
     .then(users => {
@@ -266,6 +359,7 @@ function clearThemAll(req, res) {
     User.findById(req.user.id)
     .then(user => {
         user.trucks = [];
+        user.favTrucks = [];
         user.reviews = [];
         return user.save();
     })
