@@ -2,6 +2,14 @@
 <% if (!user) { %>
 <p>Not Logged In</p>
 <% } else { %>
+<nav>
+    <div>
+        <a href="/users/profile/trucks/submitted">Submitted Trucks</a>
+    </div>
+    <div>
+        <a href="/users/profile/reviews/submitted">Submitted Reviews</a>
+    </div>
+</nav>
 <h1>Your truckSFinder account details</h1>
 <p>Hello <%= user.name %>!</p>
 <p>Your email address is: <%= user.email %></p>

@@ -10,6 +10,7 @@ module.exports = {
     editTrucksPage,
     editReviewPage,
     create,
+    userReviews,
     consoleLogAllData,
     clearThemAll,
     seedData
@@ -168,6 +169,27 @@ function create(req, res) {
     .catch(err => {
         if (err) console.log(err);
         res.redirect('/users/login');
+    });
+}
+
+function userReviews(req, res) {
+    Review.find({ reviewer: req.user.id })
+    .populate('truck')
+    .then(reviews => {
+        console.log(reviews);
+        // let reviewArray = [];
+        // reviews.forEach(review => {
+            // **************** how do i populate the truck property for each review???
+        // });
+        res.render('users/showreviews', {
+            user: req.user,
+            viewName: 'users-showreviews',
+            reviews
+        });
+    })
+    .catch(err => {
+        if (err) console.log(err);
+        res.redirect('/users/profile');
     });
 }
 

@@ -13,6 +13,8 @@ router.get('/profile/trucks/:truckid/edit', usersCtrl.editTrucksPage);
 router.get('/profile/trucks/:truckid/reviews/:reviewid/edit', usersCtrl.editReviewPage);
 router.post('/', usersCtrl.create);
 
+router.get('/profile/reviews/submitted', usersCtrl.userReviews);
+
 // ***************
 router.get('/consolelogalldata', usersCtrl.consoleLogAllData);
 router.get('/clearuserdata', usersCtrl.clearThemAll);
