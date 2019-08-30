@@ -6,14 +6,14 @@ For my first full-stack web application for SEI Project 2, I wanted to create so
 
 When you browse to [truckSFinder](https://trucksfinder.herokuapp.com), you will immediately be shown a list of all the food trucks currently in the database:
 
-<img src="https://i.imgur.com/0hONig7.png" width="250">
+<img src="https://i.imgur.com/0hONig7.png" width="500">
 The truckSFinder home page.
 
 Use the nav bar at the top of the screen for easy navigation around the app.
 
 To log in, click the 'Log in' button at the top right corner of the screen and proceed as directed.
 
-<img src="https://i.imgur.com/A9zCtvI.png" width="250">
+<img src="https://i.imgur.com/A9zCtvI.png" width="500">
 Make sure to log in!
 
 You must be logged in through your Google account to: 
@@ -22,7 +22,7 @@ You must be logged in through your Google account to:
   * add a review to a food truck
   * edit your submitted food truck
 
-<img src="https://i.imgur.com/WwdZyNf.png" width="250">
+<img src="https://i.imgur.com/WwdZyNf.png" width="500">
 You can edit/delete from your profile once you are logged in.
 
   * delete your submitted food truck
