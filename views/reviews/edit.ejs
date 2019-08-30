@@ -4,11 +4,11 @@
 <p>You must log in before editing a review.</p>
 <% } else { %> 
 <h1>Edit Review for: <%= truck.applicant %></h1>
-<form id="reviewform" action="/users/profile/trucks/<%= truck.id %>/reviews/<%= review.id %>?_method=PUT" method="POST">
+<form class="form" id="reviewform" action="/users/profile/trucks/<%= truck.id %>/reviews/<%= review.id %>?_method=PUT" method="POST">
     <input type="hidden" name="reviewer" value="<%= user._id %>">
     <input type="hidden" name="truck" value="<%= truck._id %>">
     <p>Rating: </p>
-    <select name="rating" id="ratings" required>
+    <select class="input" name="rating" id="ratings" required>
         <option value="5">5 stars</option>
         <option value="4">4 stars</option>
         <option value="3">3 stars</option>
@@ -17,9 +17,9 @@
     </select>
     <p>Previous rating: <%= review.rating %> star(s)</p>
 </form>
-<textarea form="reviewform" cols="30" rows="10" name="content" maxlength="280" placeholder="Enter your food truck review here. (Max character count: 280)"></textarea>
+<textarea class="input" form="reviewform" cols="30" rows="10" name="content" maxlength="280" placeholder="Enter your food truck review here. (Max character count: 280)"></textarea>
 <p>In your previous review, you said: </p>
-<p><%= review.content %></p>
-<input form="reviewform" type="submit" value="Save Review">
+<p class="input"><%= review.content %></p>
+<input class="submit-btn" form="reviewform" type="submit" value="Save Review">
 <% } %>
 <%- include('../partials/footerhtml') %>

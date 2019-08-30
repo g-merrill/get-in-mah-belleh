@@ -80,7 +80,7 @@ select {
   left: 0rem;
   color: red;
   font-size: 2em;
-  border-radius: 20%;
+  border-radius: 0.2rem;
   border: none;
   background-color: rgba(245, 245, 245, 1);
   padding: 0.1em 0.3em;
@@ -294,6 +294,66 @@ select {
   font-size: 0.8rem;
 }
 
+.reviews-edit .nav-main ~ * {
+  margin: 0.75rem 0;
+}
+.reviews-edit .form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.reviews-edit .input {
+  margin: 0.5rem;
+  background-color: rgba(255, 255, 255, 1);
+  padding: 1em;
+  border-radius: 0.25em;
+  font-size: 0.8rem;
+}
+.reviews-edit .submit-btn {
+  background-color: rgb(0, 156, 0);
+  color: rgba(255, 255, 255, 1);
+  padding: 0.7rem 0.3rem;
+  border-radius: 0.5em;
+  width: 8rem;
+  font-size: 0.8rem;
+}
+
+.users-showreviews .nav-submitted ~ * {
+  margin: 0.75rem 0;
+  padding: 0 5%;
+}
+.users-showreviews {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.users-showreviews .del-review-btn {
+  background-color: red;
+  color: white;
+  border-radius: 0.2em;
+  border: none;
+  padding: 0.7em;
+  font-size: 0.7em;
+}
+.users-showreviews .input {
+  margin: 0.5rem;
+  background-color: rgba(255, 255, 255, 1);
+  padding: 1em;
+  border-radius: 0.25em;
+  font-size: 0.8rem;
+  width: 90%;
+  line-height: 1.5;
+}
+.users-showreviews .submit-btn {
+  background-color: rgb(0, 156, 0);
+  color: rgba(255, 255, 255, 1);
+  padding: 0.7rem 0.3rem;
+  border-radius: 0.5em;
+  width: 8rem;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
 
 .nav-submitted {
   display: flex;
@@ -312,12 +372,10 @@ select {
 }
 .nav-submitted-truckslink:hover {
   background-color: rgba(0, 0, 0, 0.3);
-  /* color: rgba(163, 0, 0, 1); */
   font-weight: bold;
 }
 .nav-submitted-reviewslink:hover {
   background-color: rgba(0, 0, 0, 0.3);
-  /* color: rgba(163, 0, 0, 1); */
   font-weight: bold;
 }
 .nav-submitted ~ * {

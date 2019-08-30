@@ -11,17 +11,17 @@
 <p>You have not submitted any food truck reviews yet!</p>
     <% } else { %>
         <% reviews.forEach(review => { %>
-<form action="/users/profile/trucks/<%= review.truck.id %>/reviews/<%= review.id %>?_method=DELETE" method="POST">
-    <input type="submit" value="X">
-</form>
-<p>For <%= review.truck.applicant %>:</p>
+<p>For: "<%= review.truck.applicant %>"</p>
 <div>
             <% for (let i = 0; i !== review.rating; i++) { %>
     <span>&#9733</span>
             <% } %>
 </div>
-<p><%= review.content %></p>
-<a href="/users/profile/trucks/<%= review.truck.id %>/reviews/<%= review.id %>/edit">Edit Your Review</a>
+<p class="input"><%= review.content %></p>
+<a class="submit-btn" href="/users/profile/trucks/<%= review.truck.id %>/reviews/<%= review.id %>/edit">Edit Your Review</a>
+<form class="del-review-btn-form" action="/users/profile/trucks/<%= review.truck.id %>/reviews/<%= review.id %>?_method=DELETE" method="POST">
+    <input class="del-review-btn" type="submit" value='Delete Review for: "<%= review.truck.applicant %>"'>
+</form>
         <% }); %>
     <% } %>
 <% } %>
