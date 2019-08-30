@@ -38,6 +38,10 @@ select {
   color: rgba(0, 0, 0, 1);
   text-decoration: none;
   width: 20%;
+  border-radius: 0.2rem;
+}
+.nav-main-link:hover {
+  background-color: rgba(0, 0, 0, 0.25);
 }
 .nav-main-link>* {
   margin: 20px 0 0 0;
@@ -52,24 +56,39 @@ select {
 
 
 
+.trucks-index .truck-cards-container {
+  display: flex;
+  width: 80%;
+  flex-wrap: wrap;
+}
 
+.truck-cards-container .truck-card-container {
+  margin: 1rem 0.2rem;
+  width: 30%;
+}
 
 .truck-card-container {
   background-color: rgba(255, 255, 255, 1);
   border-radius: 0.1rem 0.1rem 0.1rem 0.1rem;
-  margin: 1rem 0;
-  width: 25vw;
 }
 .truck-card-container * {
   font-size: 0.5rem;
   /* border: 1px solid; */
+  position: relative;
 }
 .truck-card-header {
   background-color: rgba(245, 245, 245, 1);
-  text-decoration: underline;
   padding: 0.6rem 0.6rem 0.6rem 0.6rem;
   border-radius: 0.1rem 0.1rem 0 0;
+  height: 2rem;
+  width: 100%;
 }
+.truck-card-headerText {
+  text-decoration: underline;
+  white-space: pre;
+  overflow: auto;
+}
+
 .truck-card-starsCntnr {
   padding: 0 0.6rem;
   margin: 0.3rem 0;
@@ -211,3 +230,4 @@ select {
   display: flex;
   flex-direction: column;
 }
+

@@ -1,8 +1,56 @@
 module.exports = {
-    runSeedFunction
+    bigSeed,
+    littleSeed
 };
 
-function runSeedFunction(req, res, array) {
+function bigSeed(req, res, array) {
+    console.log('******************* SEED DATA FUNCTION START ******************');
+    const User = require('../models/user');
+    const Truck = require('../models/truck');
+    const Review = require('../models/review');
+    User.findById(req.user.id)
+    .then(user => {
+        user.trucks = [];
+        user.reviews = [];
+        return user.save();
+    })
+    .then(user => User.deleteMany({ _id: { $ne: user.id } }))
+    .then(() => Truck.deleteMany({}))
+    .then(() => Review.deleteMany({}))
+    .then(() => {
+        for (let i = 0; i < array.length; i++) {
+            let truckCopy;
+            let truckRaw = array[i];
+            truckRaw.creator = req.user.id;
+            Truck.create(truckRaw)
+            .then(createdTruck => createdTruck.save())
+            .then(savedTruck => {
+                truckCopy = savedTruck;
+                return User.findById(truckCopy.creator);
+            })
+            .then(user => {
+                user.trucks.push(truckCopy.id);
+                return user.save();
+            })
+            .then(() => {
+                if (i === array.length - 1) {
+                    console.log('******************* SEED DATA FUNCTION END ******************');
+                    res.redirect('/users/profile'); // put this at the end of the last function!            
+                }
+            })
+            .catch(err => {
+                if (err) console.log('Error: ', err);
+                res.redirect('/users/profile');
+            });
+        }
+    })
+    .catch(err => {
+        if (err) console.log('Error: ', err);
+        res.redirect('/users/profile');
+    });
+}
+
+function littleSeed(req, res, array) {
     console.log('******************* SEED DATA FUNCTION START ******************');
     const User = require('../models/user');
     const Truck = require('../models/truck');

@@ -22,7 +22,8 @@ module.exports = {
     favTruckDelFavs,
     consoleLogAllData,
     clearThemAll,
-    seedData
+    bigSeed,
+    littleSeed
 }
 
 function logInPage(req, res) {
@@ -442,7 +443,17 @@ function clearThemAll(req, res) {
     }
 }
 
-function seedData(req, res) {
+function bigSeed(req, res) {
+    if(req.user) {
+        const seedDataArray = require('../config/seedDataArray');
+        const seedFile = require('../config/seed');
+        seedFile.bigSeed(req, res, seedDataArray);
+    } else {
+        res.redirect('/users/profile');
+    }
+}
+
+function littleSeed(req, res) {
     if(req.user) {
         const seedDataArray = [
             [{
@@ -463,7 +474,7 @@ function seedData(req, res) {
             }]
         ];
         const seedFile = require('../config/seed');
-        seedFile.runSeedFunction(req, res, seedDataArray);
+        seedFile.littleSeed(req, res, seedDataArray);
     } else {
         res.redirect('/users/profile');
     }

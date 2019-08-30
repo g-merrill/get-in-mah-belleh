@@ -26,10 +26,12 @@
 </select>
 <!-- non-functional -->
 <% if (trucks.length) { %>
-<ul>
+<section class="truck-cards-container">
   <% trucks.forEach((truck, idx) => { %>
-  <li class="truck-card-container">
-    <p class="truck-card-header"><%= truck.applicant.toUpperCase(); %></p>
+  <div class="truck-card-container">
+    <div class="truck-card-header">
+      <p class="truck-card-headerText"><%= truck.applicant.toUpperCase(); %></p>
+    </div>
     <!-- <p><%= truck.fooditems %></p> -->
     <% if (truck.reviews.length) { %>        
     <div class="truck-card-starsCntnr">
@@ -105,8 +107,8 @@
 
     </div>
 
-  </li>
+  </div>
   <% }); %>
-</ul>
+</section class="truck-cards-container">
 <% } %>
 <%- include('../partials/footerhtml') %>

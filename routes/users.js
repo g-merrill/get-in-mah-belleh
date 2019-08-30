@@ -26,7 +26,8 @@ router.delete('/trucks/:truckid/favorites/favs', usersCtrl.favTruckDelFavs);
 // ***************
 router.get('/users/consolelogalldata', usersCtrl.consoleLogAllData);
 router.get('/users/clearuserdata', usersCtrl.clearThemAll);
-router.get('/users/seeddata', usersCtrl.seedData);
+router.get('/users/bigseed', usersCtrl.bigSeed);
+router.get('/users/littleseed', usersCtrl.littleSeed);
 // ***************
 
 
