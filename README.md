@@ -1,27 +1,26 @@
 # truckSFinder
 
-For my first full-stack web application for SEI Project 2, I wanted to create something that I could  use on a regular basis.  Enter truckSFinder!  This app is intended to document the different food trucks that a user has visited, log their reviews and ratings, and possibly save food trucks for future visits!  Much more functionality and more streamlined designs are in the works.
+For my first full-stack web application for SEI Project 2, I wanted to create something that I could use on a regular basis.  Enter truckSFinder.  This app is intended to document the different food trucks that a user has visited, log their reviews and ratings, and even save food trucks for future visits!  More functionality and a more streamlined design for this app are in the works!
 
 ## Getting Started
 
-When you browse to [truckSFinder](https://trucksfinder.herokuapp.com), you will immediately be show a list of all food trucks currently in the database:
+When you browse to [truckSFinder](https://trucksfinder.herokuapp.com), you will immediately be shown a list of all the food trucks currently in the database:
 
 <!-- <insert img here> -->
-truckSFinder home page
-
+<!-- truckSFinder home page -->
 Use the nav bar at the top of the screen for easy navigation around the app.
 
 You must be logged in through your Google account to: 
 
-  * add a food truck to the database,
-  * favorite a food truck,
-  * add a review to a food truck,
-  * edit your submitted food truck,
-  * delete your submitted food truck,
-  * edit your review,
-  * or delete your review.
+  * add a food truck to the database
+  * favorite a food truck
+  * add a review to a food truck
+  * edit your submitted food truck
+  * delete your submitted food truck
+  * edit your review
+  * delete your review
 
-To log in, click the 'Log in' button at the top right corner and proceed as directed.
+To log in, click the 'Log in' button at the top right corner of the screen and proceed as directed.
 
 Creating an account apart from your Google account is not functional at this time.
 
@@ -30,7 +29,7 @@ Creating an account apart from your Google account is not functional at this tim
 
 That's about it!  [Head on out there and find some tasty meals with truckSFinder!](https://trucksfinder.herokuapp.com)
 
-Special thanks to Megan Bates from GA's UXDI52 for jumping in and providing a beautiful app design and intuitive user flows.
+Special thanks to Megan Bates from GA's UXDI52 for jumping in and providing a beautiful app design and intuitive user flows that I could take and work off of.
 
 ## Technologies Used
 
