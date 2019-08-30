@@ -2,23 +2,19 @@
 <% if (!user) { %>
 <p>Not Logged In</p>
 <% } else { %>
-<nav>
-    <div>
-        <a href="/users/profile/trucks/submitted">Submitted Trucks</a>
-    </div>
-    <div>
-        <a href="/users/profile/reviews/submitted">Submitted Reviews</a>
-    </div>
+<nav class="nav-submitted">
+    <a class="nav-submitted-truckslink" href="/users/profile/trucks/submitted">Submitted Trucks</a>
+    <a class="nav-submitted-reviewslink" href="/users/profile/reviews/submitted">Submitted Reviews</a>
 </nav>
-<h1>Your truckSFinder account details</h1>
+<h1 class="page-header">Your truckSFinder account details</h1>
 <p>Hello <%= user.name %>!</p>
-<p>Your email address is: <%= user.email %></p>
+<p class="email">Your email address is: <%= user.email %></p>
     <% if (user.email === 'gmerrill03@gmail.com') { %>
 <a href="/users/consolelogalldata">DEV: console.log All Data</a>
 <a href="/users/clearuserdata">DEV: Clear all trucks and reviews for this user</a>
-<p>DEV: Clear and seed fresh data</p>
-<a href="/users/bigseed">Big Seed</a>
-<a href="/users/littleseed">Little Seed</a>
+<p>Clear and seed fresh data:</p>
+<a href="/users/bigseed">DEV: Big Seed</a>
+<a href="/users/littleseed">DEV: Little Seed</a>
     <% } %>
 <% } %>
 <%- include('../partials/footerhtml') %>

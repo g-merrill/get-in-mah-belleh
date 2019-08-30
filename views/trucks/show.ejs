@@ -1,7 +1,6 @@
 <%- include('../partials/headerhtml') %>
 <div class="truck-card-container">
     <p class="truck-card-header"><%= truck.applicant.toUpperCase(); %></p>
-    <!-- <p>Food offered: <%= truck.fooditems %></p> -->
     <% if (truck.reviews.length) { %>        
     <% for (let i = 0; i !== truckAvgRating; i++) { %>
     <span>&#9733</span>
@@ -40,6 +39,7 @@
         <% } %>
     <% } %>
 </div>
+<p>Food offered: <%= truck.fooditems %></p>
 <h3>All Reviews: </h3>
 <% if (reviews.length) { %>
     <!-- Stretch: could pop off the most recent review that is displaying up on the top card -->
@@ -49,7 +49,7 @@
     <span>&#9733</span>
         <% } %>
 </div>
-<p><%= review.reviewer.name %> said: <%= review.content %></p>
+<p class="reviews"><%= review.reviewer.name %> said: <%= review.content %></p>
     <% }); %>
 <% } else { %>
 <div>

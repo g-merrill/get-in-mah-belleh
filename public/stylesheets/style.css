@@ -30,6 +30,7 @@ select {
   display: flex;
   width: 100%;
   height: 190px;
+  background-color: rgba(0, 0, 0, 0.1); 
 }
 .nav-main-link {
   display: flex;
@@ -38,10 +39,11 @@ select {
   color: rgba(0, 0, 0, 1);
   text-decoration: none;
   width: 20%;
-  border-radius: 0.2rem;
+  border-radius: 0.1rem;
 }
 .nav-main-link:hover {
-  background-color: rgba(0, 0, 0, 0.25);
+  background-color: rgba(0, 0, 0, 0.2);
+  color: rgba(163, 0, 0, 1);
 }
 .nav-main-link>* {
   margin: 20px 0 0 0;
@@ -74,11 +76,14 @@ select {
 }
 .truck-card-delTruckBtn {
   position: absolute;
-  top: -0.35rem;
-  left: -0.2rem;
+  top: -0.9rem;
+  left: 0rem;
   color: red;
   font-size: 2em;
-  background-color: rgba(255, 255, 255, 1);
+  border-radius: 20%;
+  border: none;
+  background-color: rgba(245, 245, 245, 1);
+  padding: 0.1em 0.3em;
 }
 .truck-card-header {
   background-color: rgba(245, 245, 245, 1);
@@ -241,8 +246,87 @@ select {
   color: rgba(163, 0, 0, 1);
 }
 
+.trucks-new .nav-main ~ * {
+  margin: 0.75rem 0;
+}
 .trucks-new .form {
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+.trucks-new .input {
+  margin: 0.5rem;
+  background-color: rgba(255, 255, 255, 1);
+  padding: 5%;
+  border-radius: 0.25em;
+  font-size: 0.8rem;
+}
+.trucks-new .submit-btn {
+  background-color: rgb(0, 156, 0);
+  color: rgba(255, 255, 255, 1);
+  padding: 8% 4%;
+  border-radius: 0.5em;
+  width: 50%;
+  font-size: 0.8rem;
 }
 
+.reviews-new .nav-main ~ * {
+  margin: 0.75rem 0;
+}
+.reviews-new .form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.reviews-new .input {
+  margin: 0.5rem;
+  background-color: rgba(255, 255, 255, 1);
+  padding: 1em;
+  border-radius: 0.25em;
+  font-size: 0.8rem;
+}
+.reviews-new .submit-btn {
+  background-color: rgb(0, 156, 0);
+  color: rgba(255, 255, 255, 1);
+  padding: 0.7rem 0.3rem;
+  border-radius: 0.5em;
+  width: 8rem;
+  font-size: 0.8rem;
+}
+
+
+.nav-submitted {
+  display: flex;
+  width: 100%;
+  height: 95px;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.nav-submitted>* {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgba(0, 0, 0, 1);
+  text-decoration: none;
+  border-radius: 0.1rem;
+}
+.nav-submitted-truckslink:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+  /* color: rgba(163, 0, 0, 1); */
+  font-weight: bold;
+}
+.nav-submitted-reviewslink:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+  /* color: rgba(163, 0, 0, 1); */
+  font-weight: bold;
+}
+.nav-submitted ~ * {
+  margin: 0.75rem 0;
+}
+.users-show .email ~ * {
+  visibility: hidden;
+}
+
+.trucks-show .reviews {
+  padding: 0 5%;
+}
