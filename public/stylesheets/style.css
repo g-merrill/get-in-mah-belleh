@@ -86,7 +86,11 @@ select {
 .truck-card-headerText {
   text-decoration: underline;
   white-space: pre;
-  overflow: auto;
+  overflow: scroll;
+  color: rgba(0, 0, 0, 1);
+}
+.truck-card-header:hover .truck-card-headerText {
+  font-weight: bold;
 }
 
 .truck-card-starsCntnr {

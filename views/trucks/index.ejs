@@ -30,21 +30,20 @@
   <% trucks.forEach((truck, idx) => { %>
   <div class="truck-card-container">
     <div class="truck-card-header">
-      <p class="truck-card-headerText"><%= truck.applicant.toUpperCase(); %></p>
+      <a class="truck-card-headerLink" href="/trucks/<%= truck.id %>">
+        <p class="truck-card-headerText"><%= truck.applicant.toUpperCase(); %></p>
+      </a>
     </div>
-    <!-- <p><%= truck.fooditems %></p> -->
     <% if (truck.reviews.length) { %>        
     <div class="truck-card-starsCntnr">
       <% for (let i = 0; i !== avgRatings[idx]; i++) { %>
       <span>&#9733</span>
       <% } %>
     </div>
-    <!-- how do I make this preview text? -->
     <div class="truck-card-revcontainer">
       <p class="truck-card-revtext"><%= truck.reviews[truck.reviews.length - 1].content; %></p>
       <a class="truck-card-showlink" href="/trucks/<%= truck.id %>">read more</a>
     </div>
-    <!-- how do I make this preview text? -->
     <% } else { %>
     <div class="truck-card-starsCntnr">
       <span>&#9734</span>
@@ -80,7 +79,6 @@
       </form>
     <% } else { %>
       <% if (!user.favTrucks.some(favTruck => favTruck.toString() === truck.id)) { %>
-    <!-- if not in user's favTrucks array, enable add to favorites functionality with class of 'unhearted' -->
       <form class="truck-card-favsCntnr" action="/trucks/<%= truck.id %>/favorites/index" method="POST">
         <button class="truck-card-favsBtn" type="submit">
           <span class="truck-card-favsHeartsCntnr">
@@ -91,7 +89,6 @@
         </button>
       </form>
       <% } else { %>
-    <!-- else enable delete from trucks functionality with class of 'hearted' -->
       <form class="truck-card-favsCntnr" action="/trucks/<%= truck.id %>/favorites/index?_method=DELETE" method="POST">
         <button class="truck-card-favsBtn" type="submit">
           <span class="truck-card-favsHeartsCntnr">
