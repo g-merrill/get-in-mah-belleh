@@ -6,21 +6,28 @@ For my first full-stack web application for SEI Project 2, I wanted to create so
 
 When you browse to [truckSFinder](https://trucksfinder.herokuapp.com), you will immediately be shown a list of all the food trucks currently in the database:
 
-<!-- <insert img here> -->
-<!-- truckSFinder home page -->
+![home-pg](https://i.imgur.com/0hONig7.png)
+The truckSFinder home page.
+
 Use the nav bar at the top of the screen for easy navigation around the app.
 
-You must be logged in through your Google account to: 
+To log in, click the 'Log in' button at the top right corner of the screen and proceed as directed.
 
+![log-in](https://i.imgur.com/A9zCtvI.png)
+Make sure to log in!
+
+You must be logged in through your Google account to: 
   * add a food truck to the database
   * favorite a food truck
   * add a review to a food truck
   * edit your submitted food truck
+
+![edit/delete-truck](https://i.imgur.com/WwdZyNf.png)
+You can edit/delete from your profile once you are logged in.
+
   * delete your submitted food truck
   * edit your review
   * delete your review
-
-To log in, click the 'Log in' button at the top right corner of the screen and proceed as directed.
 
 Creating an account apart from your Google account is not functional at this time.
 
