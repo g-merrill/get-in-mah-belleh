@@ -32,9 +32,11 @@
     <p class="truck-card-header"><%= truck.applicant.toUpperCase(); %></p>
     <!-- <p><%= truck.fooditems %></p> -->
     <% if (truck.reviews.length) { %>        
+    <div class="truck-card-starsCntnr">
       <% for (let i = 0; i !== avgRatings[idx]; i++) { %>
-    <span>&#9733</span>
+      <span>&#9733</span>
       <% } %>
+    </div>
     <!-- how do I make this preview text? -->
     <div class="truck-card-revcontainer">
       <p class="truck-card-revtext"><%= truck.reviews[truck.reviews.length - 1].content; %></p>
@@ -42,42 +44,67 @@
     </div>
     <!-- how do I make this preview text? -->
     <% } else { %>
+    <div class="truck-card-starsCntnr">
       <span>&#9734</span>
       <span>&#9734</span>
       <span>&#9734</span>
       <span>&#9734</span>
       <span>&#9734</span>
+    </div>
     <div class="truck-card-revcontainer">
       <p class="truck-card-revtext">No review submitted for this truck yet!</p>
       <a class="truck-card-showlink" href="/trucks/<%= truck.id %>">read more</a>
     </div>  
     <% } %>
+
     <div class="truck-card-footer">
-    <a href="/users/profile/trucks/<%= truck.id %>/reviews/new"><i class="fas fa-pen"></i> Write a review</a>
+
+      <div class="truck-card-addRevCntnr">
+        <a class="truck-card-addRevLink" href="/users/profile/trucks/<%= truck.id %>/reviews/new">
+          <i class="fas fa-pen truck-card-addRevIcon"></i>
+          <span class="truck-card-addRevText">Write a review</span>
+        </a>
+      </div>
+
     <% if (!user) { %>
-      <form action="/users/profile/trucks/favorites" method="GET">
-        <button type="submit">
-          <span class="heartcontainer"><i class="hoverhearts far fa-heart"></i><i class="hoverhearts far fa-heart"></i></span><span class="truck-card-favtext"> Save to favorites</span>
+      <form class="truck-card-favsCntnr" action="/users/profile/trucks/favorites" method="GET">
+        <button class="truck-card-favsBtn" type="submit">
+          <span class="truck-card-favsHeartsCntnr">
+            <i class="hoverheart truck-card-favsHeart fas fa-heart"></i>
+            <i class="truck-card-favsHeart far fa-heart"></i>
+          </span>
+          <span class="truck-card-favsText">Save to favorites</span>
         </button>
       </form>
     <% } else { %>
       <% if (!user.favTrucks.some(favTruck => favTruck.toString() === truck.id)) { %>
     <!-- if not in user's favTrucks array, enable add to favorites functionality with class of 'unhearted' -->
-      <form action="/trucks/<%= truck.id %>/favorites/index" method="POST">
-        <button type="submit">
-          <span class="heartcontainer"><i class="hoverhearts far fa-heart"></i><i class="hoverhearts fas fa-heart"></i></span><span class="truck-card-favtext"> Save to favorites</span>
+      <form class="truck-card-favsCntnr" action="/trucks/<%= truck.id %>/favorites/index" method="POST">
+        <button class="truck-card-favsBtn" type="submit">
+          <span class="truck-card-favsHeartsCntnr">
+            <i class="hoverheart truck-card-favsHeart fas fa-heart"></i>
+            <i class="truck-card-favsHeart far fa-heart"></i>
+          </span>
+          <span class="truck-card-favsText">Save to favorites</span>
         </button>
       </form>
       <% } else { %>
     <!-- else enable delete from trucks functionality with class of 'hearted' -->
-      <form action="/trucks/<%= truck.id %>/favorites/index?_method=DELETE" method="POST">
-        <button type="submit">
-          <span class="heartcontainer"><i class="fas fa-heart"></i></span><span class="truck-card-favtext"> Saved to favorites</span>
+      <form class="truck-card-favsCntnr" action="/trucks/<%= truck.id %>/favorites/index?_method=DELETE" method="POST">
+        <button class="truck-card-favsBtn" type="submit">
+          <span class="truck-card-favsHeartsCntnr">
+            <i class="hoverheart truck-card-favsHeart fas fa-heart"></i>
+            <i class="truck-card-favsHeart fas fa-heart"></i>
+          </span>
+          <span class="truck-card-favsText">Saved to favorites</span>
         </button>
       </form>
       <% } %>
     <% } %>
+
+
     </div>
+
   </li>
   <% }); %>
 </ul>

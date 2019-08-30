@@ -48,26 +48,45 @@ select {
   overflow: hidden;
 }
 
+
+
+
+
+
+
 .truck-card-container {
   background-color: rgba(255, 255, 255, 1);
-  border-radius: 10px;
-  margin: 0 0 60px;
+  border-radius: 0.1rem 0.1rem 0.1rem 0.1rem;
+  margin: 1rem 0;
+  width: 25vw;
+}
+.truck-card-container * {
+  font-size: 0.5rem;
+  /* border: 1px solid; */
 }
 .truck-card-header {
   background-color: rgba(245, 245, 245, 1);
   text-decoration: underline;
+  padding: 0.6rem 0.6rem 0.6rem 0.6rem;
+  border-radius: 0.1rem 0.1rem 0 0;
+}
+.truck-card-starsCntnr {
+  padding: 0 0.6rem;
+  margin: 0.3rem 0;
 }
 .truck-card-revcontainer {
-  margin: 0 0 1em 0;
   position: relative;
-  height: 4.3em;
+  height: 5.6em;
+  padding: 0 0.6rem;
+  margin: 0.3rem 0 0.6rem;
 }
 .truck-card-revtext {
   margin: 0;
   position: relative;
-  height: 4.3em;
+  height: 5.6em;
   overflow: hidden;
   line-height: 1.5em;
+  word-wrap: break-word;
 }
 .truck-card-revtext:after {
   content: "";
@@ -75,60 +94,105 @@ select {
   position: absolute;
   bottom: 0;
   right: 0;
-  width: 36%;
+  width: 80%;
   height: 1.2em;
   background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 40%);
 }
 .truck-card-showlink {
   position: absolute;
   bottom: 0;
-  right: 0;
+  right: 0.6rem;
+  text-decoration: none;
+  color: rgba(0, 183, 255, 1);
 }
+.truck-card-showlink:hover {
+  text-decoration: underline;
+}
+
+
+
 .truck-card-footer {
   display: flex;
   width: 100%;
   align-items: center;
 }
-.truck-card-footer>a:first-child {
+.truck-card-addRevCntnr {
   width: 50%;
-  text-align: center;
+  padding: 0 0 0.6rem 0.6rem;
 }
-
-.truck-card-footer>form {
-  width: 50%;
+.truck-card-addRevLink {
+  font-size: 0.4rem;
+  text-decoration: none;
+  color: rgba(0, 183, 255, 1);
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
 }
-.truck-card-footer button {
+.truck-card-addRevLink:hover .truck-card-addRevText {
+  text-decoration: underline;
+}
+.truck-card-addRevIcon {
+  color: rgba(0, 0, 0, 1);
+  font-size: 0.4rem;
+}
+.truck-card-addRevText {
+  font-size: 0.4rem;
+  margin: 0 0 0 0.6em;
+}
+
+
+
+.truck-card-favsCntnr {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 0.6rem 0.6rem 0;
+}
+.truck-card-favsBtn {
+  font-size: 0.4rem;
+  display: flex;
+  align-items: center;
+  border: none;
+  background-color: rgba(255, 255, 255, 1);
+}
+.truck-card-favsBtn:hover .truck-card-favsText {
+  text-decoration: underline;
+}
+.truck-card-favsHeartsCntnr {
   position: relative;
+  font-size: 0.4rem;
+  display: flex;
+  align-items: center;
 }
-.heartcontainer .fa-heart {
+.truck-card-favsHeart {
   color: rgba(219, 86, 91, 1);	
+  font-size: 0.4rem;
 }
-.heartcontainer {
-  position: relative;
-  height: 32px;
-  width: 32px;
+.truck-card-favsText {
+  font-size: 0.4rem;
+  margin: 0 0 0 0.6em;
+  color: rgba(0, 183, 255, 1);
+  text-align: left;
 }
-.hoverhearts {
+.hoverheart {
   position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
-}
-.hoverhearts.fas {
   opacity: 0;
 }
-.hoverhearts.fas:hover {
+.truck-card-favsBtn:hover .hoverheart {
   opacity: 1;
   transition: 0.3s ease;
 }
-.truck-card-favtext {
-  position: absolute;
-  left: 32px;
-}
+
+
+
+
+
+
+
 
 
 
