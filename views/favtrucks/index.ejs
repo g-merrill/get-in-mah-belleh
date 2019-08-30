@@ -3,43 +3,9 @@
 <% if (!user) { %>
 <p>You must log in before seeing or saving your favorite food trucks.</p>
 <% } else { %>
-    <% if (trucks.length) { %>
-<ul>
-        <% trucks.forEach((truck, idx) => { %>
-    <li class="truck-card-container">
-        <p class="truck-card-header"><%= truck.applicant.toUpperCase(); %></p>
-        <!-- <p><%= truck.fooditems %></p> -->
-            <% if (truck.reviews.length) { %>        
-                <% for (let i = 0; i !== avgRatings[idx]; i++) { %>
-        <span>&#9733</span>
-                <% } %>
-        <!-- how do I make this preview text? -->
-        <div class="truck-card-revcontainer">
-            <p class="truck-card-revtext"><%= truck.reviews[truck.reviews.length - 1].content; %></p>
-            <a class="truck-card-showlink" href="/trucks/<%= truck.id %>">read more</a>
-        </div>
-        <!-- how do I make this preview text? -->
-            <% } else { %>
-        <span>&#9734</span>
-        <span>&#9734</span>
-        <span>&#9734</span>
-        <span>&#9734</span>
-        <span>&#9734</span>
-        <div class="truck-card-revcontainer">
-            <p class="truck-card-revtext">No review submitted for this truck yet!</p>
-            <a class="truck-card-showlink" href="/trucks/<%= truck.id %>">read more</a>
-        </div>  
-            <% } %>
-        <a href="/users/profile/trucks/<%= truck.id %>/reviews/new"><i class="fas fa-pen"></i> Write a review</a>
-        <!-- else enable delete from trucks functionality with class of 'hearted' -->
-        <form action="/trucks/<%= truck.id %>/favorites/favs?_method=DELETE" method="POST">
-            <p><button type="submit"><i class="fas fa-heart"></i></button> Saved to favorites</p>
-        </form>
-    </li>
-        <% }); %>
-</ul>
-    <% } else { %>
-        <p>You haven't saved any of your favorite food trucks yet!</p>
+    <%- include('../partials/truckcards') %>
+    <% if (!trucks.length) { %>
+<p>You haven't saved any of your favorite food trucks yet!</p>
     <% } %>
 <% } %>
 <%- include('../partials/footerhtml') %>

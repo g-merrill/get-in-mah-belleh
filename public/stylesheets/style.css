@@ -56,25 +56,29 @@ select {
 
 
 
-.trucks-index .truck-cards-container {
+.truck-cards-container {
   display: flex;
   width: 80%;
   flex-wrap: wrap;
 }
-
-.truck-cards-container .truck-card-container {
+.truck-card-container {
   margin: 1rem 0.2rem;
   width: 30%;
-}
-
-.truck-card-container {
   background-color: rgba(255, 255, 255, 1);
   border-radius: 0.1rem 0.1rem 0.1rem 0.1rem;
+  position: relative;
 }
 .truck-card-container * {
   font-size: 0.5rem;
   /* border: 1px solid; */
-  position: relative;
+}
+.truck-card-delTruckBtn {
+  position: absolute;
+  top: -0.35rem;
+  left: -0.2rem;
+  color: red;
+  font-size: 2em;
+  background-color: rgba(255, 255, 255, 1);
 }
 .truck-card-header {
   background-color: rgba(245, 245, 245, 1);
@@ -96,7 +100,12 @@ select {
 .truck-card-starsCntnr {
   padding: 0 0.6rem;
   margin: 0.3rem 0;
+  display: flex;
 }
+.truck-card-editTruckLink{
+  margin-left: auto;
+}
+
 .truck-card-revcontainer {
   position: relative;
   height: 5.6em;
@@ -213,14 +222,6 @@ select {
 
 
 
-
-
-
-
-
-
-
-
 .trucks-index .logocontainer {
   margin: 2vh 0;
   height: 132px;
@@ -228,6 +229,16 @@ select {
 }
 .trucks-index .logo {
   margin: 0 2vw;
+}
+.trucks-index .app-title {
+  font-family: "Gill Sans";
+  font-size: 2rem;
+}
+.trucks-index .app-title-SF {
+  font-family: "Gill Sans";
+  font-size: 2rem;
+  font-weight: bold;
+  color: rgba(163, 0, 0, 1);
 }
 
 .trucks-new .form {

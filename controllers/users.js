@@ -95,18 +95,18 @@ function show(req, res) {
 }
 
 function favTrucks(req, res) {
+    let trucks = [];
+    let avgRatings = [];
     if (req.user) {
     User.findById(req.user.id)
     .populate('favTrucks')
     .then(user => {
-        let avgRatings = [];
         if (user.favTrucks.length) {
-            // user.favTrucks.forEach(favTruck => {
             for(let i = 0; i < user.favTrucks.length; i++) {
                 Truck.findById(user.favTrucks[i].id)
                 .populate('reviews')
                 .then(truck => {
-                    console.log('truck: ', truck);
+                    console.log('fav-truck: ', truck);
                     let truckRatingsSum = 0;
                     if (truck.reviews.length) {
                         truck.reviews.forEach(review => {
@@ -117,12 +117,14 @@ function favTrucks(req, res) {
                     } else {
                         avgRatings.push(0);
                     }
+                    trucks.push(truck);
                     if (i === user.favTrucks.length - 1) {
                         res.render('favtrucks/index', {
                             user,
                             viewName: 'favtrucks-index',
-                            trucks: user.favTrucks,
-                            avgRatings
+                            trucks,
+                            avgRatings,
+                            pathEndpoint: 'favs'
                         });
                     }
                 })
@@ -132,12 +134,12 @@ function favTrucks(req, res) {
                 });
             }
         } else {
-            avgRatings.push(0);
             res.render('favtrucks/index', {
                 user,
                 viewName: 'favtrucks-index',
-                trucks: user.favTrucks,
-                avgRatings
+                trucks,
+                avgRatings,
+                pathEndpoint: 'favs'
             });
         }
     })
@@ -146,12 +148,12 @@ function favTrucks(req, res) {
         res.redirect('/trucks');
     });
     } else {
-        let avgRatings = [0];
         res.render('favtrucks/index', {
             user: undefined,
             viewName: 'favtrucks-index',
-            trucks: undefined,
-            avgRatings
+            trucks,
+            avgRatings,
+            pathEndpoint: 'favs'
         });
     }
 }
@@ -228,7 +230,6 @@ function userReviews(req, res) {
     });
 }
 
-
 function userTrucks(req, res) {
     Truck.find({ creator: req.user.id })
     .populate('reviews')
@@ -246,11 +247,20 @@ function userTrucks(req, res) {
                 avgRatings.push(0);
             }
         });
-        res.render('users/showtrucks', {
-            user: req.user,
-            viewName: 'users-showtrucks',
-            trucks,
-            avgRatings
+        User.findById(req.user.id)
+        .populate('favTrucks')
+        .then(user => {
+            res.render('users/showtrucks', {
+                user,
+                viewName: 'users-showtrucks',
+                trucks,
+                avgRatings,
+                pathEndpoint: 'submitted'
+            });
+        })
+        .catch(err => {
+            if (err) console.log(err);
+            res.redirect('/users/profile');
         });
     })
     .catch(err => {
@@ -461,8 +471,8 @@ function littleSeed(req, res) {
                 fooditems: "Filipino fusion food"
             },
             {
-                rating: 5,
-                content: "Highly recommended!"
+                rating: 4,
+                content: "Straight up one of the best burritos I've ever had. These guys were at Off the Grid Fort Mason and I had to see what the hype was about. California burrito. Chicken. French fries. Sour cream. Guac. Salsa. Etc. Phenomenal ratio and mix of all the ingredients."
             }],
             [{
                 applicant: "Curry Up Now",
@@ -470,7 +480,7 @@ function littleSeed(req, res) {
             },
             {
                 rating: 4,
-                content: "Good selection. Can be a little pricey."
+                content: "I got the samosas, my boo got death by Tikka masala. Both were excellent choices. The Mexican Coke is a little overpriced, but my tongue is still dancing from the flavors of the food. Fast service. Also, seriously, the lamb samosas are so good"
             }]
         ];
         const seedFile = require('../config/seed');

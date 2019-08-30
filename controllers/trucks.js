@@ -28,12 +28,31 @@ function index(req, res) {
                 avgRatings.push(0);
             }
         });
-        res.render('trucks/index', {
-            user: req.user,
-            viewName: 'trucks-index',
-            trucks,
-            avgRatings
-        });
+        if(req.user) {
+            User.findById(req.user.id)
+            .populate('favTrucks')
+            .then(user => {
+                res.render('trucks/index', {
+                    user,
+                    viewName: 'trucks-index',
+                    trucks,
+                    avgRatings,
+                    pathEndpoint: 'index'
+                });
+            })
+            .catch(err => {
+                if (err) console.log(err);
+                res.send('Error setting up trucks index page');
+            });
+        } else {
+            res.render('trucks/index', {
+                user: undefined,
+                viewName: 'trucks-index',
+                trucks,
+                avgRatings,
+                pathEndpoint: 'index'
+            });
+        }
     })
     .catch(err => {
         if (err) console.log(err);

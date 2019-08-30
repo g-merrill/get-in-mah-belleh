@@ -1,25 +1,7 @@
-<%- include('../partials/headerhtml') %>
-<% if (!user) { %>
-<p>Not Logged In</p>
-<% } else { %>
-<nav>
-    <div>
-        <a href="/users/profile/trucks/submitted">Submitted Trucks</a>
-    </div>
-    <div>
-        <a href="/users/profile/reviews/submitted">Submitted Reviews</a>
-    </div>
-</nav>
-<h1>Your truckSFinder trucks</h1>
-    <% if (!trucks.length) { %>
-<p>You have not submitted any food trucks yet!</p>
-    <% } else { %>
+<% if (trucks.length) { %>
 <section class="truck-cards-container">
-        <% trucks.forEach((truck, idx) => { %>
+<% trucks.forEach((truck, idx) => { %>
     <div class="truck-card-container">
-        <form action="/trucks/<%= truck.id %>?_method=DELETE" method="POST">
-            <input class="truck-card-delTruckBtn" type="submit" value="X">
-        </form>
         <div class="truck-card-header">
             <a class="truck-card-headerLink" href="/trucks/<%= truck.id %>">
                 <p class="truck-card-headerText"><%= truck.applicant.toUpperCase(); %></p>
@@ -30,7 +12,6 @@
         <% for (let i = 0; i !== avgRatings[idx]; i++) { %>
             <span>&#9733</span>
         <% } %>
-        <a class="truck-card-editTruckLink" href="/users/profile/trucks/<%= truck.id %>/edit">Edit Food Truck Details</a>
         </div>
         <div class="truck-card-revcontainer">
             <p class="truck-card-revtext"><%= truck.reviews[truck.reviews.length - 1].content; %></p>
@@ -91,8 +72,6 @@
     <% } %>
         </div>
     </div>
-        <% }); %>
+<% }); %>
 </section>
-    <% } %>
 <% } %>
-<%- include('../partials/footerhtml') %>
