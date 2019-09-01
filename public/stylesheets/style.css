@@ -319,9 +319,12 @@ select {
   font-size: 0.8rem;
 }
 
-.users-showreviews .nav-submitted ~ * {
-  margin: 0.75rem 0;
-  padding: 0 5%;
+.users-showtrucks .page-header {
+  margin: 1.5rem 0;
+}
+
+.users-showreviews .page-header {
+  margin: 1.5rem 0;
 }
 .users-showreviews {
   display: flex;
@@ -355,7 +358,12 @@ select {
   text-align: center;
 }
 
-
+.users-show .page-header {
+  margin: 1.5rem 0 0;
+}
+.users-show .page-header ~ * {
+  margin: 1.5rem 0 0;
+}
 .nav-submitted {
   display: flex;
   width: 100%;
@@ -378,9 +386,6 @@ select {
 .nav-submitted-reviewslink:hover {
   background-color: rgba(0, 0, 0, 0.3);
   font-weight: bold;
-}
-.nav-submitted ~ * {
-  margin: 0.75rem 0;
 }
 .users-show .email ~ * {
   visibility: hidden;

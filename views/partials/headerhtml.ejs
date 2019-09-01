@@ -8,7 +8,6 @@
     <script src="https://kit.fontawesome.com/e63fc7cc5e.js"></script>
 </head>
 <body class="<%= viewName %>">
-    <!-- <h1><%= viewName %></h1> -->
     <nav class="nav-main">
         <a class="nav-main-link" href="/trucks">
             <i class="fas fa-home fa-2x"></i>
@@ -23,9 +22,9 @@
             <p class="nav-main-linktext">Favorite food trucks</p>
         </a>
 <% if (!user) { %>
-        <a class="nav-main-link" href="#">
-            <i class="fas fa-user-plus fa-2x"></i>
-            <p class="nav-main-linktext">Create an account</p>
+        <a class="nav-main-link" href="/users/profile">
+            <i class="fas fa-user fa-2x"></i>
+            <p class="nav-main-linktext">My account</p>
         </a>
         <a class="nav-main-link" href="/auth/google">
             <i class="fas fa-sign-in-alt fa-2x"></i>

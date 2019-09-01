@@ -1,6 +1,7 @@
 <%- include('../partials/headerhtml') %>
 <% if (!user) { %>
-<p>Not Logged In</p>
+<h1 class="page-header">Your truckSFinder account details</h1>
+<p class="must-log-in">You must log in to view your account.</p>
 <% } else { %>
 <nav class="nav-submitted">
     <a class="nav-submitted-truckslink" href="/users/profile/trucks/submitted">Submitted Trucks</a>
