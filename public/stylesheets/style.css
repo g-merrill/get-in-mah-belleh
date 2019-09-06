@@ -55,9 +55,6 @@ select {
 }
 
 
-
-
-
 .truck-cards-container {
   display: flex;
   width: 80%;
@@ -67,7 +64,7 @@ select {
   margin: 1rem 0.2rem;
   width: 30%;
   background-color: rgba(255, 255, 255, 1);
-  border-radius: 0.1rem 0.1rem 0.1rem 0.1rem;
+  border-radius: 0.3rem 0.3rem 0.3rem 0.3rem;
   position: relative;
   opacity: 0.6;
 }
@@ -80,19 +77,19 @@ select {
 }
 .truck-card-delTruckBtn {
   position: absolute;
-  top: -0.9rem;
-  left: 0rem;
-  color: red;
-  font-size: 2em;
+  top: 0.5rem;
+  right: 0.5rem;
+  background-color: red;
+  font-size: 1.5em;
   border-radius: 0.2rem;
   border: none;
-  background-color: rgba(245, 245, 245, 1);
+  color: rgba(245, 245, 245, 1);
   padding: 0.1em 0.3em;
 }
 .truck-card-header {
   background-color: rgba(245, 245, 245, 1);
   padding: 0.6rem 0.6rem 0.6rem 0.6rem;
-  border-radius: 0.1rem 0.1rem 0 0;
+  border-radius: 0.3rem 0.3rem 0 0;
   height: 2rem;
   width: 100%;
 }
@@ -112,13 +109,13 @@ select {
   margin-left: auto;
 }
 
-.truck-card-revcontainer {
+.truck-card-revCntnr {
   position: relative;
   height: 5.6em;
   padding: 0 0.6rem;
   margin: 0.3rem 0 0.6rem;
 }
-.truck-card-revtext {
+.truck-card-revText {
   margin: 0;
   position: relative;
   height: 5.6em;
@@ -126,7 +123,7 @@ select {
   line-height: 1.5em;
   word-wrap: break-word;
 }
-.truck-card-revtext:after {
+.truck-card-revText:after {
   content: "";
   text-align: right;
   position: absolute;
@@ -146,8 +143,6 @@ select {
 .truck-card-showlink:hover {
   text-decoration: underline;
 }
-
-
 
 .truck-card-footer {
   display: flex;
@@ -176,8 +171,6 @@ select {
   font-size: 0.4rem;
   margin: 0 0 0 0.6em;
 }
-
-
 
 .truck-card-favsCntnr {
   width: 50%;
@@ -226,10 +219,8 @@ select {
 }
 
 
-
-
 .trucks-index .logocontainer {
-  margin: 2vh 0;
+  margin: 1rem 0 0.5rem;
   height: 132px;
   overflow: auto;
 }
@@ -247,8 +238,8 @@ select {
   color: rgba(163, 0, 0, 1);
 }
 
-.trucks-new .nav-main ~ * {
-  margin: 0.75rem 0;
+.trucks-new .page-header {
+  margin: 1.5rem 0;
 }
 .trucks-new .form {
   display: flex;
@@ -256,7 +247,7 @@ select {
   align-items: center;
 }
 .trucks-new .input {
-  margin: 0.5rem;
+  margin: 0 0 1rem;
   background-color: rgba(255, 255, 255, 1);
   padding: 5%;
   border-radius: 0.25em;
@@ -269,6 +260,10 @@ select {
   border-radius: 0.5em;
   width: 50%;
   font-size: 0.8rem;
+}
+
+.trucks-show .reviews {
+  padding: 0 5%;
 }
 
 .reviews-new .nav-main ~ * {
@@ -319,51 +314,16 @@ select {
   font-size: 0.8rem;
 }
 
-.users-showtrucks .page-header {
-  margin: 1.5rem 0;
-}
-
-.users-showreviews .page-header {
-  margin: 1.5rem 0;
-}
-.users-showreviews {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.users-showreviews .del-review-btn {
-  background-color: red;
-  color: white;
-  border-radius: 0.2em;
-  border: none;
-  padding: 0.7em;
-  font-size: 0.7em;
-}
-.users-showreviews .input {
-  margin: 0.5rem;
-  background-color: rgba(255, 255, 255, 1);
-  padding: 1em;
-  border-radius: 0.25em;
-  font-size: 0.8rem;
-  width: 90%;
-  line-height: 1.5;
-}
-.users-showreviews .submit-btn {
-  background-color: rgb(0, 156, 0);
-  color: rgba(255, 255, 255, 1);
-  padding: 0.7rem 0.3rem;
-  border-radius: 0.5em;
-  width: 8rem;
-  font-size: 0.8rem;
-  text-align: center;
-}
-
 .users-show .page-header {
   margin: 1.5rem 0 0;
 }
 .users-show .page-header ~ * {
   margin: 1.5rem 0 0;
 }
+.users-show .email ~ * {
+  visibility: hidden;
+}
+
 .nav-submitted {
   display: flex;
   width: 100%;
@@ -387,10 +347,92 @@ select {
   background-color: rgba(0, 0, 0, 0.3);
   font-weight: bold;
 }
-.users-show .email ~ * {
-  visibility: hidden;
+
+.users-showtrucks .page-header {
+  margin: 1.5rem 0;
 }
 
-.trucks-show .reviews {
-  padding: 0 5%;
+.users-showreviews .page-header {
+  margin: 1.5rem 0;
+}
+.users-showreviews .reviews-container {
+  display: flex;
+  width: 80%;
+  flex-wrap: wrap;
+}
+.users-showreviews .review-container {
+  margin: 1rem 0.2rem;
+  width: 30%;
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 0.3rem 0.3rem 0.3rem 0.3rem;
+  position: relative;
+  opacity: 0.6;
+}
+.users-showreviews .review-container:hover {
+  opacity: 1;
+}
+.users-showreviews .review-container * {
+  font-size: 0.5rem;
+}
+.users-showreviews .del-review-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background-color: red;
+  font-size: 1.5em;
+  border-radius: 0.2rem;
+  border: none;
+  color: rgba(245, 245, 245, 1);
+  padding: 0.1em 0.3em;
+}
+.users-showreviews .review-headerCntnr {
+  background-color: rgba(245, 245, 245, 1);
+  padding: 0.6rem 0.6rem 0.6rem 0.6rem;
+  border-radius: 0.3rem 0.3rem 0 0;
+  height: 2rem;
+  width: 100%;
+}
+.users-showreviews .review-headerText {
+  text-decoration: underline;
+  white-space: pre;
+  overflow: scroll;
+  color: rgba(0, 0, 0, 1);
+}
+.users-showreviews .review-starsCntnr {
+  padding: 0 0.6rem;
+  margin: 0.3rem 0;
+  display: flex;
+}
+.users-showreviews .review-revCntnr {
+  position: relative;
+  height: 5.6em;
+  padding: 0 0.6rem;
+  margin: 0.3rem 0 0.6rem;
+}
+.users-showreviews .review-revText {
+  margin: 0;
+  position: relative;
+  line-height: 1.5em;
+  word-wrap: break-word;
+}
+.users-showreviews .review-editCntnr {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+.users-showreviews .review-editLink {
+  background-color: rgb(0, 156, 0);
+  color: rgba(255, 255, 255, 1);
+  padding: 0.7rem 0.3rem;
+  border-radius: 0 0 0.3rem 0.3rem;
+  font-size: 0.8rem;
+  text-align: center;
+  width: 100%;
+  text-decoration: none;
+}
+.favtrucks-index .page-header {
+  margin: 1.5rem 0 0.5rem;
+}
+.favtrucks-index .must-log-in {
+  margin: 1.0rem 0 1.5rem
 }

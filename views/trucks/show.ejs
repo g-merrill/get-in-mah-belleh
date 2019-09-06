@@ -6,8 +6,8 @@
     <span>&#9733</span>
     <% } %>
     <!-- how do I make this preview text? -->
-    <div class="truck-card-revcontainer">
-        <p class="truck-card-revtext"><%= truck.reviews[truck.reviews.length - 1].content; %></p>
+    <div class="truck-card-revCntnr">
+        <p class="truck-card-revText"><%= truck.reviews[truck.reviews.length - 1].content; %></p>
     </div>
     <!-- how do I make this preview text? -->
     <% } else { %>
@@ -16,8 +16,8 @@
     <span>&#9734</span>
     <span>&#9734</span>
     <span>&#9734</span>
-    <div class="truck-card-revcontainer">
-        <p class="truck-card-revtext">No review submitted for this truck yet!</p>
+    <div class="truck-card-revCntnr">
+        <p class="truck-card-revText">No review submitted for this truck yet!</p>
     </div>  
     <% } %>
     <a href="/users/profile/trucks/<%= truck.id %>/reviews/new"><i class="fas fa-pen"></i> Write a review</a>

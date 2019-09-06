@@ -1,8 +1,8 @@
 <%- include('../partials/headerhtml') %>
+<h1 class="page-header">Add a new food truck</h1>
 <% if (!user) { %>
 <p>You must log in before adding a food truck.</p>
 <% } else { %>  
-<h1 class="page-header">Add a new food truck</h1>
 <form class="form" id="truckform" action="/trucks" method="POST">
     <input class="input" type="text" name="applicant" placeholder="Food Truck Name">
     <textarea class="input" name="fooditems" cols="30" rows="10" placeholder="Food Offered"></textarea>

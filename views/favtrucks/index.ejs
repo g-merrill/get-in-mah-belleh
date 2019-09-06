@@ -1,7 +1,7 @@
 <%- include('../partials/headerhtml') %>
-<h1>Favorites</h1>
+<h1 class="page-header">Favorites</h1>
 <% if (!user) { %>
-<p>You must log in before seeing or saving your favorite food trucks.</p>
+<p class="must-log-in">You must log in before seeing or saving your favorite food trucks.</p>
 <% } else { %>
     <%- include('../partials/truckcards') %>
     <% if (!trucks.length) { %>

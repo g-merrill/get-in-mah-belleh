@@ -10,19 +10,29 @@
     <% if (!reviews.length) { %>
 <p>You have not submitted any food truck reviews yet!</p>
     <% } else { %>
+<section class="reviews-container">
         <% reviews.forEach(review => { %>
-<p>For: "<%= review.truck.applicant %>"</p>
-<div>
+    <div class="review-container">
+        <form class="del-review-btn-form" action="/users/profile/trucks/<%= review.truck.id %>/reviews/<%= review.id %>?_method=DELETE" method="POST">
+            <input class="del-review-btn" type="submit" value='X'>
+        </form>
+        <div class="review-headerCntnr">
+            <p class="review-headerText"><%= review.truck.applicant.toUpperCase() %></p>
+        </div>
+        <div class="review-starsCntnr">
             <% for (let i = 0; i !== review.rating; i++) { %>
-    <span>&#9733</span>
+            <span>&#9733</span>
             <% } %>
-</div>
-<p class="input"><%= review.content %></p>
-<a class="submit-btn" href="/users/profile/trucks/<%= review.truck.id %>/reviews/<%= review.id %>/edit">Edit Your Review</a>
-<form class="del-review-btn-form" action="/users/profile/trucks/<%= review.truck.id %>/reviews/<%= review.id %>?_method=DELETE" method="POST">
-    <input class="del-review-btn" type="submit" value='Delete Review for: "<%= review.truck.applicant %>"'>
-</form>
+        </div>
+        <div class="review-revCntnr">
+            <p class="review-revText"><%= review.content %></p>
+        </div>
+        <div class="review-editCntnr">
+            <a class="review-editLink" href="/users/profile/trucks/<%= review.truck.id %>/reviews/<%= review.id %>/edit">Edit Review</a>
+        </div>
+    </div>
         <% }); %>
+</section>
     <% } %>
 <% } %>
 <%- include('../partials/footerhtml') %>

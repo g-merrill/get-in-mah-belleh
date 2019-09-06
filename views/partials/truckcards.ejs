@@ -13,8 +13,8 @@
             <span>&#9733</span>
         <% } %>
         </div>
-        <div class="truck-card-revcontainer">
-            <p class="truck-card-revtext"><%= truck.reviews[truck.reviews.length - 1].content; %></p>
+        <div class="truck-card-revCntnr">
+            <p class="truck-card-revText"><%= truck.reviews[truck.reviews.length - 1].content; %></p>
             <a class="truck-card-showlink" href="/trucks/<%= truck.id %>">read more</a>
         </div>
     <% } else { %>
@@ -25,8 +25,8 @@
             <span>&#9734</span>
             <span>&#9734</span>
         </div>
-        <div class="truck-card-revcontainer">
-            <p class="truck-card-revtext">No review submitted for this truck yet!</p>
+        <div class="truck-card-revCntnr">
+            <p class="truck-card-revText">No review submitted for this truck yet!</p>
             <a class="truck-card-showlink" href="/trucks/<%= truck.id %>">read more</a>
         </div>  
     <% } %>
