@@ -98,55 +98,55 @@ function favTrucks(req, res) {
     let trucks = [];
     let avgRatings = [];
     if (req.user) {
-    User.findById(req.user.id)
-    .populate('favTrucks')
-    .then(user => {
-        if (user.favTrucks.length) {
-            for(let i = 0; i < user.favTrucks.length; i++) {
-                Truck.findById(user.favTrucks[i].id)
-                .populate('reviews')
-                .then(truck => {
-                    console.log('fav-truck: ', truck);
-                    let truckRatingsSum = 0;
-                    if (truck.reviews.length) {
-                        truck.reviews.forEach(review => {
-                            truckRatingsSum += review.rating;
-                        });
-                        let truckAvgRating = Math.round(truckRatingsSum / truck.reviews.length);
-                        avgRatings.push(truckAvgRating);
-                    } else {
-                        avgRatings.push(0);
-                    }
-                    trucks.push(truck);
-                    if (i === user.favTrucks.length - 1) {
-                        res.render('favtrucks/index', {
-                            user,
-                            viewName: 'favtrucks-index',
-                            trucks,
-                            avgRatings,
-                            pathEndpoint: 'favs'
-                        });
-                    }
-                })
-                .catch(err => {
-                    if (err) console.log(err);
-                    res.redirect('/trucks');
+        User.findById(req.user.id)
+        .populate('favTrucks')
+        .then(user => {
+            if (user.favTrucks.length) {
+                for(let i = 0; i < user.favTrucks.length; i++) {
+                    Truck.findById(user.favTrucks[i].id)
+                    .populate('reviews')
+                    .then(truck => {
+                        console.log('fav-truck: ', truck);
+                        let truckRatingsSum = 0;
+                        if (truck.reviews.length) {
+                            truck.reviews.forEach(review => {
+                                truckRatingsSum += review.rating;
+                            });
+                            let truckAvgRating = Math.round(truckRatingsSum / truck.reviews.length);
+                            avgRatings.push(truckAvgRating);
+                        } else {
+                            avgRatings.push(0);
+                        }
+                        trucks.push(truck);
+                        if (trucks.length === user.favTrucks.length) {
+                            res.render('favtrucks/index', {
+                                user,
+                                viewName: 'favtrucks-index',
+                                trucks,
+                                avgRatings,
+                                pathEndpoint: 'favs'
+                            });
+                        }
+                    })
+                    .catch(err => {
+                        if (err) console.log(err);
+                        res.redirect('/trucks');
+                    });
+                }
+            } else {
+                res.render('favtrucks/index', {
+                    user,
+                    viewName: 'favtrucks-index',
+                    trucks,
+                    avgRatings,
+                    pathEndpoint: 'favs'
                 });
             }
-        } else {
-            res.render('favtrucks/index', {
-                user,
-                viewName: 'favtrucks-index',
-                trucks,
-                avgRatings,
-                pathEndpoint: 'favs'
-            });
-        }
-    })
-    .catch(err => {
-        if (err) console.log(err);
-        res.redirect('/trucks');
-    });
+        })
+        .catch(err => {
+            if (err) console.log(err);
+            res.redirect('/trucks');
+        });
     } else {
         res.render('favtrucks/index', {
             user: undefined,
