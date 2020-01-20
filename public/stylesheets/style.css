@@ -220,10 +220,10 @@ select {
   top: 0;
   left: 0;
   opacity: 0;
+  transition: all 0.3s ease;
 }
 .truck-card-favsCntnr:hover .hoverheart {
   opacity: 1;
-  transition: 0.3s ease;
 }
 
 .trucks-index .app-title {
