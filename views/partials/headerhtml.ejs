@@ -10,33 +10,33 @@
 <body class="<%= viewName %>">
     <nav class="nav-main">
         <a class="nav-main-link" href="/trucks">
-            <i class="fas fa-home fa-2x"></i>
+            <i class="fas fa-home fa-xs"></i>
             <p class="nav-main-linktext">All food trucks</p>
         </a>
         <a class="nav-main-link" href="/trucks/new">
-            <i class="fas fa-plus fa-2x"></i>
-            <p class="nav-main-linktext">Add a new food truck</p>
+            <i class="fas fa-plus fa-xs"></i>
+            <p class="nav-main-linktext">Add food truck</p>
         </a>
         <a class="nav-main-link" href="/users/profile/trucks/favorites">
-            <i class="fas fa-heart fa-2x"></i>
+            <i class="fas fa-heart fa-xs"></i>
             <p class="nav-main-linktext">Favorite food trucks</p>
         </a>
 <% if (!user) { %>
         <a class="nav-main-link" href="/users/profile">
-            <i class="fas fa-user fa-2x"></i>
+            <i class="fas fa-user fa-xs"></i>
             <p class="nav-main-linktext">My account</p>
         </a>
         <a class="nav-main-link" href="/auth/google">
-            <i class="fas fa-sign-in-alt fa-2x"></i>
+            <i class="fas fa-sign-in-alt fa-xs"></i>
             <p class="nav-main-linktext">Log in</p>
         </a>
 <% } else { %>
         <a class="nav-main-link" href="/users/profile">
-            <i class="fas fa-user fa-2x"></i>
+            <i class="fas fa-user fa-xs"></i>
             <p class="nav-main-linktext">My account</p>
         </a>
         <a class="nav-main-link" href="/logout">
-            <i class="fas fa-sign-out-alt fa-2x"></i>
+            <i class="fas fa-sign-out-alt fa-xs"></i>
             <p class="nav-main-linktext">Log Out</p>
         </a>
 <% } %>
