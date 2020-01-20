@@ -4,17 +4,21 @@
   padding: 0;
   font-family: Helvetica, "Gill Sans", Avenir, "Tsukushi A Round Gothic", Seravek, sans-serif;
   font-size: 32px;
-  /* border: 1px solid; */
 }
 body {
   width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: rgba(229, 229, 229, 1);
+  background-color: rgba(255, 255, 255, 1);
 }
 a {
-  color: rgba(0, 183, 255, 1);
+  color: rgba(0, 0, 0, 1);
+  transition: all 0.3s ease;
+}
+a:hover {
+  color: rgba(163, 0, 0, 1);
+  text-decoration: none;
 }
 ul {
   list-style-type: none;
@@ -52,7 +56,6 @@ select {
   font-size: calc(0.15rem + 1vw);
 }
 
-
 .truck-cards-container {
   margin: 5vh 0 0;
   display: flex;
@@ -64,9 +67,9 @@ select {
   margin: 1rem 0.5rem;
   width: 208px;
   background-color: rgba(255, 255, 255, 1);
-  border-radius: 0.3rem 0.3rem 0.3rem 0.3rem;
+  border: 1px solid rgba(163, 0, 0, 1);
   position: relative;
-  opacity: 0.6;
+  opacity: 0.4;
   transition: all 0.3s ease;
 }
 .truck-card-container:hover {
@@ -81,24 +84,36 @@ select {
   right: 0.5rem;
   background-color: red;
   font-size: 1.5em;
-  border-radius: 0.2rem;
+  border-radius: 0.25rem;
   border: none;
   color: rgba(245, 245, 245, 1);
   padding: 0.1em 0.3em;
 }
 .truck-card-header {
-  background-color: rgba(245, 245, 245, 1);
-  border-radius: 0.3rem 0.3rem 0 0;
+  background-color: rgba(163, 0, 0, 1);
   height: 2rem;
   width: 100%;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
 }
-.truck-card-headerText {
-  padding: 0.6rem 0.6rem 0.6rem 0.6rem;
-  height: 100%;
+.truck-card-header:hover {
+  background-color: rgba(255, 255, 255, 1);
+}
+.truck-card-headerLink {
   text-decoration: underline;
-  white-space: pre;
+  color: rgba(255, 255, 255, 1);
+  border: 5px double transparent;
+  padding: 0.4rem 0.4rem 0 0.4rem;
+  height: 2rem;
+  flex-grow: 1;
   overflow: scroll;
-  color: rgba(0, 0, 0, 1);
+  transition: all 0.3s ease;
+}
+.truck-card-headerLink:hover {
+  text-decoration: underline;
+  color: rgba(163, 0, 0, 1);
+  border: 4px double rgba(163, 0, 0, 1);
 }
 
 .truck-card-starsCntnr {
@@ -139,10 +154,6 @@ select {
   bottom: 0;
   right: 0.6rem;
   text-decoration: none;
-  color: rgba(0, 183, 255, 1);
-}
-.truck-card-showlink:hover {
-  text-decoration: underline;
 }
 
 .truck-card-footer {
@@ -158,16 +169,16 @@ select {
   padding: 0 0 0.6rem 0.6rem;
   font-size: 0.4rem;
   text-decoration: none;
-  color: rgba(0, 183, 255, 1);
   display: flex;
   align-items: center;
-}
-.truck-card-addRevLink:hover .truck-card-addRevText {
-  text-decoration: underline;
 }
 .truck-card-addRevIcon {
   color: rgba(0, 0, 0, 1);
   font-size: 0.4rem;
+  transition: all 0.3s ease;
+}
+.truck-card-addRevCntnr:hover .truck-card-addRevIcon {
+  color: rgba(163, 0, 0, 1);
 }
 .truck-card-addRevText {
   font-size: 0.4rem;
@@ -188,7 +199,6 @@ select {
   display: flex;
   align-items: center;
   border: none;
-  border-radius: 0 0 0.3rem 0;
   padding: 0 0.6rem 0.6rem 0;
   background-color: rgba(255, 255, 255, 1);
 }
@@ -207,11 +217,11 @@ select {
   cursor: pointer;
   font-size: 0.4rem;
   margin: 0 0 0 0.6em;
-  color: rgba(0, 183, 255, 1);
   text-align: left;
+  transition: all 0.3s ease;
 }
 .truck-card-favsCntnr:hover .truck-card-favsText {
-  text-decoration: underline;
+  color: rgba(163, 0, 0, 1);;
 }
 .hoverheart {
   position: absolute;
@@ -385,7 +395,7 @@ select {
   right: 0.5rem;
   background-color: red;
   font-size: 1.5em;
-  border-radius: 0.2rem;
+  border-radius: 0.25rem;
   border: none;
   color: rgba(245, 245, 245, 1);
   padding: 0.1em 0.3em;

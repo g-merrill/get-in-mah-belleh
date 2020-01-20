@@ -3,9 +3,7 @@
 <% trucks.forEach((truck, idx) => { %>
     <div class="truck-card-container">
         <div class="truck-card-header">
-            <a class="truck-card-headerLink" href="/trucks/<%= truck.id %>">
-                <p class="truck-card-headerText"><%= truck.applicant.toUpperCase(); %></p>
-            </a>
+            <a class="truck-card-headerLink" href="/trucks/<%= truck.id %>"><%= truck.applicant.toUpperCase(); %></a>
         </div>
     <% if (truck.reviews.length) { %>        
         <div class="truck-card-starsCntnr">
