@@ -225,7 +225,9 @@ select {
 .truck-card-favsCntnr:hover .hoverheart {
   opacity: 1;
 }
-
+.trucks-index .vid1 {
+  width: 100vw;
+}
 .trucks-index .app-title {
   margin: 5vh 0 0;
   font-family: "Gill Sans";
