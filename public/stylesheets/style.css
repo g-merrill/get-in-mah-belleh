@@ -103,7 +103,7 @@ select {
 .truck-card-headerLink {
   text-decoration: underline;
   color: rgba(255, 255, 255, 1);
-  border: 5px double transparent;
+  border: 4px double transparent;
   padding: 0.4rem 0.4rem 0 0.4rem;
   height: 2rem;
   flex-grow: 1;
